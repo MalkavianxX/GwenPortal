@@ -56,7 +56,7 @@ def render_seccion_inicio_dashboard(request):
     return render(request, "inicio_sesion/dashboard/inicio.html")
 
 def render_seccion_blog_dashboard(request):
-    return render(request, "inicio_sesion/dashboard/blog.html")
+    return redirect('nada-blog')
 
 def render_seccion_cursos_dashboard(request):
     return render(request, "inicio_sesion/dashboard/cursos.html")
