@@ -12,7 +12,7 @@ function formatCurrency(value) {
   return formattedNumber;
 }
 function agregarAlCarrito(productoId) {
-  const url = `http://127.0.0.1:8000/micontenido/agregar_al_carrito/${productoId}/`;
+  const url = `http://3.144.80.153/micontenido/agregar_al_carrito/${productoId}/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -35,7 +35,7 @@ function agregarAlCarrito(productoId) {
 }
 
 function remover_del_carrito(productoId) {
-  const url = `http://127.0.0.1:8000/micontenido/eliminar_del_carrito/${productoId}/`;
+  const url = `http://3.144.80.153/micontenido/eliminar_del_carrito/${productoId}/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -64,7 +64,7 @@ function remover_del_carrito(productoId) {
 }
 
 function obtener_carrito() {
-  const url = `http://127.0.0.1:8000/micontenido/ver_carrito/`;
+  const url = `http://3.144.80.153/micontenido/ver_carrito/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -164,7 +164,7 @@ function verificarCupon() {
   const cupon = cuponInput.value;
 
   // Realizar una solicitud al servidor para verificar el cupón
-  const url = `http://127.0.0.1:8000/micontenido/verificar_descuento/${cupon}/`;
+  const url = `http://3.144.80.153/micontenido/verificar_descuento/${cupon}/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -216,7 +216,7 @@ window.addEventListener('load', obtener_carrito);
 
 //meradopago
 function agregarEnlacePago() { 
-  const url = `http://127.0.0.1:8000/micontenido/crear_preferencia_MP/`;
+  const url = `http://3.144.80.153/micontenido/crear_preferencia_MP/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -247,7 +247,7 @@ function agregarEnlacePago() {
 }
 
 function agregarEnlacePP() {
-  const url = `http://127.0.0.1:8000/micontenido/crear_preferencia_PP/`;
+  const url = `http://3.144.80.153/micontenido/crear_preferencia_PP/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {

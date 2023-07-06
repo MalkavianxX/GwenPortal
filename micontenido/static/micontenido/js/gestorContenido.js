@@ -3,7 +3,7 @@ function marcar_completado() {
     const idCollection = document.getElementById('id_collection').value;
     const idLibrary = document.getElementById('id_library').value;
 
-    const url = `http://127.0.0.1:8000/micontenido/marcar_completado/${guid}/`;
+    const url = `http://3.144.80.153/micontenido/marcar_completado/${guid}/`;
     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
     const fetchOptions = {

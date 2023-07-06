@@ -12,7 +12,7 @@ function formatCurrency(value) {
     return formattedNumber;
   }
 function agregarEnlacePP() {
-    const url = `http://127.0.0.1:8000/micontenido/crear_preferencia_PP/`;
+    const url = `http://3.144.80.153/micontenido/crear_preferencia_PP/`;
     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
   
     const fetchOptions = {
@@ -36,7 +36,7 @@ function agregarEnlacePP() {
   
   }
   function agregarEnlacePago() { 
-    const url = `http://127.0.0.1:8000/micontenido/crear_preferencia_MP/`;
+    const url = `http://3.144.80.153/micontenido/crear_preferencia_MP/`;
     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
   
     const fetchOptions = {
