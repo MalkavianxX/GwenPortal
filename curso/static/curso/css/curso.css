@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.container-ver-curso {
+  overflow: hidden;
+  position: relative;
+  height: 50vh;
+  border-radius: 20px;
+
+  @media (max-width: 768px) {
+    height: 20vh;
+    /* This will be the height of the div on mobile devices */
+  }
+}
+
+.border-boton-circulo {
+  border-radius: 50%;
+
+  @media (max-width: 768px) {
+    border-radius: 25px;
+    /* This will be the height of the div on mobile devices */
+  }
+}
+
+.limit-caracter-80 {
+  max-width: 20ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fnt-roboto {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.animated {
+  transform: scale(1.2);
+  transition: transform 1.2s ease-in-out;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.contenedor-sombras {
+  border-radius: 18px;
+background: #ffffff;
+box-shadow:  29px 29px 58px #bababa,
+             -29px -29px 58px #ffffff;
+}
+.card{
+  border-radius: 42px;
+  background: #fcfcfc00;
+  box-shadow:  -27px 27px 54px #d4d4d4,
+               27px -27px 54px #ffffff;
+}
+
+.titulo-shadow{
+  border-radius: 42px;
+background: #fcfcfc;
+box-shadow:  20px 20px 40px #dedede,
+             -20px -20px 40px #ffffff;
+}
+a{
+  text-decoration: none !important;
+}

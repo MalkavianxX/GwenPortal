@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8#rchxzea9!8xs+h7e_je1h-eo^otkws7ull*yx55c$bdm)$n='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'login',
     'inicio_sesion',
     'curso',
     'blog',
+    'videos',
+    'micontenido',
 ]
 
 MIDDLEWARE = [
@@ -121,20 +124,23 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
 
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+ 
+STATIC_URL = 'static/'
+STATIC_ROOT =  os.path.join(BASE_DIR,'static') 
+MEDIA_URL= '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR,'media')
 
-STATIC_URL = '/static/'
-STATIC_ROOT =  os.path.join(BASE_DIR,'static/') 
-MEDIA_URL= 'media/'
-MEDIA_ROOT =  os.path.join(BASE_DIR,'media/')
+MERCADO_PAGO_CLIENT_ID = 'TEST-45f25815-70b7-4017-9052-2bb2a4acdcfa'
+MERCADO_PAGO_CLIENT_SECRET = 'TEST-13674068714057-062721-6a711bd620175aa9edb5aec2d47ec6d3-1091690075'
 
+#paypal
+CLIENT_ID = "AeB5FOIGIoRzw4PQkpM4wg0CWW9NOSJrV2oJCUtdhOusKa0F2jqz_rT5QlC2m7XxrKmHSIUiYik7ksb8"
+CLIENT_SECRET = "EDPOiRQwhbfzk3qO0o4PxriQpqiCWHy6RpYnM1cOumK_J_mTy8kHmCPAEeBfL47_-JC0Hqmb2NoLiRP6"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

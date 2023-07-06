@@ -1,120 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-  
+.limit-caracter {
+  max-width: 50ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.limit-caracter-10 {
+  max-width: 20ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.hover-grow {
+  transition: all 0.5s;
+}
 
-  
-  .visuallyhidden {
-    position: absolute;
-    z-index: -1;
-    right: 0;
-    opacity: 0;
-    
-  }
-  
-  h1 {
-    color: white;
-    text-align: center;
-    margin-top: 1em;
-  }
-  
 
-  
-  .card-carousel {
-    --card-width: 80%;
-    --card-max-width: 280px;
-    --card-height: 350px;
-    --carousel-min-width: 600px;
-    z-index: 1;
-    position: relative;
-    margin: 0 auto;
-    width: 100%;
-    height: var(--card-height);
-    min-width: var(--carousel-min-width);
-    transition: filter .3s ease;
-  }
-  
-  @media screen and (max-width: 640px) {
-    .card-carousel {
-      margin-left: calc((100vw - var(--carousel-min-width) - 40px) / 2)
-    }
-  }
-  
-  .card-carousel.smooth-return {
-    transition: all .2s ease;
-  }
-  
-  .card-carousel .card {
-    background: whitesmoke;
-    width: var(--card-width);
-    max-width: var(--card-max-width);
-    text-align: center;
-    padding: 1em;
-    min-width: 250px;
-    height: var(--card-height);
-    position: absolute;
-    margin: 0 auto;
-    color: rgba(0,0,0,.5);
-    transition: inherit;
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
-    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
-    border-radius: 1em;
-    filter: brightness(.9);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .card.highlight {
-    filter: brightness(1)
-  }
-  
-  
+a {
+  text-decoration: none;
+}
 
-   
 
-  
-  
-  .image-container {
-    width: 14em;
-    height: 14em;
-    position: relative;
-    background-size: cover;
-    margin-bottom: 2em;
-    /* border-radius: 100%; */
-    /* padding: 1em; */
-    /* -webkit-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.3); */
-    /*-moz-box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.3);
-    /* box-shadow: inset 0px 0px 17px 0px rgba(0,0,0,0.3); */
-  }
-  
-  .image-container::after {
-    content: "";
-    display: block;
-    width: 120%;
-    height: 120%;
-    border: solid 3px rgba(0,0,0,.1);
-    border-radius: 100%;
-    position: absolute;
-    top: calc(-10% - 3px);
-    left: calc(-10% - 3px);
-  }
-  
-  h2 {
-    padding: 1em;
-    margin-top: 1em;
-    background: rgba(0,0,0,.3);
-    text-align: center;
-    color: white;
-    border-radius: .2em;
-    display: inline-block;
-    transform: translateX(calc((100vw - 100%) / 2))
-  }
-  
-  h2 a {
-    color: #f5b916
-  }
+.hover-grow:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.img-zoom{
+  transition: all 0.5s;
+}
+.img-zoom:hover{
+  transform: scale(1.1);
+}
+.contenedor-sombra{
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  background-color: whitesmoke;
+}
 
-  #prev-titulo, #prev-contenido {
-    font-size: 16px; /* tamaño de fuente por defecto */
+.bg-morado-gr{
+  background: linear-gradient(50deg, #6e00ff 0, #bb00ff 100%) !important;
+}
+*{
+  font-family: 'Montserrat', sans-serif;
+
+}
+.animated {
+  transform: scale(1.2);
+  transition: transform 1.2s ease-in-out;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+}
+.post-image-bg{
+  filter: brightness(0.5);
+}
+.letra-blanca{
+  color: white;
+}
+.bg-facebook {
+  background-color: #5d82d1;
+  color: var(--bs-white);
+}
+.bg-instagram-gradient {
+  background: radial-gradient(circle at 20% 130%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: -webkit-radial-gradient(circle at 20% 130%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: var(--bs-white);
+  background-size: 120% 120%;
+  background-position: right bottom;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border: 0;
+}
+.bg-youtube {
+  background-color: #ff0000;
+  color: var(--bs-white);
+}
+
+header {
+  background: linear-gradient(50deg, #6e00ff 0, #bb00ff 100%) !important;
+}
+
+.fnt-roboto{
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.mayus{
+  text-transform: uppercase;
+  letter-spacing: 0.5vh;
+  
+}  
+.carrito-largo{
+  height: 70vh;
+  overflow-y: scroll;
+  @media (max-width: 768px) {
+      height: 60vh;
+      overflow-y: scroll;
+
   }
+}
+
+.fnt-monse{
+  font-family: 'Montserrat', sans-serif;
+
+} 

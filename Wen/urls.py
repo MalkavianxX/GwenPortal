@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
     path('inicio_sesion/',include('inicio_sesion.urls')),
     path('cursos/',include('curso.urls')),
     path('blog/',include('blog.urls')),
+    path('videos/',include('videos.urls')),
+    path('micontenido/',include('micontenido.urls')),
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

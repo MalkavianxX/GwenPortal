@@ -1,0 +1,30 @@
+.carrito-largo{
+    height: 70vh;
+    overflow-y: scroll;
+    @media (max-width: 768px) {
+        height: 60vh;
+        overflow-y: scroll;
+
+    }
+}
+.bg-morado-gr{
+    background: linear-gradient(50deg, #6e00ff 0, #bb00ff 100%) !important;
+    color: white !important;
+    border-color: blueviolet !important;
+  }
+  .bg-morado-gr :hover{
+    background-color: blueviolet !important;
+
+  }
+.fnt-monse{
+    font-family: 'Montserrat', sans-serif;
+
+} 
+.fnt-roboto{
+    font-family: 'Roboto', sans-serif !important;
+  }
+.mayus{
+    text-transform: uppercase;
+    letter-spacing: 0.5vh;
+    
+}  

@@ -1,0 +1,26 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Nunito&display=swap');
+  .bg-morado-gr{
+    background: linear-gradient(50deg, #6e00ff 0, #bb00ff 100%) !important;
+  }
+
+.nav-link {
+  color: white;
+  font-size: 1.2rem;
+  transition: all 0.5s;
+  font-family: 'Montserrat', sans-serif;
+}
+.nav-link:hover {
+  transform: scale(1.1);
+  background-color: #f8f9fa59;
+  color: #000;
+}
+
+  
+.nav-link-active {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2em;
+  background-color: #f8f9fa59;
+  color: #000;
+  border-radius: 5px;
+}

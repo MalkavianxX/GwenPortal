@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
@@ -8,6 +8,8 @@ def login_view(request):
     return render(request,"inicio_sesion/login.html")
 
 def log_out(request):
+    logout(request)
+
     return redirect('login')
 
 # Create your views here.

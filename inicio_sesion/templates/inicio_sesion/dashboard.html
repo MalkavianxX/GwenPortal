@@ -1,115 +1,177 @@
-<html lang="en" data-bs-theme="light"><head><script src="/docs/5.3/assets/js/color-modes.js"></script>
-    {% load static %}
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
 
-    <title>Sidebars · Bootstrap v5.3</title>
+<head>
+  {% load static %}
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
-    <link rel="stylesheet" type="text/css" href="{% static 'inicio_sesion/css/dashboard.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- Favicons -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/" />
+  <link rel="stylesheet" type="text/css" href="{% static 'inicio_sesion/css/dashboard.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+</head>
 
-<meta name="theme-color" content="#712cf9">
-
-<main class="d-flex flex-nowrap">
-  <h1 class="visually-hidden">Sidebars examples</h1>
-
-  <div class="d-flex flex-column flex-shrink-0 p-3  nav-style" >
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" >
-      <img src="{% static '/inicio_sesion/img/logo-white.png' %}" height="50px" width="50px" alt="">
-      <span class="fs-4 " style="font-family: 'Nunito', sans-serif;">Dashboard Admin</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_inicio_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_inicio_dashboard' %}" class="nav-link text-white " aria-current="page">
-          <i class="bi bi-house-door"></i>
-          &nbsp;Inicio
-        </a>
-      </li>
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_blog_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_blog_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-speedometer2"></i>
-          &nbsp;Blog
-        </a>
-      </li>
-    
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_cursos_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_cursos_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-grid"></i>
-          &nbsp;Todos los cursos
-        </a>
-      </li>
-      
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_talleres_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_talleres_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-layout-split"></i>
-          &nbsp;Todos los talleres
-        </a>
-      </li>
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_biblioteca_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_biblioteca_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-collection-play"></i>
-          &nbsp;Biblioteca
-        </a>
-      </li>
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_usuarios_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_usuarios_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-people"></i>
-          &nbsp; Usuarios
-        </a>
-      </li>
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_mensajes_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_mensajes_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-send"  width="16" height="16"></i>
-          &nbsp;Mensajes
-        </a>
-      </li>
-      <li class="nav-item {% if request.resolver_match.url_name == 'render_seccion_estadisticas_dashboard' %}nav-link-active{% endif %}">
-        <a href="{% url 'render_seccion_estadisticas_dashboard' %}" class="nav-link text-white ">
-          <i class="bi bi-graph-up-arrow"></i>
-          &nbsp; Estadistica
-        </a>
-      </li>
-    </ul>
-    
-    
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong class="nav-link "> {{ user.first_name }}</strong>
+<body>
+  <nav class="navbar bg-body-tertiary navbar-expand-lg bd-navbar fixed-top bg-morado-gr">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">
+        <img src="{% static '/inicio_sesion/img/logo-white.png' %}" height="50px" width="50px" alt="" />
+        Dashboard
       </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">Configuraciones</a></li>
-        <li><a class="dropdown-item" href="#">Perfil</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="{% url 'log_out' %}">Cerrar sesion</a></li>
-      </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header bg-morado-gr">
+          <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">
+            <img src="{% static '/inicio_sesion/img/logo-white.png' %}" height="50px" width="50px" alt="" />
+            Dashboard
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body bg-morado-gr">
+          <ul class="navbar-nav justify-content-evenly flex-grow-1 pe-3">
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'render_seccion_inicio_dashboard' %}nav-link-active{% endif %}">
+              <a href="{% url 'login' %}" class="nav-link text-white" aria-current="page">
+                <i class="bi bi-house-door"></i>
+                &nbsp;Inicio
+              </a>
+            </li>
+            {% if user.is_staff %}
+
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'render_seccion_blog_dashboard' %}nav-link-active{% endif %}">
+              <a href="{% url 'render_seccion_blog_dashboard' %}" class="nav-link text-white">
+                <i class="bi bi-speedometer2"></i>
+                &nbsp;Blog
+              </a>
+            </li>
+
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'dashboard_cursos' %}nav-link-active{% endif %}">
+              <a href="{% url 'dashboard_cursos' %}" class="nav-link text-white">
+                <i class="bi bi-grid"></i>
+                &nbsp;Todos los cursos
+              </a>
+            </li>
+            
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'dashboard_talleres' %}nav-link-active{% endif %}">
+              <a href="{% url 'dashboard_talleres' %}" class="nav-link text-white">
+                <i class="bi bi-layout-split"></i>
+                &nbsp;Todos los talleres
+              </a>
+            </li>
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'dashboard_videos' %}nav-link-active{% endif %}">
+              <a href="{% url 'dashboard_videos' %}" class="nav-link text-white">
+                <i class="bi bi-collection-play"></i>
+                &nbsp;Biblioteca
+              </a>
+            </li>
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'render_seccion_usuarios_dashboard' %}nav-link-active{% endif %}">
+              <a href="http://127.0.0.1:8000/admin/auth/user/" class="nav-link text-white">
+                <i class="bi bi-people"></i>
+                &nbsp; Usuarios
+              </a>
+            </li>
+            <li
+              class="nav-item {% if request.resolver_match.url_name == 'render_seccion_estadisticas_dashboard' %}nav-link-active{% endif %}">
+              <a href="{% url 'render_seccion_estadisticas_dashboard' %}" class="nav-link text-white">
+                <i class="bi bi-graph-up-arrow"></i>
+                &nbsp; Estadistica
+              </a>
+            </li>
+            {%endif%}
+
+
+            <li
+            class="nav-item {% if request.resolver_match.url_name == 'dash_micontenido' %}nav-link-active{% endif %}">
+            <a href="{% url 'dash_micontenido' %}" class="nav-link text-white">
+              <i class="bi bi-ui-radios-grid"></i>
+              &nbsp; Mi contenido
+            </a>
+          </li>
+            <li
+              class="nav-item ">
+              <button
+                class="btn btn-outline-light rounded-pill hover-translate-y-n3 btn-icon  d-lg-inline-block scroll-me"
+                type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight">
+
+                <i class="bi bi-cart" id="cantidad-productos">&nbsp;&nbsp; 0 </i>
+              </button>
+            </li>
+          </ul>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown"
+              data-bs-display="static" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end">
+              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'log_out' %}">Cerrar sesion</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  {% csrf_token %}
+
+  {% block content %} {%endblock%}
+  {% csrf_token %}
+  <!--CARRITO-->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header bg-morado-gr " style="color: white;">
+      <h4 class="offcanvas-title fw-bold fnt-monse" id="offcanvasRightLabel">Mi carrito</h4>
+      <button type="button" class="btn-close" style="color: white;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="row carrito-largo" id="carrito-contenedor">
+
+      </div>
+      <div class="w-100">
+        <div class="input-group mb-3 input-group-sm">
+          <input type="text" class="form-control fw-bold mayus text-center" id="cupon-input" style="color: blueviolet;"
+            placeholder="¿Tienes un cupon?">
+          <button class="btn fnt-robot" type="button" style="color: white; background-color: blueviolet; border-color: rgb(166, 107, 222);" onclick="verificarCupon()"
+            id="btn-verificar-cupon">Aplicar</button>
+        </div>
+        <p><small id="alter-descuento" class="fw-bold"></small></p>
+      </div>
+      <div class="w-100  d-flex mb-3 justify-content-between ">
+
+        <div class="input-group mb-3">
+          <span class="input-group-text fnt-monse fw-bold" id="basic-addon1">Total</span>
+          <input type="text" class="form-control fnt-robot fw-bold" id="total-carrito" value="0.0 USD" readonly
+            value="">
+        </div>
+      </div>
+      <div class="w-100  justify-content-center">
+        <div class="d-grid gap-2">
+          <a class="btn btn-primary" style="text-decoration: none;" type="button" href="{% url 'checkout' %}">Completar compra</a>
+        </div>
+      </div>
     </div>
   </div>
+  <!--carrito-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'micontenido/js/carrito.js' %}"></script>
 
-  <div class="b-example-divider b-example-vr"></div>
+</body>
 
-
-  {% block content %}
-
-  {%endblock%}
-
-
-
-
-</main>
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-
-      
-  
-
-</body></html>
+</html>

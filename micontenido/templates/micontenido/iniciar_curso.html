@@ -1,0 +1,122 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+{% csrf_token %}
+
+<input type="text" value="{{id_collection}}" class="d-none" id="id_collection">
+<input type="text" value="{{id_library}}" class="d-none" id="id_library">
+<input type="text" value="{{primer_video.guid}}" id="video_presentado" class="d-none">
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'micontenido/css/contenido.css' %}" />
+
+<section style="margin-top: 10vh;">
+    <div class="container">
+        <div class="row justify-content-evenly shadow">
+            {% if flag == 1 %}
+            <div class="col-lg-9">
+                <img src="{% static 'micontenido/img/cursofin.png' %}" class="img-fluid" alt="">
+                <div class="d-grid gap-2 mt-5">
+                    <button class="btn btn-danger fnt-roboto fw-bold btn-lg" type="button">Descargar certificado <i class="bi bi-file-earmark-pdf"></i></button>
+                </div>
+            </div>
+
+            {%else%}
+            <div class="col-lg-9">
+                <div class="w-100 d-flex justify-content-between">
+                    <h4 class="fnt-monse fw-bold">{{primer_video.nombre}}</h4>
+                    <button type="submit" onclick="marcar_completado()"  id="marcar_completado"  class="btn btn-outline-success">Marcar como completado</button>
+                </div>
+                <div class="mt-3" style="position: relative; padding-top: 56.25%;"><iframe src="{{primer_video.link}}" loading="lazy"
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowfullscreen=""
+                        style="border: none; position: absolute; top: 0px; height: 100%; width: 100%;"></iframe>
+                </div>
+            </div>
+            {% endif%}
+            <div class="col-lg-3 ">
+                <h4 class="fnt-roboto">Siguientes clases</h4>
+                <div class="row">
+                    {% for video in videos %}
+                    <a href="#" id="{{video.guid}}">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <!--video-->
+                            <div class="col-9 align-self-center">
+                                <div style="position: relative; padding-top: 56.25%;"><iframe  src="{{video.link}}" loading="lazy"
+                                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                    allowfullscreen=""
+                                    style="border: none; position: absolute; top: 0px; height: 100%; width: 100%;"></iframe>
+                            </div>
+                            </div>
+                            <!--demas-->
+                            <div class="col-3 align-self-center ">
+                                <p class="text-muted limit-caracter-10"><small>{{video.nombre}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                    {%endfor%}
+                </div>
+                <h4>Clases terminadas</h4>
+                <div class="row">
+                    {% for video in videos_vistos %}
+                    <a href="#" id="{{video.guid}}">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <!--video-->
+                            <div class="col-9 align-self-center">
+                                <div style="position: relative; padding-top: 56.25%;"><iframe src="{{video.link}}" loading="lazy"
+                                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                    allowfullscreen=""
+                                    style="border: none; position: absolute; top: 0px; height: 100%; width: 100%;"></iframe>
+                            </div>
+                            </div>
+                            <!--demas-->
+                            <div class="col-3 align-self-center ">
+                                <p class="text-muted limit-caracter-10"><small>{{video.nombre}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section style="margin-top: 5vh;">
+    <div class="container">
+        <div class="row justify-content-between">
+
+            <div class="col-lg-7 shadow">
+                <h4 class="fnt-monse">Material del curso</h4>
+                <div class="row">
+                    {% for material in materiales %}
+                    <div class="col-lg-5 col-12 text-start rounded bg-light shadow mb-2 img-zoom" >
+                        <a class="fs-5" target="_blank" id="{{material.nombre_archivo}}" style="text-decoration: none;color: black;" href="{{material.archivo.url}}" ><strong>{{material.curso}}</strong>  <small>{{material.nombre_archivo}}.{{material.tipo_archivo}} </small></a>
+                    </div>
+                {%endfor%}
+                </div>
+            </div>
+            <div class="col-lg-3 justify-content-center shadow">
+                <h4 class="fnt-roboto  text-center">Calificanos</h4>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rate" value="5">
+                    <label for="star5" title="text"></label>
+                    <input type="radio" id="star4" name="rate" value="4">
+                    <label for="star4" title="text"></label>
+                    <input checked="" type="radio" id="star3" name="rate" value="3">
+                    <label for="star3" title="text"></label>
+                    <input type="radio" id="star2" name="rate" value="2">
+                    <label for="star2" title="text"></label>
+                    <input type="radio" id="star1" name="rate" value="1">
+                    <label for="star1" title="text"></label>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'micontenido/js/gestorContenido.js' %}"></script>
+
+{%endblock%}

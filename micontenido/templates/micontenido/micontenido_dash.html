@@ -1,0 +1,75 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+
+<section style="margin-top: 10vh;">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-evenly">
+            <div class="col-lg-6 shadow">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <h4>Mis Cursos y Talleres</h4>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="row row-cols-1 row-cols-lg-2 row-cols-md-3 g-4">
+                            {% for curso in cursos %}
+                            <div class="col" id="{{curso.nombre}}">
+                                <div class="card border border-0 h-100 overflow-hidden">
+                                    <a href="{% url 'iniciar_curso' id_library=curso.tipo id_collection=curso.collection_id %}"
+                                        style="text-decoration: none; color: black;">
+                                        <img src="{{curso.imagen}}" class="img-zoom rounded" height="120px" alt="...">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{curso.nombre}}</h5>
+                                        <p class="card-text"><small>Prgreso:
+                                                <strong>{{curso.progreso}}%</strong></small></p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="row row-cols-1 row-cols-lg-2 row-cols-md-3 g-4">
+                            {% for curso in talleres %}
+                            <div class="col" id="{{curso.nombre}}">
+                                <div class="card border border-0 h-100 overflow-hidden">
+                                    <a href="{% url 'iniciar_curso' id_library=curso.tipo id_collection=curso.collection_id %}"
+                                        style="text-decoration: none; color: black;">
+                                        <img src="{{curso.imagen}}" class="img-zoom rounded" height="120px" alt="...">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{curso.nombre}}</h5>
+                                        <p class="card-text"><small>Prgreso: <strong>{{curso.progreso}}</strong></small>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 shadow">
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Ultimas clases</h4>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+</section>
+
+{%endblock%}

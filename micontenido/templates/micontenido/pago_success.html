@@ -1,0 +1,21 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+
+<section>
+    <div class="container " style="margin-top: 20vh;">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <img src="{% static 'micontenido/img/success.png' %}" class="img-fluid" alt="">
+                <h1 class="fnt-robot fw-bold" style="color: rgb(132, 0, 255);">¡Gracias por tu pago!</h1>
+                <p style="color: rgb(188, 130, 243);"><strong>Ya puedes comenzar tu curso/taller.&nbsp; </strong> <a style="color: rgb(157, 87, 223); text-decoration: underline;" href="#">Haz click aquí para visualizarlo</a></p>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</section>
+
+{%endblock%}

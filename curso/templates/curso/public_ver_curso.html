@@ -1,0 +1,133 @@
+{% extends 'login/login.html' %} {% load static %}{% load humanize %}
+
+{% block content%}
+<link rel="stylesheet" href="{% static 'curso/css/curso.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+<section style="margin-top: 7.5vh;">
+    <div class="cointer-fluid text-center" style="background-image: url({{curso.imagen.url}}); filter: blur();">
+        <div class="container position-relative mt-5 container-ver-curso ">
+            <img src="{{curso.imagen.url}}" alt="" class="rounded img-fluid">
+            <div class="row d-lg-flex d-none position-absolute bottom-0 start-50 translate-middle-x w-100">
+                <div class="col-lg-6 text-start ">
+                    <h2 class="fw-bold fs-1  titutlo-curso  w-75  " style="color: white;">&nbsp;&nbsp; <span class="badge" style="background-color: blueviolet;">{{curso.nombre}}</span></h2>
+                </div>
+                <div class="col-6 align-self-center text-end  ">
+                    <p><span class="badge bg-danger fs-3" >{{curso.categoria}}</span></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="d-lg-none text-center fs-1 fw-bold mt-lg-0 mt-4">{{curso.nombre}}<span class="badge"style="background-color: blueviolet;">{{curso.categoria}}</span></h1>      
+</section>
+<section class="mt-5" style="margin-bottom: 50vh;"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <h3 class="fw-bold fnt-roboto">Contenido del curso</h3>
+                <p><small class="text-muted">{{numvideos}} secciones · {{numvideos}} clases · {{total_tiempo}} de duración total </small></p>
+                <ol class="list-group list-group-numbered">
+                    {% for video in videos%}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{video.nombre}}</div>
+                        
+                      </div>
+                      <span class="badge bg-primary rounded-pill">{{video.tiempo}}</span>
+                    </li>
+                    {%endfor%}
+                </ol>
+                <div class="row mt-5 " >
+                    <div class="col-12 rounded border">
+                        <br>
+                        <h4 class="text-star fw-bold mx-3 fnt-roboto">Acerca del curso</h4>
+                        <p class="text-muted mx-3" >{{curso.descripcion}}</p>
+                    </div>
+                </div>
+                <div class="container text-start mt-5">
+                    <h5 class="text-start fw-bold fnt-roboto">Los estudiantes también compraron</h5>
+                    {% for contenido in contenido_relacionado %}
+                    <div class="row row-cols-lg-5 row-cols-2  border-bottom mt-3">
+                      <div class="col align-self-center text-center"><img  class="img-fluid rounded" width="50%"  src="{{contenido.imagen.url}}" alt=""></div>
+                      <div class="col align-self-center"><p class="fw-bold text-center">{{contenido.nombre}}</p></div>
+                      <div class="col align-self-center mt-lg-0 mt-3"><p class="text-center fw-bold"><strong></strong>${{contenido.precio|intcomma}}0 USD</p></div>
+                      <div class="col align-self-center mt-lg-0 mt-3"> <p class="text-center"><strong style="color: rgb(184, 140, 28);">4.4 </strong ><i style="color: gold;" class="bi bi-star-fill"></i> </p></div>
+                      <div class="col align-self-center text-center d-lg-block d-none"><button  class=" btn-lg fw-bold btn btn-outline-dark fs-5 border-boton-circulo"  type="button"><i class="bi bi-bag-heart"></i></button></div>
+                    </div>
+                    <div class="row d-lg-none d-flex">
+                        <div class="col-12">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn btn-outline-dark fs-5" type="button"><i class="bi bi-bag-heart "></i></button>
+                              </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                  </div> 
+            </div>
+            <div class="col-lg-4 col-12 mt-lg-0 mt-4 ">
+                <div class="row shadow  rounded">
+                    <div class="col-12">
+                        <img src="{{curso.imagen.url}}" alt="" class="img-fluid rounded">
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <h3 class="text-center text-success fw-bold fnt-roboto">${{curso.precio|intcomma}}0</h3>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="d-grid gap-2">
+                                            <button class="btn  btn-lg letra-blanca fw-bold" id="{{curso.id_collection}}" onclick="agregarAlCarrito(this.id)" style="color: white; background-color: rgb(149, 47, 245);" type="button">Añadir a la cesta</button>
+                                          </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="d-grid gap-2 ">
+                                            <button  class=" btn-lg fw-bold btn btn-outline-dark fs-5"  type="button"><i class="bi bi-bag-heart"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="d-grid gap-2 ">
+                                    <button class=" btn-lg  btn btn-outline-dark fs-5"  type="button">Comprar ahora</button>
+                                </div>
+                            </div>
+                            <p class="text-center mt-3"><small>Garantia de satisfacción*</small></p>
+                            <h3 class="text-start mt-2 fw-bold">Este curso incluye</h3>
+                            <p><strong class="fw-bold"><i class="bi bi-camera-video"></i></strong> <small>{{total_tiempo}} de video</small></p>
+                            <p> <strong><i class="bi bi-cloud-arrow-down"></i> </strong> <small> {{cant_material}} recursos descargables</small></p>
+                            <p><strong><i class="bi bi-phone"></i></strong><small> Acceso en dispositivos moviles y TV</small></p>
+                            <p><strong><i class="bi bi-infinity"></i></strong><small> Acceso de por vida</small></p>
+                            <p><strong><i class="bi bi-trophy"></i> </strong><small>Certificado de finalización</small></p>
+                            <hr>
+                            <h3 class="text-start fw-bold">No lo pienses más</h3>
+                            <p class="">Transforma tu vida con nuestros cursos holistos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  
+    </div>
+</section>
+<div class="container d-lg-none d-block bg-light">
+    <div class="fixed-bottom">
+       
+        <div class="row bg-light justify-content-center mt-1">
+            <div class="col-4 align-self-center text-center"><h1 class="fw-bold text-success fnt-roboto">${{curso.precio|intcomma}}0USD</h1></div>
+            <div class="col-8">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-lg letra-blanca fnt-roboto" id="{{curso.id_collection}}" onclick="agregarAlCarrito(this.id)" style="background-color: rgb(149, 47, 245);" type="button">Añadir a la cesta</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+{%endblock%}

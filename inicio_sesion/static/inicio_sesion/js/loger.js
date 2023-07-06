@@ -1,7 +1,7 @@
 function logIn() {
     // Obtener los valores del formulario
-    var usuario = document.getElementById("usuario_login").value;
-    var contrasena = document.getElementById("password_login").value;
+    var usuario = document.getElementById("loginEmail").value;
+    var contrasena = document.getElementById("loginPassword").value;
   
     // Crear objeto FormData y agregar los valores del formulario
     var formData = new FormData();

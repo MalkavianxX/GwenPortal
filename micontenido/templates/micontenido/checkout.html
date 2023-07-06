@@ -1,0 +1,70 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+
+<section  style="margin-top: 10vh;">
+    <div class="container " >
+        <div class="row d-flex justify-content-evenly ">
+
+            <div class="col-4">
+                <div class="row shadow rounded">
+                    <div class="col-12  " style="background-color: blueviolet;"> 
+                        <h4 class="fnt-robot fw-bold text-center letra-blanca ">Resumen</h4>
+                    </div>
+                    <div class="col-12 border">
+                        <hr>
+                        <p class="text-muted"><small>Detalles</small></p>
+                        <h5 class="fnt-robot mt-3 text-muted">Subtotal: <strong>{{total|intcomma}}0USD</strong> </h5>
+                        <h5 class="fnt-robot mt-1 text-muted">Cupon: </h5>
+                        <hr>
+                        <div class="row">
+                            <p class="text-muted"><small>Metodos de pago</small></p>
+
+                            <div class="col-12" id="wallet_container">
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-grid gap-2">
+                                <a href="" class="btn btn-primary fnt-robot fw-bold btn-lg"  id="pp-link"><i class="bi bi-paypal"></i> Pagar con PayPal</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-5 mb-3">
+                <div class="row shadow rounded mb-3">
+                    <div class="col-12 letra-blanca" style="background-color: blueviolet;">
+                        <h4 class="fnt-robot fw-bold text-center">Mi carrito</h4>
+                    </div>
+                    {% for curso in cursos %}
+                    <div class="col-12 mb-3 mt-3">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="{{curso.imagen}}" class="img-fluid rounded-start" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{curso.nombre}}</h5>
+                                  <p class="card-text">{{curso.categoria}}.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    {%endfor%}
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'micontenido/js/checkout.js' %}"></script>
+
+{%endblock%}

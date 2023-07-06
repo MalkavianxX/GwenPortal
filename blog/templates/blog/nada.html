@@ -2,188 +2,167 @@
 {% block content%}
 <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
 
-<div class="container d-block justify-content-center">
-  <div id="alerta-categoria" style="display: none;" class="row justify-content-end ">
+<div class="container d-block justify-content-center" style="position: relative">
+  <div id="alerta-categoria" style="display: none" class="row justify-content-end">
     <div class="col-lg- col-md-2 col-sm-12 col-12">
-      <div class="alert alert-success" role="alert">
-        Hecho.
-      </div>
+      <div class="alert alert-success" role="alert">Hecho.</div>
     </div>
   </div>
 
-  <div class="container-fluid">
-    <h5>Creador de Blog</h5>
+  <div class="container" style="margin-top: 7rem">
+    <div class="row justify-content-between">
+      <div class="col-lg-6 col-md-5 col-sm-12 col-12 justify-content-center">
+        <form>
+          {% csrf_token %}
 
-    <div class="row justify-content-center ">
- 
-      <div class="col-lg-4 col-md-5 col-sm-12 col-12 justify-content-center">
-
-        <form action="">
-          <div class=" mb-3">
+          <div class="mb-3">
             <div class="row justify-content-between align-items-end">
               <div class="col-10">
-                <label for="categoria" class="form-label">Categoria</label>
-                <input class="form-control" list="categoriaOptions" id="creador-blog-categoria" name="creador-blog-categoria" placeholder="Buscar">
+                <h4>Nuevo Post</h4>
+                <input class="form-control" list="categoriaOptions" id="creador-blog-categoria"
+                  name="creador-blog-categoria" placeholder="Categoria" />
                 <datalist id="categoriaOptions">
                   {% for categoria in categorias %}
                   <option value="{{categoria.nombre}}"></option>
                   {%endfor%}
                 </datalist>
               </div>
-              <div class="col-2 ">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-categoria-agregar">
+              <div class="col-2">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#modal-categoria-agregar">
                   +
                 </button>
-                <div class="modal fade" id="modal-categoria-agregar" tabindex="-1" aria-labelledby="modal-categoria-agregar" aria-hidden="true">
+                <div class="modal fade" id="modal-categoria-agregar" tabindex="-1"
+                  aria-labelledby="modal-categoria-agregar" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h1 class="modal-title fs-5 " style="color:black" id="modal-categoria-agregar">Agregar categoria</h1>
+                        <h1 class="modal-title fs-5" style="color: black" id="modal-categoria-agregar">
+                          Agregar categoria
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         {% csrf_token %}
                         <form id="form-agregar-categoria" action="" method="post">
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="categoria-blog-nombre" name="categoria-blog-nombre" placeholder="Titulo">
+                            <input type="email" class="form-control" id="categoria-blog-nombre"
+                              name="categoria-blog-nombre" placeholder="Titulo" />
                             <label for="categoria-blog-nombre">Nombre</label>
                           </div>
                           <div class="form-floating">
-                            <input type="text" class="form-control" id="categoria-blog-descripcion" name="categoria-blog-descripcion" placeholder="Descripción">
+                            <input type="text" class="form-control" id="categoria-blog-descripcion"
+                              name="categoria-blog-descripcion" placeholder="Descripción" />
                             <label for="categoria-blog-descripcion">Descripción</label>
                           </div>
                         </form>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" id="GuardarCategoria" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                          Cancelar
+                        </button>
+                        <button type="button" id="GuardarCategoria" class="btn btn-success">
+                          Guardar
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
           </div>
-          
+
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="creador-titulo-blog" name="creador-titulo-blog" placeholder="" />
+            <input type="text" class="form-control" id="creador-titulo-blog" name="creador-titulo-blog"
+              placeholder="" />
             <label for="floatingInput">Titulo</label>
           </div>
-  
+
           <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here"  id="creador-contenido-blog" name="creador-contenido-blog"
-              style="height: 100px"></textarea>
+            <textarea class="form-control" placeholder="Leave a comment here" id="creador-contenido-blog"
+              name="creador-contenido-blog" style="height: 50vh"></textarea>
             <label for="floatingTextarea2">Contenido</label>
           </div>
           <div class="mb-3">
-            <label for="creador-archivo-blog" class="form-label">Archivo</label>
+            <label for="creador-archivo-blog" class="form-label">Imagen / Video</label>
             <input class="form-control" type="file" id="creador-archivo-blog" name="creador-archivo-blog" />
           </div>
-          <div class="mb-3 align-items-center d-flex justify-content-between">
-            <label for="exampleColorInput" class="form-label">Color de fondo</label>
-            <input type="color" class="form-control form-control-color" id="creador-color-bg-blog" name="creador-color-bg-blog" value="#563d7c"
-              title="Choose your color" />
-  
-            <label for="exampleColorInput" class="form-label">Color de letra</label>
-            <input type="color" class="form-control form-control-color" id="creador-color-fg-blog" name="creador-color-fg-blog" value="#FFFFFF"
-              title="Choose your color" />
-          </div>
-          <div class="mb-3">
-            <div class="row justify-content-between">
-              <div class="col-6">
-                <label for="creador-fuente-letra" class="form-label">Fuente de letra</label>
-                <input class="form-control" list="datalistOptions" id="creador-fuente-letra" name="creador-fuente-letra" placeholder="Buscar">
-                <datalist id="datalistOptions">
-                  <option value="Arial"></option>
-                  <option value="Cabin"></option>
-                  <option value="Calibri"></option>
-                  <option value="Comic Sans MS"></option>
-                  <option value="Courier New"></option>
-                  <option value="Fira Sans"></option>
-                  <option value="Georgia"></option>
-                  <option value="Helvetica"></option>
-                  <option value="IBM Plex Sans"></option>
-                  <option value="Impact"></option>
-                  <option value="Inter"></option>
-                  <option value="Lato"></option>
-                  <option value="Merriweather"></option>
-                  <option value="Montserrat"></option>
-                  <option value="Muli"></option>
-                  <option value="Noto Sans"></option>
-                  <option value="Nunito"></option>
-                  <option value="Open Sans"></option>
-                  <option value="Oswald"></option>
-                  <option value="Playfair Display"></option>
-                  <option value="Poppins"></option>
-                  <option value="PT Sans"></option>
-                  <option value="Raleway"></option>
-                  <option value="Roboto"></option>
-                  <option value="Roboto Condensed"></option>
-                  <option value="Source Sans Pro"></option>
-                  <option value="Trebuchet MS"></option>
-                  <option value="Ubuntu"></option>
-                  <option value="Verdana"></option>
-                  <option value="Work Sans"></option>
-  
-  
-                </datalist>
-              </div>
-              <div class="col-6">
-                <label for="tamano-fuente" class="form-label">Tamaño de letra</label>
-                <div class="row">
-                  <div class="col-6">
-                    <input class="form-control" type="number" id="tamano-fuente-titulo" name="tamano-fuente-titulo" placeholder="Titulo">
-                  </div>
-                  <div class="col-6">
-                    <input class="form-control" type="number" id="tamano-fuente-cuerpo" name="tamano-fuente-cuerpo"  placeholder="Cuerpo">
-                  </div>
-                </div>
-              </div>
-  
-            </div>
-          </div>
-  
           <div class="mb-3">
             <div class="d-grid gap-2">
               <button class="btn btn-primary" id="publicar-blog" type="submit">Publicar</button>
             </div>
           </div>
         </form>
-
-
       </div>
 
-      <div class="col-lg-6">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 col-md-12 col-sm-12 col-12 justify-content-center" id="lugar-estructura">
-            <div class="card mb-3" style="max-width: 540px" id="prev-card">
-              <div class="row g-0 align-items-center">
-                <div class="col-md-4">
-                  <img src="..." class="img-fluid rounded-start" id="prev-imagen" alt="..." />
+      <div class="col-lg-6 justify-content-center">
+        <div class="row">
+          <div class="col-lg-4 col-12">
+            <a style="text-decoration: none; color: black;" href="{% url 'mostrar_blog' %}" class="fs-4 fw-bold">Mis Post</a>
+          </div>
+          <div class="col-lg-8 col-12">
+            <div class="input-group mb-3">
+              <a class="btn btn-outline-secondary" href="http://127.0.0.1:8000/admin/blog/post/" type="button"><i
+                  class="bi bi-pencil"></i></a>
+              <input type="text" class="form-control" list="posts" placeholder="Buscar post"
+                onchange="buscarElemento(this.value)" />
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-4" style="height: 80vh !important; overflow-y: scroll">
+          {% for post in posts %}
+          <div class="col">
+            <a href="{% url 'ver_post' post.id %}" style="text-decoration: none">
+              <div class="card" id="{{post.titulo}}" style="height: 20rem">
+                <img src="{{post.imagen.url}}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">{{post.titulo}}</h5>
+                  <p class="card-text limit-caracter">{{post.contenido}}</p>
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title" id="prev-titulo"></h5>
-                    <p class="card-text" id="prev-contenido"></p>
+                <div class="card-footer">
+                  <div class="row justify-content-between">
+                    <div class="col">
+                      <p class="card-text">
+                        <small class="text-body-secondary">{{post.fecha_publicacion}}</small>
+                      </p>
+                    </div>
+                    <div class="col text-end">
+                      <p>
+                        <small><i class="bi bi-heart-fill"></i> {{post.me_gusta}}
+                        </small>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
+          {%endfor%} 
         </div>
       </div>
     </div>
   </div>
+  <datalist id="posts">
+    {% for post in posts %}
+    <option value="{{post.titulo}}"></option>
+    {%endfor%}
+  </datalist>
 
   <!--BLOGS-PREVIOS-->
-
-  <div class="container mt-5">
-
-  </div>
 </div>
+<script>
+  function buscarElemento(valor) {
+    var elemento = document.getElementById(valor);
+
+    if (elemento) {
+      elemento.scrollIntoView();
+      elemento.classList.add("animated");
+      setTimeout(function () {
+        elemento.classList.remove("animated");
+      }, 1200);
+    }
+  }
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static '/blog/js/carousel.js' %}"></script>
 <script src="{% static '/blog/js/blog.js' %}"></script>
 {%endblock%}

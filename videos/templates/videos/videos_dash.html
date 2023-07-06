@@ -1,0 +1,147 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'videos/css/videos.css' %}">
+
+<section>
+    <div class="container " style="margin-top: 10vh;">
+        <div class="row justify-content-between">
+            <div class="col-6 fw-bold fnt-roboto"><h4><strong>Cursos </strong></h4></div>
+            <div class="col-6 text-end"><a class="fs-5" href="{% url 'mostar_todos_videos' 132990%}" style="text-decoration: underline; color: black;"><small>Ver todo</small></a></div>
+        </div>
+        <div class="row overflow-x-scroll" id="video-container-cursos" style="display: flex;flex-wrap: nowrap !important;">
+            <div class="col-lg-4 col-12 align-self-center text-center ">
+                <a type="button" data-bs-toggle="modal" data-bs-target="#modalFormCursos" >
+                   <img src="{% static 'videos/img/addcam.png' %}" class="shadow hover-grow img-fluid align-self-center" width="50%" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container " style="margin-top: 2vh;">
+        <div class="row justify-content-between">
+            <div class="col-6 fw-bold fnt-roboto"><h4><strong>Talleres </strong></h4></div>
+            <div class="col-6 text-end"><a class="fs-5" href="{% url 'mostar_todos_videos' 132992%}" style="text-decoration: underline; color: black;"><small>Ver todo</small></a></div>
+        </div>
+        <div class="row overflow-x-scroll" id="video-container-talleres" style="display: flex;flex-wrap: nowrap !important;">
+            <div class="col-lg-4 col-12 align-self-center text-center">
+              <a type="button" data-bs-toggle="modal" data-bs-target="#modalFormTaller" >
+
+                <img src="{% static 'videos/img/addcam2.png' %}" class="shadow hover-grow img-fluid align-self-center" width="50%" alt="">
+              </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!---MODAL CURSOS SUBIR VIDEO-->
+<!-- Button trigger modal -->
+
+  
+<!---MODAL cursos SUBIR VIDEO-->
+<div class="modal fade" id="modalFormCursos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-4 fnt-roboto fw-bold" id="exampleModalLabel">Subir video</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <section class="loader " id="spin_curso" style="display: none;">
+
+              <div class="slider" style="--i:0">
+              </div>
+              <div class="slider" style="--i:1">
+              </div>
+              <div class="slider" style="--i:2">
+              </div>
+              <div class="slider" style="--i:3">
+              </div>
+              <div class="slider" style="--i:4">
+              </div>
+            </section>
+            <form action="" id="subir_videos_curso">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="titulo_video">
+                    <label for="titulo_video">Titulo del video</label>
+                  </div>
+                  <div class="form-floating mb-3" id="">
+                    <select class="form-select" id="id_curso">
+                      {% for curso in cursos %}
+                        <option selected value="{{curso.id_collection}}">{{curso.nombre}}</option>
+                      {%endfor%}
+                    </select>
+                    <label for="floatingSelect">Selecciona curso</label>
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">Selecciona video</label>
+                    <input class="form-control" type="file" id="file_videos">
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn letra-blanca" style="background-color: blueviolet;" onclick="guardar_curso()" type="button">Subir</button>
+                  </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<!---MODAL TALLERES SUBIR VIDEO-->
+
+  <div class="modal fade" id="modalFormTaller" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-4 fnt-roboto fw-bold" id="exampleModalLabel">Subir video</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="d-flex justify-content-center " id="spin_taller" style="display: none !important;">
+              <div class="spinner-border" style="width: 3rem; height: 3rem; color: blueviolet;" role="status">
+                <span class="visually-hidden">Subiendo...</span>
+              </div>
+            </div>
+            <form action="" id="subir_videos_taller">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="taller_titulo_video">
+                    <label for="taller_titulo_video">Titulo del video</label>
+                  </div>
+                  <div class="form-floating mb-3" id="">
+                    <select class="form-select" id="id_taller">
+                      {% for taller in talleres %}
+                        <option selected value="{{taller.id_collection}}">{{taller.nombre}}</option>
+                      {%endfor%}
+                    </select>
+                    <label for="floatingSelect">Selecciona taller</label>
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">Selecciona video</label>
+                    <input class="form-control" type="file" id="taller_file_videos">
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn letra-blanca" style="background-color: blueviolet;" onclick="guardar_taller()" type="button">Subir</button>
+                  </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'videos/js/videos.js' %}"></script>
+<script src="{% static 'videos/js/manager.js' %}"></script>
+<script src="https://kit.fontawesome.com/63bc1a63be.js" crossorigin="anonymous"></script>
+{%endblock%}
+
+
