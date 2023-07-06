@@ -54,7 +54,7 @@ function remover_del_carrito(productoId) {
         div.remove();
         obtener_carrito();
       } else {
-        alert("Ocurrió un error al eliminar el producto del carrito.");
+        alert("Ocurrió un error al  eliminar el producto del carrito.");
       }
     })
     .catch((error) => {
