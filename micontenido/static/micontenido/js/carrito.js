@@ -30,7 +30,6 @@ function agregarAlCarrito(productoId) {
     })
     .catch((error) => {
       console.error("Ocurrió un error en la solicitud:", error);
-      alert("Ocurrió un error en agregar al carrito.");
     });
 }
 
@@ -54,12 +53,11 @@ function remover_del_carrito(productoId) {
         div.remove();
         obtener_carrito();
       } else {
-        alert("Ocurrió un error al  eliminar el producto del carrito.");
+        console.erro("Ocurrió un error al  eliminar el producto del carrito.");
       }
     })
     .catch((error) => {
       console.error("Ocurrió un error en la solicitud:", error);
-      alert("Ocurrió un error en remover del carrito Por favor, inténtalo de nuevo.");
     });
 }
 
@@ -144,8 +142,7 @@ function obtener_carrito() {
       });
     })
     .catch((error) => {
-      console.error("Ocurrió un error en la solicitud:", error);
-      alert("Ocurrió un error en obtener el carrito Por favor, inténtalo de nuevo.");
+      console.error("Ocurrió un error  obtener el carrito Por favor,:", error);
     });
 }
 function convertirAFloat(stringValor) {
