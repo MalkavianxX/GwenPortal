@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
 def login_view(request):
 
@@ -11,7 +12,7 @@ def log_out(request):
     logout(request)
 
     return redirect('login')
-
+@csrf_exempt
 # Create your views here.
 def log_in(request):
     if request.method == 'POST':

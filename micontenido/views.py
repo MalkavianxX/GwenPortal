@@ -12,6 +12,7 @@ import requests
 from  curso.models import Material,Curso,Taller
 import json
 from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_exempt
 
 class MicontenidoAux():
     def __init__(self, nombre, tipo, imagen, progreso,collection_id):
@@ -119,7 +120,7 @@ def iniciar_curso(request,id_library,id_collection):
 
 
         })
-
+@csrf_exempt
 def cerrar_sesion(request):
     logout(request)
     return redirect('nombre_de_la_vista') 
@@ -158,7 +159,7 @@ def dash_micontenido(request):
 
 #carrito
 
-
+@csrf_exempt
 def agregar_al_carrito(request, producto_id):
     try:
         producto = Taller.objects.get(id_collection = producto_id)
@@ -238,7 +239,7 @@ class ProductoAux():
             'id_collection': self.id_collection
         }
 
-
+@csrf_exempt
 def ver_carrito(request):
     carrito = request.session.get('carrito', [])
     productos = []
