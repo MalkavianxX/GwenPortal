@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'Wen.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'WenDev',
-        'USER': 'postgres',
-        'PASSWORD': 'Rmpv54321',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'wendev',
+        'USER': 'ibm_cloud_ddb7036a_5af4_4989_b53b_72aabb3d6471',
+        'PASSWORD': '2f1d95edd45add0b2ce96c93f852eb14d8a1e547f437aae2dbd748bf357f3975',
+        'HOST': '2f84f822-1b65-4213-a47d-784494cd5cc0.btdkfu0w0p0vutjk0r9g.databases.appdomain.cloud',
+        'PORT': '30860',
     }
 }
 
