@@ -30,8 +30,8 @@
     integrity="sha512-LpKoEmPyokcDYSjRJ/7WgybgdAYFsKtCrGC9m+VBwcefe1vHXyUnD9fTQb3nXVJda6ny1J84UR+iBtEYm3OQmQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!--MP-->
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <!--MP-->
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 </head>
 
@@ -145,7 +145,7 @@
                       </div>
                     </a>
 
-                  </li> 
+                  </li>
                   <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
                     <a href="{% url 'public_todos_cursos' %}"
                       class="list-group-item list-group-item-action dropdown-toggle">
@@ -523,14 +523,13 @@
 
             <li class="nav-item mr-lg-5">
 
-              <button class="btn btn-outline-light rounded-pill hover-translate-y-n3 btn-icon  d-lg-inline-block scroll-me" 
-              type="button" 
-              data-bs-toggle="offcanvas" 
-              data-bs-target="#offcanvasRight" 
-              aria-controls="offcanvasRight">
-              
-              <i class="bi bi-cart" id="cantidad-productos" >&nbsp;&nbsp; 0 </i>
-            </button>
+              <button
+                class="btn btn-outline-light rounded-pill hover-translate-y-n3 btn-icon  d-lg-inline-block scroll-me"
+                type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight">
+
+                <i class="bi bi-cart" id="cantidad-productos">&nbsp;&nbsp; 0 </i>
+              </button>
 
             </li>
 
@@ -545,7 +544,7 @@
         </div>
       </div>
     </nav>
-    {% csrf_token %} 
+    {% csrf_token %}
     <!--CARRITO-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
@@ -558,21 +557,25 @@
         </div>
         <div class="w-100">
           <div class="input-group mb-3 input-group-sm">
-            <input type="text" class="form-control fw-bold mayus text-center" id="cupon-input" style="color: blueviolet;"  placeholder="¿Tienes un cupon?">
-            <button class="btn bg-morado-gr " type="button" onclick="verificarCupon()" id="btn-verificar-cupon">Aplicar</button>
+            <input type="text" class="form-control fw-bold mayus text-center" id="cupon-input"
+              style="color: blueviolet;" placeholder="¿Tienes un cupon?">
+            <button class="btn bg-morado-gr " type="button" onclick="verificarCupon()"
+              id="btn-verificar-cupon">Aplicar</button>
           </div>
-          <p><small id="alter-descuento"  class="fw-bold"></small></p>
+          <p><small id="alter-descuento" class="fw-bold"></small></p>
         </div>
-        <div class="w-100  d-flex mb-3 justify-content-between " >
+        <div class="w-100  d-flex mb-3 justify-content-between ">
 
           <div class="input-group mb-3">
             <span class="input-group-text fnt-monse fw-bold" id="basic-addon1">Total</span>
-            <input type="text" class="form-control fnt-robot fw-bold" id="total-carrito" value = "0.0 USD" readonly value="">
+            <input type="text" class="form-control fnt-robot fw-bold" id="total-carrito" value="0.0 USD" readonly
+              value="">
           </div>
         </div>
         <div class="w-100  justify-content-center">
           <div class="d-grid gap-2">
-            <a class="btn btn-primary" style="text-decoration: none;" type="button" href="{% url 'checkout' %}">Completar compra</a>
+            <a class="btn btn-primary" style="text-decoration: none;" type="button"
+              href="{% url 'checkout' %}">Completar compra</a>
           </div>
         </div>
       </div>
@@ -585,7 +588,12 @@
   {% block content%}
 
   <!-- Omnisearch -->
- 
+  <!--AVISO DE PRIVACIDAD-->
+  <!-- Button trigger modal -->
+
+
+
+
   <div class="main-content">
     <!-- Header (v1) -->
     <section class="header-1 section-rotate bg-section-secondary" data-offset-top="#header-main">
@@ -612,11 +620,11 @@
 
               <div>
                 <h2 class="text-white mb-4">
-                  <span class="display-4 font-weight-light">Gwendolyn Luyalva</span>
+                  <span class="display-4 font-weight-light">Gwen Luyalva</span>
                   <span class="d-block">Terapeuta <strong class="font-weight-light">Holística</strong></span>
                 </h2>
                 <p class="lead text-white">
-                  Transforma tu vida desde adentro hacia afuera con los cursos en línea de Gwendolyn Luyalva.
+                  Transforma tu vida desde adentro hacia afuera con los cursos en línea de Gwen Luyalva.
                   Bienvenidos al portal de cursos holísticos.
                 </p>
                 <div class="mt-5">
@@ -1065,7 +1073,7 @@
               <div class="col-lg-8">
                 <p class="lead text-white">
                   Diseñados para ayudarte a encontrar el equilibrio y el bienestar integral que necesitas. Desde
-                  meditación y yoga hasta terapias alternativas y desarrollo personal, te brindarán las herramientas y
+                  meditación hasta terapias alternativas y desarrollo personal, te brindarán las herramientas y
                   técnicas necesarias para mejorar tu calidad de vida y sentirte en armonía con el mundo que te rodea.
                 </p>
                 <div class="btn-container mt-5">
@@ -1514,7 +1522,7 @@
             <div class=" pr-lg-4">
               <h5 class=" h3">Descubre la armonía en cada curso.</h5>
               <p class="lead mt-4 mb-5">Diseñados para ayudarte a encontrar el equilibrio y el bienestar integral que
-                necesitas. Desde meditación y yoga hasta terapias alternativas y desarrollo personal, te brindarán las
+                necesitas. Desde meditación hasta terapias alternativas y desarrollo personal, te brindarán las
                 herramientas y técnicas necesarias para mejorar tu calidad de vida y sentirte en armonía con el mundo
                 que te rodea. </p><a href="https://themes.getbootstrap.com/product/purpose-website-ui-kit/"
                 class="link link-underline-primary">Persepcion holistica de una IA</a>
@@ -1854,6 +1862,361 @@
   </div>
 
   {%endblock%}
+  <!-- Modal privacidad-->
+  <div class="modal fade" id="modalprivacidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalprivacidad" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Aviso de privacidad - Gwen Luyalva</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Fecha de vigencia: 15 de julio del 2024
+
+            En Gwen Luyalva, valoramos tu privacidad y nos comprometemos a proteger tus datos personales. Este aviso de
+            privacidad tiene como objetivo proporcionarte información clara sobre cómo recopilamos, utilizamos,
+            almacenamos y protegemos la información que nos brindas al utilizar nuestra plataforma. Te recomendamos leer
+            detenidamente este aviso para comprender nuestras prácticas de privacidad.
+
+            1. Información de contacto:
+
+            Si tienes alguna pregunta o inquietud relacionada con la privacidad o el procesamiento de tus datos
+            personales, puedes ponerte en contacto con nosotros a través de los siguientes medios:
+
+            Dirección: [Dirección física]
+            Correo electrónico: [Correo electrónico de contacto]
+            Teléfono: [Número de teléfono de contacto]
+
+            2. Información recopilada:
+
+            Cuando creas una cuenta en Gwen Luyalva, recopilamos la siguiente información personal:
+
+            - Nombre completo: Utilizamos tu nombre para identificarte en nuestra plataforma.
+            - Correo electrónico: Necesitamos tu dirección de correo electrónico para comunicarnos contigo, enviar
+            notificaciones relevantes y restablecer tu contraseña si es necesario.
+            - Contraseña: Se requiere una contraseña para proteger tu cuenta y mantener la seguridad de tus datos
+            personales.
+
+            3. Uso de la información:
+
+            Utilizamos la información recopilada para los siguientes fines:
+
+            - Gestión de la cuenta: Utilizamos tu nombre y dirección de correo electrónico para crear y administrar tu
+            cuenta en Gwen Luyalva.
+            - Comunicación: Podemos utilizar tu dirección de correo electrónico para enviarte actualizaciones sobre
+            nuestra plataforma, cambios en nuestros servicios o información relevante.
+            - Seguridad: La contraseña se utiliza para proteger el acceso a tu cuenta y garantizar la seguridad de tus
+            datos personales.
+
+            4. Compartir la información:
+
+            En Gwen Luyalva, nos comprometemos a no vender, alquilar ni compartir tu información personal con terceros,
+            salvo en las siguientes circunstancias:
+
+            - Proveedores de servicios: Podemos compartir tu información personal con proveedores de servicios de
+            confianza que nos asisten en la prestación de servicios relacionados con nuestra plataforma. Estos
+            proveedores están obligados a mantener la confidencialidad y seguridad de tus datos personales.
+            - Cumplimiento legal: Podemos revelar tu información personal si así lo requiere la ley, una orden judicial
+            u otro proceso legal.
+
+            5. Cookies y tecnologías similares:
+
+            Utilizamos cookies y tecnologías similares para mejorar tu experiencia en Gwen Luyalva. Estas tecnologías
+            nos permiten recopilar información no identificable personalmente, como tu dirección IP y tus patrones de
+            navegación. Puedes gestionar tus preferencias de cookies a través de la configuración de tu navegador.
+
+            6. Seguridad de los datos:
+
+            Implementamos medidas de seguridad adecuadas para proteger tus datos personales contra accesos no
+            autorizados, pérdidas o robos. Mantenemos procedimientos internos para garantizar la seguridad de la
+            información que recopilamos.
+
+            7. Derechos de los usuarios:
+
+            Tienes derechos sobre tus datos personales. Puedes ejercer los siguientes derechos:
+
+            - Acceso: Tienes derecho a acceder a la información personal que mantenemos sobre ti.
+            - Rectificación: Puedes solicitar la corrección de cualquier información personal inexacta o incompleta.
+            - Cancelación: Puedes solicitar la eliminación de tus datos personales de nuestra plataforma.
+            - Oposición: Puedes oponerte al procesamiento de tus datos personales en ciertas circunstancias.
+
+            Si deseas ejercer alguno de estos derechos, ponte en contacto con nosotros utilizando los detalles
+            proporcionados en la sección de Información de contacto.
+
+            8. Cambios en el aviso de privacidad:
+
+            Nos reservamos el derecho de modificar este aviso de privacidad en cualquier momento. Cualquier cambio se
+            publicará en esta página y se te notificará por correo electrónico. Te recomendamos revisar periódicamente
+            este aviso para estar al tanto de cualquier actualización.
+
+            Al crear una cuenta en Gwen Luyalva, confirmas que has leído, entendido y aceptado los términos de este
+            aviso de privacidad.
+
+            Gracias por confiar en Gwen Luyalva. Estamos comprometidos a proteger tu privacidad y mantener la
+            confidencialidad de tus datos personales.
+
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal cookies-->
+  <div class="modal fade" id="modalcokie" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalprivacidad" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Aviso de Cookies - Gwen Luyalva</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+
+
+            Fecha de vigencia: 15 de junio del 2023<br>
+
+            En Gwen Luyalva, utilizamos cookies y tecnologías similares en nuestra plataforma web para mejorar tu
+            experiencia como usuario. Este aviso de cookies tiene como objetivo informarte sobre qué son las cookies,
+            cómo las utilizamos y cómo puedes gestionar tus preferencias.
+            <br>
+            1. ¿Qué son las cookies?<br>
+
+            Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo cuando visitas nuestra
+            plataforma. Estas cookies nos permiten recopilar información no identificable personalmente, como tu
+            dirección IP, tipo de navegador, páginas visitadas y la duración de tu visita. La información recopilada a
+            través de las cookies se utiliza para mejorar nuestros servicios y ofrecerte una experiencia personalizada.
+            <br>
+            2. Tipos de cookies que utilizamos:
+            <br>
+            a. Cookies esenciales: Estas cookies son necesarias para el funcionamiento básico de nuestra plataforma. Nos
+            permiten gestionar tu sesión, recordar tus preferencias y garantizar la seguridad de tu cuenta.
+            <br>
+            b. Cookies de rendimiento: Estas cookies recopilan información sobre cómo utilizas nuestra plataforma. Nos
+            permiten analizar y mejorar el rendimiento y la funcionalidad de nuestro sitio web.
+            <br>
+            c. Cookies de funcionalidad: Estas cookies nos permiten recordar tus preferencias y personalizar tu
+            experiencia en nuestra plataforma. Por ejemplo, recordar tu idioma preferido o tus opciones de
+            personalización.
+            <br>
+            d. Cookies de publicidad: Podemos utilizar cookies de terceros para mostrarte anuncios relevantes basados en
+            tus intereses. Estas cookies recopilan información sobre tus hábitos de navegación y se utilizan para
+            personalizar los anuncios que se te muestran en nuestra plataforma.
+            <br>
+            3. Gestión de las cookies:
+            <br>
+            Puedes gestionar tus preferencias de cookies a través de la configuración de tu navegador. Puedes optar por
+            aceptar todas las cookies, rechazar todas las cookies o configurar tu navegador para que te notifique cuando
+            se envía una cookie. Ten en cuenta que el bloqueo o eliminación de cookies puede afectar la funcionalidad de
+            nuestra plataforma y limitar tu experiencia como usuario.
+            <br>
+            4. Cookies de terceros:
+            <br>
+            Es posible que trabajemos con terceros que utilizan cookies en nuestra plataforma. Estos terceros están
+            sujetos a sus propias políticas de privacidad y cookies. Te recomendamos consultar las políticas de
+            privacidad y cookies de estos terceros para obtener más información sobre cómo utilizan la información
+            recopilada.
+            <br>
+            5. Cambios en el aviso de cookies:
+            <br>
+            Nos reservamos el derecho de modificar este aviso de cookies en cualquier momento. Cualquier cambio se
+            publicará en esta página. Te recomendamos revisar periódicamente este aviso para estar al tanto de cualquier
+            actualización.
+            <br>
+            Al continuar utilizando nuestra plataforma, aceptas el uso de cookies de acuerdo con este aviso.
+            <br>
+            Si tienes alguna pregunta o inquietud sobre nuestro uso de cookies, por favor, ponte en contacto con
+            nosotros utilizando los detalles proporcionados en la sección de Información de contacto de nuestro aviso de
+            privacidad.
+            <br>
+            Gracias por utilizar Gwen Luyalva y por leer nuestro aviso de cookies.
+            <br>
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Soporte-->
+  <div class="modal fade" id="modalsoporte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Contacto a soporte</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <a href="mailto:soporte@gwenluy.com">
+              <i class="bi bi-envelope-at"></i> soporte@gwenluy.com
+            </a>
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal PAGOS-->
+  <div class="modal fade" id="modalpagosaviso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalprivacidad" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"> Aviso de Pagos - Gwen Luyalva</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+
+            Fecha de vigencia: 15 de julio del 2023<br>
+
+            En Gwen Luyalva, queremos informarte que no nos encargamos directamente de los pagos realizados en nuestra
+            plataforma. En su lugar, utilizamos pasarelas de pago confiables como MercadoPago y PayPal para gestionar
+            las transacciones.<br>
+
+            1. Información de contacto:<br>
+
+            Si tienes alguna pregunta o inquietud relacionada con los pagos en nuestra plataforma, puedes ponerte en
+            contacto con nosotros a través de los siguientes medios:<br>
+
+            Dirección: S/N<br>
+            Correo electrónico: soporte@gwenluy.com<br>
+            Teléfono: S/N<br>
+
+            2. Uso de pasarelas de pago:<br>
+
+            Cuando realizas un pago en nuestra plataforma, serás redirigido a la pasarela de pago correspondiente
+            (MercadoPago o PayPal). Estas pasarelas son responsables de procesar el pago de manera segura y confiable.
+            Gwen Luyalva no recopila ni almacena los detalles completos de tu pago, como los datos de tu tarjeta de
+            crédito o cuenta bancaria.<br>
+
+            3. Políticas de privacidad y seguridad:<br>
+
+            Las pasarelas de pago que utilizamos (MercadoPago y PayPal) tienen sus propias políticas de privacidad y
+            seguridad. Te recomendamos revisar dichas políticas para comprender cómo protegen tus datos personales y
+            financieros durante el proceso de pago.<br>
+
+            - Política de privacidad de MercadoPago: https://www.mercadopago.com.mx/privacidad<br>
+            - Política de privacidad de PayPal:<br>
+            https://www.paypal.com/es/cshelp/article/%C2%BFcu%C3%A1l-es-la-pol%C3%ADtica-de-paypal-sobre-la-privacidad-y-c%C3%B3mo-se-aplica-la-declaraci%C3%B3n-de-privacidad-help330
+
+            <br>Recuerda que, al utilizar las pasarelas de pago, estarás sujeto a los términos y condiciones de servicio de
+            dichas plataformas.<br>
+
+            4. Responsabilidad limitada:<br>
+
+            En Gwen Luyalva, nos esforzamos por brindar un entorno seguro y confiable para los pagos en línea. Sin
+            embargo, no podemos hacernos responsables de ninguna pérdida, daño o problema que pueda surgir durante el
+            proceso de pago a través de las pasarelas de pago externas. Te recomendamos revisar detenidamente las
+            políticas y condiciones de uso de las pasarelas de pago antes de realizar cualquier transacción.<br>
+
+            Recuerda que este aviso de pagos es informativo y no establece ninguna relación contractual entre Gwen
+            Luyalva, MercadoPago y PayPal.<br>
+
+            Agradecemos tu confianza en Gwen Luyalva y en las pasarelas de pago que utilizamos para procesar tus
+            transacciones. Si tienes alguna pregunta adicional, no dudes en contactarnos utilizando los detalles
+            proporcionados en la sección de Información de contacto.<br>
+
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal restricc-->
+  <div class="modal fade" id="modalrestricc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalprivacidad" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"> Restricciones - Gwen Luyalva</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="text-align: justify;">
+          <p>
+
+
+            Fecha de vigencia: 15 de junio del 2023 <br>
+
+            En Gwen Luyalva, queremos informarte sobre ciertas restricciones y limitaciones que debes tener en cuenta al
+            utilizar nuestra plataforma. Estas restricciones se aplican para garantizar el buen uso de nuestros
+            servicios y cumplir con las regulaciones correspondientes.<br>
+
+            1. Edad mínima:<br>
+
+            El uso de nuestra plataforma está limitado a personas mayores de 18 años. Si eres menor de edad, debes
+            obtener el consentimiento y supervisión de tus padres o tutores legales para utilizar nuestros servicios.<br>
+
+            2. Uso personal:<br>
+
+            Nuestra plataforma está diseñada para un uso personal y no comercial. No está permitido utilizar nuestros
+            servicios con fines comerciales, de reventa o de distribución sin autorización previa por escrito por parte
+            de Gwen Luyalva.<br>
+
+            3. Cumplimiento legal:<br>
+
+            Al utilizar nuestra plataforma, aceptas cumplir con todas las leyes, regulaciones y normativas aplicables.
+            No debes utilizar nuestros servicios para actividades ilegales, fraudulentas, difamatorias, obscenas o que
+            infrinjan los derechos de terceros.<br>
+
+            4. Propiedad intelectual:<br>
+
+            Todos los derechos de propiedad intelectual relacionados con nuestra plataforma, incluyendo pero no limitado
+            a derechos de autor, marcas comerciales y derechos de diseño, pertenecen a Gwen Luyalva o a los respectivos
+            propietarios. No está permitido copiar, modificar, distribuir o utilizar nuestros contenidos y materiales
+            sin nuestro consentimiento previo por escrito.<br>
+
+            5. Comportamiento adecuado:<br>
+
+            Esperamos que todos los usuarios de nuestra plataforma se comporten de manera adecuada, respetuosa y ética.
+            No se tolerarán actividades que generen un ambiente hostil, acosador, ofensivo o perjudicial para otros
+            usuarios o para Gwen Luyalva. Nos reservamos el derecho de tomar las medidas necesarias, incluyendo la
+            suspensión o eliminación de cuentas, en caso de violaciones a estas restricciones.<br>
+
+            6. Limitación de responsabilidad:<br>
+
+            Gwen Luyalva no se hace responsable de ningún daño, pérdida o perjuicio que puedas sufrir al utilizar
+            nuestra plataforma, salvo en los casos establecidos por ley. No garantizamos la disponibilidad
+            ininterrumpida de nuestros servicios y no nos responsabilizamos por cualquier interrupción, fallo técnico o
+            error en nuestra plataforma.<br>
+
+            Recuerda que estas restricciones son aplicables para garantizar el buen funcionamiento de nuestra plataforma
+            y mantener un ambiente seguro y confiable para todos los usuarios.<br>
+
+            Si tienes alguna pregunta o inquietud acerca de estas restricciones, por favor, ponte en contacto con
+            nosotros utilizando los detalles proporcionados en la sección de Información de contacto.<br>
+
+            Agradecemos tu comprensión y cumplimiento de estas restricciones en Gwen Luyalva.<br>
+
+
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="wallet_container"></div>
   <footer id="footer-main">
     <div class="footer footer-dark bg-gradient-primary footer-rotate">
@@ -1872,24 +2235,18 @@
             <h6 class="heading mb-3">Plataforma</h6>
             <ul class="list-unstyled">
               <li><a href="pages/account-profile.html">Registro</a></li>
-              <li><a href="pages/account-settings.html">Pagos</a></li>
-              <li><a href="pages/account-billing.html">Restricciones</a></li>
+              <li><a data-bs-toggle="modal" data-bs-target="#modalpagosaviso" type="button">Pagos</a></li>
+              <li><a data-bs-toggle="modal" data-bs-target="#modalrestricc" type="button">Restricciones</a></li>
             </ul>
           </div>
-          <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
-            <h6 class="heading mb-3">FAQS</h6>
-            <ul class="list-unstyled text-small">
-              <li><a href="#">Contacto</a></li>
-              <li><a href="#">Redes sociales</a></li>
-              <li><a href="#"></a></li>
-            </ul>
-          </div>
+
           <div class="col-lg-2 col-sm-4 mb-5 mb-lg-0">
             <h6 class="heading mb-3">Nosotros</h6>
             <ul class="list-unstyled">
-              <li><a href="#">Aviso de privacidad</a></li>
-              <li><a href="#">Uso de cookies</a></li>
-              <li><a href="#">Soporte</a></li>
+
+              <li><a data-bs-toggle="modal" data-bs-target="#modalprivacidad" type="button">Aviso de privacidad</a></li>
+              <li><a data-bs-toggle="modal" data-bs-target="#modalcokie" type="button">Uso de cookies</a></li>
+              <li><a data-bs-toggle="modal" data-bs-target="#modalsoporte" type="button">Soporte</a></li>
             </ul>
           </div>
         </div>
@@ -1945,7 +2302,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
-    <!--mercadopago-->
+  <!--mercadopago-->
 
 </body>
 

@@ -300,9 +300,9 @@ def crear_preferencia_MP(request):
             }
         ],
         "back_urls": {
-            "success": "http://3.144.80.153/micontenido/pago_success/",
-            "failure": "http://3.144.80.153/micontenido/pago_danger/",
-            "pending": "http://3.144.80.153/micontenido/pago_pendiente/"
+            "success": "https://gwenluy.com/micontenido/pago_success/",
+            "failure": "https://gwenluy.com/micontenido/pago_danger/",
+            "pending": "https://gwenluy.com/micontenido/pago_pendiente/"
         },
         "payer": {
             "name": "Juan",
@@ -341,8 +341,8 @@ def crear_preferencia_PP(request):
                 }
             ],
             "application_context":{
-                "return_url":"http://3.144.80.153/micontenido/pago_success/",
-                "cancel_url":"http://3.144.80.153/micontenido/pago_danger/",
+                "return_url":"https://gwenluy.com/micontenido/pago_success/",
+                "cancel_url":"https://gwenluy.com/micontenido/pago_danger/",
                 "brand_name":"Gwen Cursos"
             }
         }
