@@ -124,7 +124,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-CSRF_TRUSTED_ORIGINS = ['gwenluy.com', 'https://gwenluy.com']
+CSRF_TRUSTED_ORIGINS = ['https://gwenluy.com',]
 
 
 
