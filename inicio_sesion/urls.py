@@ -19,6 +19,7 @@ urlpatterns = [
     path('render_seccion_usuarios_dashboard', views.render_seccion_usuarios_dashboard, name="render_seccion_usuarios_dashboard"),
     path('render_seccion_mensajes_dashboard', views.render_seccion_mensajes_dashboard, name="render_seccion_mensajes_dashboard"),
     path('render_seccion_estadisticas_dashboard', views.render_seccion_estadisticas_dashboard, name="render_seccion_estadisticas_dashboard"),
+    path('crear_usuario/', views.crear_usuario, name="crear_usuario"),
     
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

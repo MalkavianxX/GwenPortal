@@ -125,9 +125,9 @@ def cerrar_sesion(request):
     logout(request)
     return redirect('nombre_de_la_vista') 
 
-
 # Create your views here.
 def dash_micontenido(request):
+    flag = True
     contenido = MiContenido.objects.filter(usuario = request.user).order_by('-fecha_inicio')
     lista_cursos = []
     lista_talleres = []
@@ -151,10 +151,12 @@ def dash_micontenido(request):
             ))
             print(item.taller.id_collection)
            
-
+    if (not lista_cursos and not lista_talleres):
+        flag = False  
     return render(request,"micontenido/micontenido_dash.html",{
         'cursos':lista_cursos,
-        'talleres': lista_talleres
+        'talleres': lista_talleres,
+        'flag':flag
     })
 
 #carrito
@@ -288,6 +290,15 @@ def verificar_descuento(request, cupon):
 import mercadopago
 
 def crear_preferencia_MP(request): 
+    carrito = request.session.get('carrito', [])
+    total = 0
+    for clave in carrito:
+        try:
+            producto = Curso.objects.get(id_collection=clave)
+        except Curso.DoesNotExist:
+            producto = Taller.objects.get(id_collection=clave)
+        total = total + float(producto.precio)
+
     sdk = mercadopago.SDK(settings.MERCADO_PAGO_CLIENT_SECRET)
     PUBLIC_KEY_MP=settings.MERCADO_PAGO_CLIENT_ID
 
@@ -297,7 +308,7 @@ def crear_preferencia_MP(request):
                 "title": "Producto test",
                 "quantity": 1,
                 "currency_id": "USD", 
-                "unit_price": 100.00
+                "unit_price": str(total)
             }
         ],
         "back_urls": {
@@ -325,6 +336,16 @@ def crear_preferencia_MP(request):
     return JsonResponse(response_data)
 
 def crear_preferencia_PP(request):
+
+    carrito = request.session.get('carrito', [])
+    total = 0
+    for clave in carrito:
+        try:
+            producto = Curso.objects.get(id_collection=clave)
+        except Curso.DoesNotExist:
+            producto = Taller.objects.get(id_collection=clave)
+        total = total + float(producto.precio)
+
     environment = SandboxEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
     client = PayPalHttpClient(environment)
     requestPaypal = OrdersCreateRequest()
@@ -337,7 +358,7 @@ def crear_preferencia_PP(request):
                 { 
                     "amount": {
                         "currency_code": 'USD',
-                        "value": '100'
+                        "value": str(total)
                     }
                 }
             ],

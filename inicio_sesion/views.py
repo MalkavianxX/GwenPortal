@@ -3,10 +3,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('dash_micontenido')
 
-    return render(request,"inicio_sesion/login.html")
+    else:
+
+        return render(request,"inicio_sesion/login.html")
 
 def log_out(request):
     logout(request)
@@ -43,6 +48,7 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.first_name = first_name
             user.save()
+            
             # Iniciar sesión
             user = authenticate(request, username=username, password=password)
             login(request, user)
@@ -50,6 +56,28 @@ def register(request):
             return JsonResponse(data={'mensaje': 'Creacion exitoso'}, status=200)
     else:
         return JsonResponse(data={'mensaje': 'Método no permitido'}, status=405)
+
+def crear_usuario(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        username = data.get("correo")
+        password = data.get("pass")
+        email = data.get("correo")
+        first_name = data.get("nombre")
+        # Validar que el usuario no exista
+  
+        if User.objects.filter(username=username).exists():
+            return JsonResponse(data={'mensaje': 'Usuario ya existe'}, status=400)
+        else:
+                
+            # Crear el usuario
+            user = User.objects.create_user(username, email, password)
+            user.first_name = first_name
+            user.save()
+            # Iniciar sesión
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            return JsonResponse(data={'mensaje': 'Creacion exitosa'}, status=200)
 
 def render_dashboard(request):
     return render(request,"inicio_sesion/dashboard.html")

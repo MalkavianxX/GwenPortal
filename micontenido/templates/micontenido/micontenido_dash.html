@@ -7,8 +7,20 @@
 <section style="margin-top: 10vh;">
     <div class="container-fluid">
         <div class="row d-flex justify-content-evenly">
+            {% if flag == False %}
+            <div class="col-12 text-center">
+                <div class="w-100">
+                    <img src="{% static 'micontenido/img/astgif.gif' %}" class="img-fluid" alt="">
+                </div>
+                <h1 class="fnt-monse" style="color: rgb(188, 130, 243);"><strong>Aún no tienes ningun curso&nbsp; </strong> <a style="color: rgb(157, 87, 223); text-decoration: underline;" href="#">Adquiere uno aquí</a></h1>
+
+            </div>
+            {% else %}
+             
             <div class="col-lg-6 shadow">
                 <div class="row">
+     
+                    
                     <div class="col-12 mb-3">
                         <h4>Mis Cursos y Talleres</h4>
                     </div>
@@ -62,6 +74,8 @@
                     </div>
                 </div>
             </div>
+
+            {%endif %}
 
 
 
