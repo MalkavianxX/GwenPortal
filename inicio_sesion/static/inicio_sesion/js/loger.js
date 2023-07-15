@@ -41,7 +41,7 @@ const checkInput = document.getElementById('reg_check');
 const submitButton = document.getElementById('reg_submit');
 
 // Deshabilitar el botón de registrar inicialmente
-submitButton.disabled = true;
+submitButton.disabled = true; 
 checkInput.disabled = true;
 // Función para validar las contraseñas
 function validarContraseñas() {
@@ -78,7 +78,7 @@ function enviarDatos() {
         pass: pass
     };
     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-    const url = "http://127.0.0.1:8000/inicio_sesion/crear_usuario/"
+    const url = "https://gwenluy.com/inicio_sesion/crear_usuario/"
     // Configurar la petición fetch
     const fetchOptions = {
         method: 'POST',
