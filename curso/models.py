@@ -64,6 +64,4 @@ class Material(models.Model):
     tipo_archivo = models.CharField(max_length=2000, choices=opciones)
     fecha = models.DateField(auto_now_add=True)
     archivo = models.FileField(upload_to="material/",blank=True,null=True)
-    def __str__(self):
-        string = str(self.curso.nombre + self.nombre_archivo)
-        return string
+
