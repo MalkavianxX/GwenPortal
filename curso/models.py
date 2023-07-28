@@ -65,3 +65,6 @@ class Material(models.Model):
     fecha = models.DateField(auto_now_add=True)
     archivo = models.FileField(upload_to="material/",blank=True,null=True)
 
+    def __str__(self):
+        return self.nombre_archivo
+
