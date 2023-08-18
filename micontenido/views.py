@@ -257,7 +257,7 @@ def ver_carrito(request):
             nombre=producto.nombre,
             imagen=producto.imagen.url,
             precio=producto.precio,
-            categoria=producto.categoria.nombre,
+            categoria=producto.categoria.nombre, 
             id_collection=producto.id_collection
         )
         total = total + float(producto.precio)
