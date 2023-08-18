@@ -14,6 +14,15 @@ def nada(request):
         'posts':post
     })
 
+def render_escribir(request):
+    return render(request,"blog/escribir.html",{
+        'categorias':CategoriaPost.objects.all().order_by('-nombre'),
+
+    })
+def render_categorias(request):
+    return render(request,"blog/categorias.html",{
+        'cats':CategoriaPost.objects.all().order_by('-nombre'),
+    })
 def crear_categoria(request):
     if request.method == 'POST':
         nombre = request.POST.get('categoria-blog-nombre')
@@ -36,13 +45,13 @@ def publicar_post(request):
         categoria_id = request.POST.get('categoria', '')
         contenido = request.POST.get('contenido', '')
         archivo = request.FILES.get('archivo', None)
-
+ 
 
         # Crear una instancia del modelo Post y guardarla en la base de datos
     
-        post = Post(
+        post = Post( 
             titulo=titulo,
-            categoria=CategoriaPost.objects.get(nombre = categoria_id),
+            categoria=CategoriaPost.objects.get(id = categoria_id),
             contenido=contenido,
             autor='Gewndolyn',
        

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import requests
 
 
 class Categoria(models.Model):
@@ -21,6 +22,20 @@ class Curso(models.Model):
     usuarios_cursando = models.ManyToManyField(User, related_name='cursos_cursando', blank=True)
     id_collection = models.CharField(max_length=100000,blank=True, null=True)
 
+    def addCantidadVideos(self):
+        url = "https://video.bunnycdn.com/library/132990/videos?page=1&itemsPerPage=100&collection=" + str(self.id_collection)
+
+        headers = {
+            "accept": "application/json",
+            "AccessKey": "6b2d3de5-8f09-4541-a57fe5df8534-047a-4afd"
+        }
+
+        response = requests.get(url, headers=headers)
+        response = response.json() 
+        cant = response["totalItems"]
+        self.cantidad_videos = cant
+        self.save()
+
     def __str__(self):
         return self.nombre
 class Taller(models.Model):
@@ -35,6 +50,17 @@ class Taller(models.Model):
     usuarios_cursando = models.ManyToManyField(User, related_name='talleres_cursando', blank=True)
     id_collection = models.CharField(max_length=100000,blank=True, null=True)
 
+    def addCantidadVideos(self):
+        url = "https://video.bunnycdn.com/library/132992/videos?page=1&itemsPerPage=100&collection=" + str(self.id_collection)
+        headers = {
+            "accept": "application/json",
+            "AccessKey": "1e8f3a9c-0092-464b-96c0336bad00-0a1d-4912"
+        }
+        response = requests.get(url, headers=headers)
+        response = response.json() 
+        cant = response["totalItems"]
+        self.cantidad_videos = cant
+        self.save()
     def __str__(self):
         return self.nombre
    

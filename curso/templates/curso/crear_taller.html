@@ -1,0 +1,187 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+{% csrf_token %}
+
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Talleres</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Agregar taller</h4>
+            </div>
+        </div>
+    </div> 
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="header-title mb-3">Crear un taller</h4>
+
+                        <div id="rootwizard">
+                            <ul class="nav nav-pills nav-justified form-wizard-header mb-3" role="tablist">
+                                <li class="nav-item" data-target-form="#accountForm" role="presentation">
+                                    <a href="#first" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 py-2 active" aria-selected="true" role="tab">
+                                        <i class="mdi mdi-account-circle font-18 align-middle me-1"></i>
+                                        <span class="d-none d-sm-inline">Datos del taller</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item" data-target-form="#profileForm" role="presentation">
+                                    <a href="#second" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 py-2" aria-selected="false" role="tab" tabindex="-1">
+                                        <i class="mdi mdi-face-man-profile font-18 align-middle me-1"></i>
+                                        <span class="d-none d-sm-inline">Configuracion</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item" data-target-form="#otherForm" role="presentation">
+                                    <a href="#third" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 py-2" aria-selected="false" role="tab" tabindex="-1">
+                                        <i class="mdi mdi-checkbox-marked-circle-outline font-18 align-middle me-1"></i>
+                                        <span class="d-none d-sm-inline">Finalizacion</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content mb-0 b-0">
+
+                                <div class="tab-pane active show" id="first" role="tabpanel">
+                                    <form id="accountForm" method="post" action="#" class="form-horizontal was-validated">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row mb-3">
+                                                    <label class="col-md-3 col-form-label" for="nombre">Nombre</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" placeholder="Taller de respiracion" class="form-control" id="nombre" name="nombre" required>
+                                                    </div> 
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-md-3 col-form-label" for="categoria">Categoria</label>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control" id="categoria" required aria-label="Default select example">
+                                                            {% for categoria in categorias %}
+                                                            <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+                                                           {% endfor %}
+                                                          </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row mb-3">
+                                                    <label class="col-md-3 col-form-label" for="descrip">Descripcion</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" id="descrip" name="descrip" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                            </div> <!-- end col -->
+                                        </div> <!-- end row -->
+                                    </form>
+                                   
+                                </div> 
+
+                                <div class="tab-pane fade" id="second" role="tabpanel">
+                                    <form id="profileForm" method="post" action="#" class="form-horizontal was-validated">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row mb-3">
+                                                    <label class="col-md-3 col-form-label" for="precio">Precio</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" id="precio" name="precio" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-md-3 col-form-label" for="imagen">Imagen</label>
+                                                    <div class="col-md-9">
+                                                        <input class="form-control" type="file" id="imagen">
+                                                    </div>
+                                                </div>
+                                    
+                                               
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                        <!-- end row -->
+                                    </form>
+                                  
+                                </div>
+
+                                <div class="tab-pane fade" id="third" role="tabpanel">
+                                    <form id="otherForm" method="post" action="#" class="form-horizontal was-validated"></form>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="text-center">
+                                                    <h2 class="mt-0">
+                                                        <i class="mdi mdi-check-all"></i>
+                                                    </h2>
+                                                    <h3 class="mt-0">Campos completados</h3>
+                                    
+                                                    <p class="w-75 mb-2 mx-auto">Presiona el boton de guardar para subir este taller, en la sección de videos podras cargar los videos necesarios o en la seccion de archivos los documentos pertenecientes.</p>
+                                    
+                                                    <div class="mb-3">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                        <!-- end row -->
+                                    
+                                    <ul class="pager wizard mb-0 list-inline mt-1">
+                                        <li class="previous list-inline-item disabled">
+                                            <button type="button" class="btn btn-light"><i class="mdi mdi-arrow-left me-1"></i>Cancelar</button>
+                                        </li>
+                                        <li class="next list-inline-item float-end">
+                                            <button type="submit" id="submitButton" class="btn btn-info">Guardar</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div> <!-- tab-content -->
+                        </div> <!-- end #rootwizard-->
+                    
+
+                </div> <!-- end card-body -->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-filled ">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <i class="ri-check-line h1 text-success"></i>
+                    <h4 class="mt-2 text-secondary">Se ha creado el taller</h4>
+                    <p class="mt-3 text-muted">Para iniciar a cargar videos o documentos dirigete a la seccion pertinente</p>
+                    <button type="button" class="btn btn-success my-2" onclick="recargarpagina()" data-bs-dismiss="modal">Continuar</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<div id="info-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <i class="ri-information-line h1 text-info"></i>
+                    <h4 class="mt-2">Ha ocurrido un error</h4>
+                    <p class="mt-3" id="mensajealertinfo">Asegurate de rellenar todos los campos solicitados.</p>
+                    <button type="button" class="btn btn-info my-2" data-bs-dismiss="modal">Corregir</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<script src="{% static 'curso/js/talleres.js' %}"></script>
+{%endblock%}

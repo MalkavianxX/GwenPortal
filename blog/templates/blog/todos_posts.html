@@ -1,8 +1,9 @@
 {% extends 'login/login.html' %} {% load static %}
- 
+
 {% block content%}
 <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 <section class="pt-4 pb-0  mt-5">
     <div class="container">
@@ -12,13 +13,18 @@
             <div class="col-lg-7 col-12 mt-lg-5 mt-4">
                 <div class="col-12">
                     <div class="form-floating mb-3">
-                        <input class="form-control fw-bold" onchange="buscarElemento(this.value)" list="post_visitados" style="border-color: blueviolet; color: rgb(145, 28, 255);" id="exampleDataList" placeholder="Buscar Post ">
+                        <input class="form-control fw-bold" onchange="buscarElemento(this.value)" list="post_visitados"
+                            style="border-color: blueviolet; color: rgb(145, 28, 255);" id="exampleDataList"
+                            placeholder="Buscar Post ">
                         <label for="floatingInput">Buscar Post</label>
-                      </div>
+                    </div>
                 </div>
-                <div class="card text-bg-dark position-relative overflow-hidden" >
-                    <img src="{{header_1.imagen.url}}" class="img-zoom object-fit-cover"
-                        alt="...">
+                <div class="card text-bg-dark position-relative overflow-hidden">
+                    {% if header_1.imagen %}
+                    <img src="{{header_1.imagen.url}}" class="img-zoom object-fit-cover" alt="...">
+                    {% else %}
+                    <img src="{% static 'blog/img/porsi.png' %}" class="img-zoom object-fit-cover" alt="...">
+                    {% endif %}
                     <div class="card-img-overlay position-absolute mt-lg-5 mx-4 p-2 pb-0 bg-dark bg-opacity-25  ">
                         <a href="" style="text-decoration: none;" class=" badge text-bg-danger mb-2 "><i
                                 class="bi bi-circle-fill"></i> {{header_1.categoria.nombre}}</a>
@@ -32,11 +38,10 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card text-bg-dark overflow-hidden">
-                            <img src="{{header_3.imagen.url}}" class="card-img"
-                                alt="...">
+                            <img src="{{header_3.imagen.url}}" class="card-img" alt="...">
                             <div class="card-img-overlay mt-lg-5 bg-dark bg-opacity-25 img-zoom ">
-                                <a href=""  class=" badge text-bg-success mb-2 "><i
-                                        class="bi bi-circle-fill"></i> {{header_3.categoria.nombre}}</a>
+                                <a href="" class=" badge text-bg-success mb-2 "><i class="bi bi-circle-fill"></i>
+                                    {{header_3.categoria.nombre}}</a>
 
                                 <h1 class="card-title fw-bold">{{header_3.categoria.nombre}}</h1>
 
@@ -48,8 +53,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-12">
                                 <div class="card text-bg-dark overflow-hidden">
-                                    <img src="{{header_4.imagen.url}}"
-                                        class="card-img" alt="...">
+                                    <img src="{{header_4.imagen.url}}" class="card-img" alt="...">
                                     <div class="card-img-overlay bg-dark bg-opacity-25  img-zoom">
                                         <a href="" style="text-decoration: none;" class=" badge text-bg-dark mb-2 "><i
                                                 class="bi bi-circle-fill"></i>{{header_4.categoria.nombre}}</a>
@@ -62,8 +66,7 @@
                             </div>
                             <div class="col-lg-6 col-12 mt-lg-0 mt-4 overflow-hidden">
                                 <div class="card text-bg-dark">
-                                    <img src="{{header_2.imagen.url}}"
-                                        class="card-img" alt="...">
+                                    <img src="{{header_2.imagen.url}}" class="card-img" alt="...">
                                     <div class="card-img-overlay bg-dark bg-opacity-25 img-zoom ">
                                         <a href="" style="text-decoration: none;"
                                             class=" badge text-bg-warning mb-2 "><i class="bi bi-circle-fill"></i>
@@ -95,12 +98,16 @@
                     {% for post in posts %}
                     <div class="col1" id="{{post.titulo}}">
                         <div class="card border border-0 h-100 overflow-hidden">
-                            <img src="{{post.imagen.url}}" class="img-zoom rounded"
-                                alt="...">
+                            {% if post.imagen %}
+                            <img src="{{post.imagen.url}}" class="img-zoom rounded" alt="...">
+                            {% else %}
+                            <img src="{% static 'blog/img/porsi.jpg' %}" class="img-zoom rounded" alt="...">
+                            {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{post.titulo}}</h5>
                                 <p class="card-text limit-caracter">{{post.contenido}}</p>
-                                <p class="card-text"><small>por <strong>Gwendolyn</strong> &nbsp;&nbsp;&nbsp;{{post.fecha_publicacion}}</small></p>
+                                <p class="card-text"><small>por <strong>Gwendolyn</strong>
+                                        &nbsp;&nbsp;&nbsp;{{post.fecha_publicacion}}</small></p>
 
                             </div>
                         </div>
@@ -113,21 +120,24 @@
                 <div class="container">
                     <div class="row g-2">
                         <div class="col-4 hover-grow">
-                            <a href="#" style="text-decoration: none;" class="bg-facebook rounded text-center text-white-force p-3 d-block">
+                            <a href="#" style="text-decoration: none;"
+                                class="bg-facebook rounded text-center text-white-force p-3 d-block">
                                 <i class="fa-brands fa-square-facebook fs-5 mb-2" style="color: #ffffff;"></i>
                                 <h6 class="m-0">1.5K</h6>
                                 <span class="small">Fans</span>
                             </a>
                         </div>
                         <div class="col-4 hover-grow">
-                            <a href="#" style="text-decoration: none;" class="bg-instagram-gradient rounded text-center text-white-force p-3 d-block">
+                            <a href="#" style="text-decoration: none;"
+                                class="bg-instagram-gradient rounded text-center text-white-force p-3 d-block">
                                 <i class="fab fa-instagram fs-5 mb-2"></i>
                                 <h6 class="m-0">1.8M</h6>
                                 <span class="small">Followers</span>
                             </a>
                         </div>
                         <div class="col-4 hover-grow">
-                            <a href="#" style="text-decoration: none;" class="bg-youtube rounded text-center text-white-force p-3 d-block">
+                            <a href="#" style="text-decoration: none;"
+                                class="bg-youtube rounded text-center text-white-force p-3 d-block">
                                 <i class="fab fa-youtube-square fs-5 mb-2"></i>
                                 <h6 class="m-0">22K</h6>
                                 <span class="small">Subs</span>
@@ -140,35 +150,27 @@
                     <div class="container text-center">
                         <div class="row row-cols-1">
                             {% for curso_cat in cat_cursos %}
+                            {% if curso_cat.icono %}
+
                             <div class="col  hover-grow mb-3"
                                 style="height: 3rem; background-image: url({{curso_cat.icono.url}});background-position: center left;background-size: cover;">
-                                <a class="fs-5 fw-bold letra-blanca mt-2" style="text-decoration: none;">{{curso_cat.nombre}}</a>
+                                <a class="fs-5 fw-bold letra-blanca mt-2"
+                                    style="text-decoration: none;">{{curso_cat.nombre}}</a>
                             </div>
+                            {% else %}
+                            <div class="col  hover-grow mb-3"
+                                style="height: 3rem; background-image: url(https://coderthemes.com/hyper/modern/assets/images/svg/startup.svg);background-position: center left;background-size: cover;">
+                                <a class="fs-5 fw-bold letra-blanca mt-2"
+                                    style="text-decoration: none;">{{curso_cat.nombre}}</a>
+                            </div>
+                            {% endif %}
                             {%endfor%}
 
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="col-12 col-sm-6 col-lg-12">
-                        <h4 class="mt-4 fw-bold mb-3">Post Recientes</h4>
-                        <!-- Recent post item -->
-                        {% for post in posts %}
-
-                        <div class="card hover-grow border border-0 mb-3">
-                            <div class="row g-3 d-flex justify-content-between">
-                                <div class="col-4">
-                                    <img class="rounded" src="{{post.imagen.url}}" width="90vh" alt="">
-                                </div>
-                                <div class="col-8">
-                                    <h6><a href="post-single-2.html" style="text-decoration: none;" class=" text-reset fw-bold">&nbsp; {{post.titulo}}</a></h6>
-                                    <div class="small mt-1">{{post.fecha_publicacion}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        {%endfor%}
-
-                    </div>
+           
 
                 </div>
             </div>
@@ -178,25 +180,27 @@
 <section class="" style="height: 55vh;">
 
 </section>
-<datalist id="post_visitados" >
+<datalist id="post_visitados">
     {% for post in posts %}
     <option value="{{post.titulo}}"></option>
     {%endfor%}
 </datalist>
 <script>
     function buscarElemento(valor) {
-      var elemento = document.getElementById(valor);
-  
-      if (elemento) {
-        elemento.scrollIntoView();
-        elemento.classList.add("animated");
-        setTimeout(function () {
-          elemento.classList.remove("animated");
-        }, 1200);
-      }
+        var elemento = document.getElementById(valor);
+
+        if (elemento) {
+            elemento.scrollIntoView();
+            elemento.classList.add("animated");
+            setTimeout(function () {
+                elemento.classList.remove("animated");
+            }, 1200);
+        }
     }
-  </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
 
 <script src="https://kit.fontawesome.com/63bc1a63be.js" crossorigin="anonymous"></script>
 {%endblock%}

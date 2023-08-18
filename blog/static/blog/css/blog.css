@@ -41,10 +41,7 @@ a {
 .bg-morado-gr{
   background: linear-gradient(50deg, #6e00ff 0, #bb00ff 100%) !important;
 }
-*{
-  font-family: 'Montserrat', sans-serif;
 
-}
 .animated {
   transform: scale(1.2);
   transition: transform 1.2s ease-in-out;

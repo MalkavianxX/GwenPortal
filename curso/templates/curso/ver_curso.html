@@ -7,7 +7,7 @@
 
 <section>
     <div class="cointer-fluid text-center" style="background-image: url({{curso.imagen.url}}); filter: blur();">
-        <div class="container position-relative mt-5 container-ver-curso ">
+        <div class="container position-relative container-ver-curso ">
             <img src="{{curso.imagen.url}}" alt="" class="rounded img-fluid">
             <div class="row d-lg-flex d-none position-absolute bottom-0 start-50 translate-middle-x w-100">
                 <div class="col-lg-6 text-start ">
@@ -40,7 +40,7 @@
                     </li>
                     {%endfor%}
                 </ol>
-                <div class="row mt-5 " >
+                <div class="row mt-3 " >
                     <div class="col-12 rounded border">
                         <br>
                         <h4 class="text-star fw-bold mx-3 fnt-roboto">Acerca del curso</h4>
@@ -55,15 +55,8 @@
                       <div class="col align-self-center"><p class="fw-bold text-center">{{contenido.nombre}}</p></div>
                       <div class="col align-self-center mt-lg-0 mt-3"><p class="text-center fw-bold"><strong></strong>${{contenido.precio|intcomma}}0USD </p></div>
                       <div class="col align-self-center mt-lg-0 mt-3"> <p class="text-center"><strong style="color: rgb(184, 140, 28);">4.4 </strong ><i style="color: gold;" class="bi bi-star-fill"></i> </p></div>
-                      <div class="col align-self-center text-center d-lg-block d-none"><button  class=" btn-lg fw-bold btn btn-outline-dark fs-5 border-boton-circulo"  type="button"><i class="bi bi-bag-heart"></i></button></div>
                     </div>
-                    <div class="row d-lg-none d-flex">
-                        <div class="col-12">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn btn-outline-dark fs-5" type="button"><i class="bi bi-bag-heart "></i></button>
-                              </div>
-                        </div>
-                    </div>
+                 
                     {%endfor%}
                   </div> 
             </div>
@@ -79,16 +72,12 @@
                             </div>
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-12">
                                         <div class="d-grid gap-2">
                                             <button class="btn  btn-lg letra-blanca fw-bold" id="{{curso.id_collection}}" onclick="agregarAlCarrito(this.id)" style="background-color: rgb(149, 47, 245);" type="button">Añadir a la cesta</button>
                                           </div>
                                     </div>
-                                    <div class="col-4">
-                                        <div class="d-grid gap-2 ">
-                                            <button  class=" btn-lg fw-bold btn btn-outline-dark fs-5"  type="button"><i class="bi bi-bag-heart"></i></button>
-                                        </div>
-                                    </div>
+                                
                                 </div>
                             </div>
                             <div class="col-12 mt-3">

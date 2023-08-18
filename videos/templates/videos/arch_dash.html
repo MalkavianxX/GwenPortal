@@ -1,0 +1,282 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+
+<link
+    href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.css"
+    rel="stylesheet">
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Archivos</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Archivos</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-lg-flex justify-content-between align-items-center">
+                        <div class="btn-group d-block mb-2">
+                            <button type="button" class="btn btn-info dropdown-toggle w-100" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-plus"></i> Agregar nuevo
+                                archivo </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#info-header-modal"><i class="mdi mdi-folder-plus-outline me-1"></i>
+                                    Curso</button>
+                                <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#primary-header-modal"><i class="mdi mdi-file-plus-outline me-1"></i>
+                                    Taller</button>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="">
+                        <h5 class="mb-2">Mias archivos</h5>
+
+                        <div class="row mx-n1 g-0">
+                            {% for material in materiales %}
+                            {% if material.curso %}
+                            <div class="col-xxl-3 col-lg-6">
+                                <div class="card m-1 shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <div class="avatar-sm">
+                                                    <span class="avatar-title bg-light text-reset rounded">
+                                                        <i class="mdi mdi-folder font-16"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col ps-0">
+                                                <a href="{{material.archivo.url}}" target="_blank" class="text-muted fw-bold">{{material.nombre_archivo}} {{material.tipo_archivo}}</a>
+                                                <p class="mb-0 font-13">{{material.curso.nombre}}</p>
+                                            </div>
+                                        </div> <!-- end row -->
+                                    </div> <!-- end .p-2-->
+                                </div> <!-- end col -->
+                            </div> <!-- end col-->
+                            {% else %}
+                            <div class="col-xxl-3 col-lg-6">
+                                <div class="card m-1 shadow-none border">
+                                    <div class="p-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <div class="avatar-sm">
+                                                    <span class="avatar-title bg-primary-lighten text-primary rounded">
+                                                        <i class="mdi mdi-folder-zip-outline font-16"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col ps-0">
+                                                <a href="{{material.archivo.url}}" target="_blank" class="text-muted fw-bold">{{material.nombre_archivo}} {{material.tipo_archivo}}</a>
+                                                <p class="mb-0 font-13">{{material.taller.nombre}}</p>
+                                            </div>
+                                        </div> <!-- end row -->
+                                    </div> <!-- end .p-2-->
+                                </div> <!-- end col -->
+                            </div> <!-- end col-->
+                            {% endif %}
+                            {% endfor %}
+                         
+                         
+                        </div> <!-- end row-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODALEWS-->
+<div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h4 class="modal-title" id="info-header-modalLabel" style="color: white;">Agregar archivo - CURSO</h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="needs-validation" method="post" novalidate> {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom01">Curso</label>
+                                        <select class="form-control" id="curso-curso" required aria-label="Default select example">
+                                            {% for curso in cursos %}
+                                            <option value="{{curso.id}}">{{curso.nombre}}</option>
+                                            {% endfor %}
+                                          
+                                          </select>
+                                        
+                                        <div class="valid-feedback">
+                                            Curso seleccionado
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Selecciona un curso valido
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom02">Nombre del archivo</label>
+                                        <input type="text" class="form-control" id="nombre-curso"
+                                            placeholder="Last name"  required>
+                                            <div class="valid-feedback">
+                                                Listo!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Escribe un nombre de archivo valido
+                                            </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom01">Tipo de archivo</label>
+                                        <select class="form-control" id="tipo-curso" required aria-label="Default select example">
+                                            <option value=".pdf">PDF</option>
+                                            <option value=".img">Imagen</option>
+                                            <option value=".pptx">PPTX</option>
+                                            <option value=".doc">Word</option>
+                                            <option value=".archivo">Otro</option>
+
+                                          </select>
+                                        
+                                          <div class="valid-feedback">
+                                            Archvio seleccionado
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Selecciona un archivo valido
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFileSm" class="form-label">Archivo</label>
+                                        <input class="form-control form-control-sm" id="file-curso" required type="file">
+                                        <div class="valid-feedback">
+                                            Archivo seleccionado
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Selecciona un archvio valido
+                                        </div>
+                                      </div>
+                                   
+                                   
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" id="guardar-file-curso" class="btn btn-info">Guardar archivo</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div id="primary-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title" id="primary-header-modalLabel" style="color: white;">Agregar archivo - Taller</h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="needs-validation" method="post" novalidate> {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom01">Taller</label>
+                                        <select class="form-control" id="taller-taller" required aria-label="Default select example">
+                                            {% for taller in talleres %}
+                                            <option value="{{taller.id}}">{{taller.nombre}}</option>
+                                            {% endfor %}
+                                          
+                                          </select>
+                                        
+                                        <div class="valid-feedback">
+                                            Taller seleccionado
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Selecciona un taller valido
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom02">Nombre del archivo</label>
+                                        <input type="text" class="form-control" id="nombre-taller"
+                                            placeholder="Last name"  required>
+                                            <div class="valid-feedback">
+                                                Listo!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Escribe un nombre de archivo valido
+                                            </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom01">Tipo de archivo</label>
+                                        <select class="form-control" id="tipo-taller" required aria-label="Default select example">
+                                            <option value=".pdf">PDF</option>
+                                            <option value=".img">Imagen</option>
+                                            <option value=".pptx">PPTX</option>
+                                            <option value=".doc">Word</option>
+                                            <option value=".archivo">Otro</option>
+
+                                          </select>
+                                        
+                                          <div class="valid-feedback">
+                                            Archvio seleccionado
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Selecciona un archivo valido
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFileSm" class="form-label">Archivo</label>
+                                        <input class="form-control form-control-sm" id="file-taller" required type="file">
+                                        <div class="valid-feedback">
+                                            Archivo seleccionado
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Selecciona un archvio valido
+                                        </div>
+                                      </div>
+                                   
+                                   
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" id="guardar-file-taller" class="btn btn-primary">Guardar archivo</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<script
+    src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+<script src="{% static 'blog/js/pages/demo.datatable-init.js' %}"></script>
+<script src="{% static 'blog/js/hyper-syntax.js' %}"></script>
+<script src="{% static 'videos/js/files.js' %}"></script>
+{%endblock%}

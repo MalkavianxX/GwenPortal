@@ -2,232 +2,78 @@
 
 
 {% block content%}
-<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
 
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
 
-<section style="margin-top: 10vh;">
-    <div class="container-fluid text-center">
-        <div class="row ">
-            <!--Categorias-->
-            <div class="col-lg-4 col-12  text-center">
-                <div class="row ">
-                    <div class="col-8 align-self-center">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="buscador_categorias" list="categorias-list"
-                                onchange="buscarElemento(this.value,this.id)">
-                            <label for="floatingInput">Buscar categoria</label>
-                        </div>
-                    </div>
-                    <div class="col-3 align-self-center">
-                        <a type="button" href="https://gwenluy.com/admin/curso/categoria/add/" target="_blank"
-                            class="btn  btn-lg" style="background-color: #c586f5;text-decoration: none;">
-                            <h3 class="letra-blanca"><i class="bi bi-plus-circle-dotted"></i></h3>
-
-                        </a>
-
-                    </div>
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Talleres</li>
+                    </ol>
                 </div>
-                <div class="row mt-3">
-                    {% for categoria in categorias %}
-                    <div class="col-12 ">
-                        <div class="card border border-0 mb-3 shadow bg-body-tertiary rounded" id="{{categoria.nombre}}"
-                            style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4 align-self-center">
-                                    <img src="{{categoria.icono.url}}" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <div class="w-100 d-flex justify-content-between">
-                                            <p class="fw-bold "> {{categoria.nombre}}</p>
-                                            <p>Talleres: <strong>{{categoria.num_cursos}}</strong></p>
-                                        </div>
-                                        <p class="w-100 text-start limit-caracter"><small>{{categoria.descripcion}}</small> </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor%}
-                </div>
-
-            </div>
-            <!--Talleres-->
-            <div class="col-lg-4 col-12  text-center">
-                <div class="row ">
-                    <div class="col-8 align-self-center">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" list="talleres-list" id="buscador_talleres"
-                                onchange="buscarElemento(this.value,this.id)">
-                            <label for="floatingInput">Buscar taller</label>
-                        </div>
-                    </div>
-                    <div class="col-3 align-self-center">
-                        <button type="button"  data-bs-toggle="modal" data-bs-target="#modalFormCurso"
-                            class="btn btn-lg" style="background-color: #ab71c7;text-decoration: none;">
-                            <h3 class="letra-blanca"><i class="bi bi-patch-plus"></i></h3>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    {% for curso in talleres %}
-                    <div class="col-12">
-                        <a href="{% url 'ver_taller' curso.id %}">
-                            <div class="card border border-0 mb-3 shadow bg-body-tertiary rounded" id="{{curso.nombre}}"
-                                style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4 align-self-center">
-                                        <img src="{{curso.imagen.url}}" class="img-fluid rounded-start rounded"
-                                            alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <div class="w-100 d-flex justify-content-between align-self-center">
-                                                <p class=" fw-bold">{{curso.nombre}}</p>
-                                                <p class="fw-bold text-success">${{curso.precio|intcomma}}</p>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col text-start">
-                                                    <p class="limit-caracter"><small>{{curso.descripcion}}</small> </p>
-                                                </div>
-                                                <div class="col align-self-center text-end">
-                                                    <p>{{curso.num_video}}</p>
-                                                    <p>{{curso.categoria.nombre}}</p>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    {%endfor%}
-                </div>
-
-            </div>
-            <!--MATERIAL-->
-            <div class="col-lg-4 col-12 text-center">
-                <div class="row ">
-                    <div class="col-8 align-self-center ">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" list="materiales-list" id="buscador_materiales"
-                                onchange="buscarElemento(this.value,this.id)">
-                            <label for="floatingInput">Buscar material</label>
-                        </div>
-                    </div>
-                    <div class="col-3 align-self-center">
-                        <a href="https://gwenluy.com/admin/curso/material/add/" target="_blank" type="button"
-                            class="btn  btn-lg" style="background-color: #b946f3;text-decoration: none;">
-                            <h3 class="letra-blanca"><i class="bi bi-file-earmark-plus"></i></h3>
-                        </a>
-                    </div>
-                </div>
-                <div class="row justify-content-evenly mt-4 ">
-                    {% for material in materiales %}
-                    <div class="col-lg-5 col-12 text-start rounded bg-light mb-2">
-                        <a target="_blank" id="{{material.nombre_archivo}}" style="text-decoration: none;color: black;"
-                            href="{{material.archivo.url}}"><strong>{{material.curso}}</strong>
-                            <small>{{material.nombre_archivo}}.{{material.tipo_archivo}} </small></a>
-                    </div>
-                    {%endfor%}
-
-                </div>
+                <h4 class="page-title text-uppercase">Mis talleres</h4>
             </div>
         </div>
-    </div>
-</section>
-<!--DATALIST DE CATEGORIA-->
-<datalist id="categorias-list">
-    {% for categoria in categorias %}
-    <option value="{{categoria.nombre}}"></option>
-    {%endfor%}
-</datalist>
-<!--DATALIST DE talleres-->
-<datalist id="talleres-list">
-    {% for curso in talleres %}
-    <option value="{{curso.nombre}}"></option>
-    {%endfor%}
-</datalist>
-<!--DATALIST DE Materiales-->
-<datalist id="materiales-list">
-    {% for material in materiales %}
-    <option value="{{material.nombre_archivo}}"></option>
-    {%endfor%}
-</datalist>
-
-<!--MODAL CREAR CURSO-->
-<div class="modal fade" id="modalFormCurso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-4 fnt-roboto fw-bold" id="exampleModalLabel">Nuevo Taller</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <form action="guardar_taller" method="post" id="form_crear_curso" enctype="multipart/form-data">{%csrf_token %}
-                        <div class="form-floating mb-3">
-                            <select class="form-select" name="Categoria" id="Categoria">
-                                {% for categoria in categorias %}
-
-                                <option selected value="{{categoria.id}}">{{categoria}}</option>
-                                {%endfor%}
-                            </select>
-                            <label for="floatingSelect">Categoria</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="curso_nombre" id="curso_nombre">
-                            <label for="curso_nombre">Nombre del taller</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" name="curso_descripcion" id="curso_descripcion"
-                                style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Descripcion</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="precio_curso" id="precio_curso"
-                                placeholder="Password">
-                            <label for="floatingPassword">Precio</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Selecciona Imagen</label>
-                            <input class="form-control" name="curso_imagen" type="file" id="curso_imagen">
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button class="btn letra-blanca" style="background-color: blueviolet;" type="submit">Crear taller</button>
-                        </div>
-                    </form>
+    </div> 
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-12">
+            <div class="card">
+                <div class="card-body ">
+                    <table id="example" class="table table-striped"  style="width:100%; font-family: nunito;">
+                        <thead class="bg-primary" >
+                            <tr>
+                                <th style="color: white;">Nombre</th>
+                                <th style="color: white;">Categoria</th>
+                                <th style="color: white;">Precio</th>
+                                <th style="color: white;">Videos</th>
+                                <th style="color: white;">Usuarios</th>
+                                <th style="color: white;">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for curso in talleres %}
+                            <tr>
+                                <td><a href="{% url 'ver_taller' curso.id %}" class="text-secondary">{{curso.nombre}}</a>  </td>
+                                <td>{{curso.categoria.nombre}}</td>
+                                <td>${{curso.precio|intcomma}}</td>
+                                <td>{{curso.num_videos}}</td>
+                                <td>{{curso.cantidad_usuarios_cursando}}</td>
+                                <td>{{curso.fecha}}</td>
+                            </tr>
+                            {%endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                                <th>Precio</th>
+                                <th>Videos</th>
+                                <th>Usuarios</th>
+                                <th>Fecha</th>
+                          </tr>
+                          </tfoot>
+                    </table>
                 </div>
             </div>
-
+       
         </div>
+        <div class="col-lg-4 col-md-4 col-12"></div>
+
     </div>
 </div>
-<script>
-    function buscarElemento(valor, id) {
-        var elemento = document.getElementById(valor);
 
-        if (elemento) {
-            elemento.scrollIntoView();
-            elemento.classList.add("animated");
 
-            setTimeout(function () {
-                elemento.classList.remove("animated");
-
-            }, 1200);
-            document.getElementById(id).value = "";
-
-        }
-    }
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script src="{% static 'curso/js/cursos.js' %}"></script>
-<script src="https://kit.fontawesome.com/63bc1a63be.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+<script src="{% static 'blog/js/pages/demo.datatable-init.js' %}"></script>
+<script src="{% static 'blog/js/hyper-syntax.js' %}"></script>
 {%endblock%}

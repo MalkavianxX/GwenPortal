@@ -1,0 +1,123 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}
+{% block content%}
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Categorias</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Categorias <button type="button" data-bs-toggle="modal" data-bs-target="#signup-modal" class="btn btn-outline-primary rounded-pill"><i class="mdi mdi-plus-thick"></i></button>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead class="bg-primary-lighten">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                    
+                    </tr>
+                </thead>
+               <tbody>
+                {% for cat in cats %}
+                <tr>
+                  <td>{{cat.nombre}}</td>
+                  <td>{{cat.descripcion}}</td>
+                {% endfor %}
+               </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+    
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title" style="color: white;" >Agregar categoria</h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+          
+
+                <form class="ps-3 pe-3" action="#"> {% csrf_token %}
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="categoria-blog-nombre" placeholder="name@example.com">
+                        <label for="categoria-blog-nombre">Nombre</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="categoria-blog-descripcion"></textarea>
+                            <label for="categoria-blog-descripcion">Descripcion</label>
+                          </div>
+                    </div>
+
+   
+                    <div class="d-grid">
+                            <button type="button" class="btn btn-soft-primary" id="GuardarCategoria" type="submit">Guardar</button>
+                    </div>
+               
+
+                </form>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    //CATEGORIAS
+document.getElementById('GuardarCategoria').addEventListener('click', function () {
+  const nombre = document.getElementById('categoria-blog-nombre').value;
+  const descripcion = document.getElementById('categoria-blog-descripcion').value;
+  const csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'crear_categoria', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('X-CSRFToken', csrftoken);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+
+      // Cierra el modal
+      $('#signup-modal').modal('hide');
+      $(document).ready(function () {
+        
+      });
+
+    }
+  };
+  const params = 'categoria-blog-nombre=' + encodeURIComponent(nombre) +
+    '&categoria-blog-descripcion=' + encodeURIComponent(descripcion);
+  xhr.send(params);
+});
+
+</script>
+<script src="{% static 'blog/js/pages/demo.datatable-init.js' %}"></script>
+
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+
+<script src="{% static 'blog/js/hyper-syntax.js' %}"></script>
+{%endblock%}

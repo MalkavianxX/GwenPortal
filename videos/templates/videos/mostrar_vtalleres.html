@@ -1,0 +1,54 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}
+
+
+{% block content%}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">{{titulo}} </li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">{{titulo}} ({{total}})</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for video in videos %}
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div style="position:relative;padding-top:56.25%;" class="card-img-top"><iframe
+                    src="{{ video.link}}"
+                    loading="lazy" style="border:none;position:absolute;top:0;height:100%;width:100%;"
+                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
+            </div>
+                <div class="card-body">
+                    <h5 class="card-title text-primary" > <i class="uil-layer-group"></i> {{video.curso}}</h5>
+                    <div class="card-text d-flex justify-content-between">
+                        <p class="text-muted text-lowercase">{{video.nombre_video}}</p>
+                        <p class="text-lowercase text-muted"> <i class="mdi mdi-content-save-outline "></i> {{video.peso}}</p>
+                    </div>
+                </div> <!-- end card-body -->
+            </div> <!-- end card -->
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'videos/js/videos.js' %}"></script>
+{%endblock%}

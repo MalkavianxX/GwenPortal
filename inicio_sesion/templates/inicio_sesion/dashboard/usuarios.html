@@ -1,7 +1,123 @@
-{% extends 'inicio_sesion/dashboard.html' %}
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
 
-{% block content %}
 
-  <h1>Usuarios</h1>
-  
+{% block content%}
+
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
+
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Usuarios</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Usuarios</h4>
+            </div>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-12">
+            <div class="card">
+                <div class="card-body ">
+                    <table id="example" class="table table-striped"  style="width:100%; font-family: nunito;">
+                        <thead class="" style="background-color: rgb(120, 78, 227);">
+                            <tr>
+                                <th style="color: white;">Nombre usuario</th>
+                                <th style="color: white;">Correo</th>
+                                <th style="color: white;">Nombre</th>
+                                <th style="color: white;">Perfil</th>
+                          
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in usuarios %}
+                           <tr>
+                            <td>{{user.username}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.first_name}}  {{user.last_name}}</td>
+                            {% if user.is_staff %}
+                            <td>Administrador</td>
+                            {% else %}
+                            <td>Susbscriptor</td>
+                            {% endif %}
+                           </tr>
+                           {%endfor%}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                              <th >Nombre usuario</th>
+                              <th >Correo</th>
+                              <th >Nombre</th>
+                              <th >Perfil</th>
+                          </tr>
+                          </tfoot>
+                    </table>
+                </div>
+            </div>
+       
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Tabla de presentacion
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Aqui se muestran todos los usuarios registrados.</strong>  Es una visalizacion de los usuarios registrados.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            ¿Qué puedo hacer aquí?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>El ojetivo es la visualizacion de informacion de interes.</strong> En esta seccion solo puedes ver a los usuarios registrados  pero no podras hacer modificaciones o crearlos debido a que solo pueden ser creados por un usuarios nuevo.
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            ¿Como puedo administrarlos?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Aquí no puedes administrarlos</strong> Pero puedes hacer click en la siguiente liga para administrarlos: <a href="#">Administrar perfiles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+<script src="{% static 'blog/js/pages/demo.datatable-init.js' %}"></script>
+<script src="{% static 'blog/js/hyper-syntax.js' %}"></script>
 {%endblock%}

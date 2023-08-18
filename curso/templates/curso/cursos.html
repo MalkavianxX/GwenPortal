@@ -2,218 +2,125 @@
 
 
 {% block content%}
-<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
 
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
 
-<section style="margin-top: 10vh;">
-    <div class="container-fluid text-center">
-        <div class="row ">
-            <!--Categorias-->
-            <div class="col-lg-4 col-12  text-center">
-                <div class="row ">
-                    <div class="col-8 align-self-center">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" list="categorias-list" onchange="buscarElemento(this.value)">
-                            <label for="floatingInput">Buscar categoria</label>
-                        </div>
-                    </div>
-                    <div class="col-3 align-self-center">
-                        <a type="button" href="https://gwenluy.com/admin/curso/categoria/add/" target="_blank" class="btn  btn-lg" style="background-color: #c586f5;text-decoration: none;">
-                            <h3 class="letra-blanca"><i class="bi bi-plus-circle-dotted"></i></h3>
-                            
-                        </a>
-
-                    </div>
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Cursos</li>
+                    </ol>
                 </div>
-                
-                <div class="row mt-3">
-                    {% for categoria in categorias %}
-                    <div class="col-12 " >
-                        <div class="card border border-0 mb-3 shadow bg-body-tertiary rounded" id="{{categoria.nombre}}" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4 align-self-center">
-                                    <img src="{{categoria.icono.url}}"
-                                        class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <div class="w-100 d-flex justify-content-between">
-                                            <p class="fw-bold "> {{categoria.nombre}}</p>
-                                            <p>Cursos: <strong>{{categoria.num_cursos}}</strong></p>
-                                        </div>
-                                        <p class="w-100 text-start limit-caracter"><small>{{categoria.descripcion}}</small> </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor%}
-                </div>
-
+                <h4 class="page-title text-uppercase">Cursos</h4>
             </div>
-            <!--Cursos-->
-            <div class="col-lg-4 col-12  text-center">
-                <div class="row ">
-                    <div class="col-8 align-self-center">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" list="cursos-list" onchange="buscarElemento(this.value)">
-                            <label for="floatingInput">Buscar curso</label>
-                        </div>
-                    </div>
-                    <div class="col-3 align-self-center">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalFormCurso" class="btn btn-lg" style="background-color: #ab71c7;text-decoration: none;">
-                            <h3 class="letra-blanca"><i class="bi bi-patch-plus"></i></h3>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-12">
+            <div class="card">
+                <div class="card-body ">
+                    <table id="example" class="table table-striped"  style="width:100%; font-family: nunito;">
+                        <thead class="" style="background-color: rgb(155, 78, 227);">
+                            <tr>
+                                <th style="color: white;">Nombre</th>
+                                <th style="color: white;">Categoria</th>
+                                <th style="color: white;">Precio</th>
+                                <th style="color: white;">Videos</th>
+                                <th style="color: white;">Usuarios</th>
+                                <th style="color: white;">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for curso in cursos %}
+                            <tr>
+                                <td><a href="{% url 'ver_curso' curso.id %}" class="text-secondary">{{curso.nombre}}</a>  </td>
+                                <td>{{curso.categoria.nombre}}</td>
+                                <td>${{curso.precio|intcomma}}</td>
+                                <td>{{curso.num_videos}}</td>
+                                <td>{{curso.cantidad_usuarios_cursando}}</td>
+                                <td>{{curso.fecha}}</td>
+                            </tr>
+                            {%endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                                <th>Precio</th>
+                                <th>Videos</th>
+                                <th>Usuarios</th>
+                                <th>Fecha</th>
+                          </tr>
+                          </tfoot>
+                    </table>
+                </div>
+            </div>
+       
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Tabla de presentacion
                         </button>
-
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    {% for curso in cursos %}
-                    <div class="col-12">
-                        <a href="{% url 'ver_curso' curso.id %}">
-                            <div class="card border border-0 mb-3 shadow bg-body-tertiary rounded"  id="{{curso.nombre}}" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4 align-self-center">
-                                        <img src="{{curso.imagen.url}}"
-                                            class="img-fluid rounded-start rounded" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <div class="w-100 d-flex justify-content-between align-self-center">
-                                                <p class=" fw-bold">{{curso.nombre}}</p>
-                                                <p class="fw-bold text-success" >${{curso.precio|intcomma}}</p>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col text-start" >
-                                                    <p class="limit-caracter"><small>{{curso.descripcion}}</small> </p>
-                                                </div>
-                                                <div class="col align-self-center text-end">
-                                                    <p>{{curso.num_video}}</p>
-                                                    <p>{{curso.categoria.nombre}}</p>
-                                                </div>
-                                            </div>
-    
-    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-               
-                    </div>
-                    {%endfor%}
-                </div>
-
-            </div>
-            <!--MATERIAL-->
-            <div class="col-lg-4 col-12 text-center">
-                <div class="row ">
-                    <div class="col-8 align-self-center ">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" list="materiales-list" onchange="buscarElemento(this.value)">
-                            <label for="floatingInput">Buscar material</label>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Aqui se muestran todos los cursos registrados.</strong> Las columnas consisten en Nombre el cual es el nombre del curso, despues Categoria, se muestra el nombre de la categoria a la cual pertenece,
+                            por consiguiente el precio en dolares, despues Videos lo cual es el numero total de videos que tiene el curso/taller, despues lo Usuarios, son aquellos usuarios que estan tomando el curso/taller, por ultima la fecha la cual 
+                            es la fecha en la cual fue creado el curso/taller. 
                         </div>
                     </div>
-                    <div class="col-3 align-self-center">
-                        <a href="https://gwenluy.com/admin/curso/material/add/" target="_blank" type="button" class="btn  btn-lg" style="background-color: #b946f3;text-decoration: none;">
-                            <h3 class="letra-blanca"><i class="bi bi-file-earmark-plus"></i></h3>
-                        </a>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            ¿Qué puedo hacer aquí?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>El ojetivo es la visualizacion de informacion de interes.</strong> En esta seccion solo puedes ver los cursos activos e inactivos, <strong>haciendo click sobre el nombre del curso</strong> podras visualizarlo.
+                            Si haces click sobre otra columna no responderá nada.
+                        </div>
                     </div>
                 </div>
-                <div class="row justify-content-evenly mt-4 " >
-                    {% for material in materiales %}
-                        <div class="col-lg-5 col-12 text-start rounded bg-light mb-2" >
-                            <a target="_blank" id="{{material.nombre_archivo}}" style="text-decoration: none;color: black;" href="{{material.archivo.url}}" ><strong>{{material.curso}}</strong>  <small>{{material.nombre_archivo}}.{{material.tipo_archivo}} </small></a>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            ¿Donde subo un curso?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Aquí no puedes subir un curso.</strong> Pero puedes hacer click en la siguiente liga para subir un curso: <a href="{% url 'render_crear_curso'%}">Subir un curso</a>
                         </div>
-                    {%endfor%}
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!--DATALIST DE CATEGORIA-->
-<datalist id="categorias-list">
-    {% for categoria in categorias %}
-    <option value="{{categoria.nombre}}"></option>
-    {%endfor%}
-</datalist>
- <!--DATALIST DE CURSO-->
-<datalist id="cursos-list">
-    {% for curso in cursos %}
-    <option value="{{curso.nombre}}"></option>
-    {%endfor%}
-</datalist> 
-<!--DATALIST DE Materiales-->
-<datalist id="materiales-list">
-    {% for material in materiales %}
-    <option value="{{material.nombre_archivo}}"></option>
-    {%endfor%}
-</datalist>
-<script>
-    function buscarElemento(valor) {
-      var elemento = document.getElementById(valor);
-  
-      if (elemento) {
-        elemento.scrollIntoView();
-        elemento.classList.add("animated");
-        setTimeout(function () {
-          elemento.classList.remove("animated");
-        }, 1200);
-      }
-    }
-  </script>
 
-<!--MODAL CREAR CURSO-->  
-<div class="modal fade" id="modalFormCurso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-4 fnt-roboto fw-bold" id="exampleModalLabel">Crear curso</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container"> 
-            <form action="guardar_curso" method="post" id="form_crear_curso" enctype="multipart/form-data">{% csrf_token %}
-                <div class="form-floating mb-3">
-                    <select class="form-select" name="Categoria" id="Categoria" >
-                        {% for categoria in categorias %}
-
-                            <option selected value="{{categoria.id}}">{{categoria}}</option>
-                        {%endfor%}
-                    </select>
-                    <label for="floatingSelect">Categoria</label>
-                  </div> 
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="curso_nombre" id="curso_nombre">
-                    <label for="curso_nombre">Nombre del curso</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" name="curso_descripcion" id="curso_descripcion" style="height: 100px"></textarea>
-                    <label for="floatingTextarea2">Descripcion</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="precio_curso" id="precio_curso" placeholder="Password">
-                    <label for="floatingPassword">Precio</label>
-                  </div>
-                  <div class="mb-3">
-                    <label for="formFile"  class="form-label">Selecciona Imagen</label>
-                    <input class="form-control" name="curso_imagen" type="file"id="curso_imagen">
-                  </div>
-                  <div class="d-grid gap-2">
-                    <button class="btn letra-blanca" style="background-color: blueviolet;" type="submit">Crear curso</button>
-                  </div>
-            </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script src="{% static 'curso/js/cursos.js' %}"></script>
-<script src="https://kit.fontawesome.com/63bc1a63be.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+<script src="{% static 'blog/js/pages/demo.datatable-init.js' %}"></script>
+<script src="{% static 'blog/js/hyper-syntax.js' %}"></script>
 {%endblock%}

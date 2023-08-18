@@ -1,54 +1,65 @@
 {% extends 'inicio_sesion/dashboard.html' %} {% load static %}
 {% block content%}
-<br>
-<br>
-<style>
-
-</style>
-
-<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
-<div class="container-fluid position-relative  rounded img-fluid" style="
-    background-image: url({{post.imagen.url}});
-    
-    height: 60vh;">
-    <div class="container bg-dark opacity-75 w-auto w-100 h-auto position-absolute top-50 start-50 translate-middle rounded">
-        <p class="fs-1 letra-blanca text-center">{{post.titulo}}</p>
-        <hr class="letra-blanca">
-        <p class="fs-3 letra-blanca text-center"><small>{{post.categoria.nombre}}</small></p>
-    </div>
-
-    <hr>
-
-</div>
-
-<div class="container mt-5">
-    <pre class="position-relative lh-base " style="text-align: justify;">{{post.contenido}}</pre>
-    <p class="text-end "><small>{{post.autor}} , {{post.fecha_publicacion}}</small></p>
-</div>
-<div class="container mt-5 w-100 ">
-    <p class="fs-3 fw-bold">Te podria interesar</p>
-    <hr>
-
-    <div class="row d-flex overflow-x-scroll">
-        {% for another in otros_post %}
-            <div class="col-lg-4 col-12 hover-grow">
-                <a href="{% url 'ver_post' another.id %}" style="text-decoration: none;">
-
-                <div class="card text-bg-dark">
-                    <img src="{{another.imagen.url}}" class=""  alt="...">
-                    <div class="card-img-overlay position-absolute top-50 start-50 translate-middle w-100 bg-dark opacity-75">
-                      <h5 class="card-title text-center">{{another.titulo}}</h5>
-                      <p class="card-text text-center"><small>{{another.fecha_publicacion}}</small></p>
-                    </div>
-                  </div>
-                </a>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Blog</a>
+                        </li>
+                        <li class="breadcrumb-item active">Post</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Blog</h4>
             </div>
-
-        {%endfor%}
+        </div>
     </div>
+    <div class="row d-flex justify-content-center">
+            <div class="col-lg-8 col-md-4 col-12 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-body justify-content-center">
+                        {% if post.imagen %}
+                        <img src="{{post.imagen.url}}" class="img-fluid rounded"  alt="...">
+                        {%else%}
+                        <img src="{% static 'blog/img/porsi.jpg' %}"  class="img-fluid rounded"   alt="...">
+    
+                    {% endif %}
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-floating">
+                                    <h3> {{post.titulo}}</h3>
+                                    <hr>
+                                    <textarea class="form-control" readonly style="height: 50vh; border:0px;" placeholder="Leave a comment here" id="floatingTextarea">{{post.contenido}}
+                                    </textarea>
+                                    
+                                </div>
+                                <p class="text-end "><small>{{post.autor}} , {{post.fecha_publicacion}}</small></p>
 
+                            </div>
 
-
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+    </div>
 </div>
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+
+
+
+
+
 {%endblock%}

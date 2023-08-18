@@ -13,6 +13,8 @@ urlpatterns = [
     path('guardar_curso',views.guardar_curso, name="guardar_curso"),
     path('guardar_taller', views.guardar_taller, name="guardar_taller"),
     path('public_todos_cursos',views.public_todos_cursos, name="public_todos_cursos"),
+    path('render_crear_curso', views.render_crear_curso, name="render_crear_curso"),
+    path('render_crear_taller', views.render_crear_taller, name="render_crear_taller"),
  
     
 ]

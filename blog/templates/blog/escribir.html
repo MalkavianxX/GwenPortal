@@ -1,0 +1,68 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}
+{% block content%}
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Escribir</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Escribir blog</h4>
+            </div>
+        </div>
+    </div> 
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-12">
+              
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="creador-titulo-blog" placeholder="name@example.com" />
+                                <label for="creador-titulo-blog">Titulo</label>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="creador-contenido-blog" style="height: 20vh;"></textarea>
+                            <label for="creador-contenido-blog">Contenido</label>
+                        </div>
+                        </div>
+                        <div class="col-lg-4 col-md-8 col-12 align-self-center">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="creador-blog-categoria" aria-label="Floating label select example">
+                                    {% for categoria in categorias %}
+                                    <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+                   
+                                    {% endfor %}
+                                </select>
+                                <label for="creador-blog-categoria">Categoria</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="creador-archivo-blog" class="form-label">Añadir imagen</label>
+                                <input class="form-control" type="file" id="creador-archivo-blog">
+                              </div>
+                            
+                              <div class="d-grid">
+                                <button type="button" id="publicar-blog" class="btn  btn-primary">Guardar</button>
+                            </div>
+                            <!-- end d-grid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'blog/js/blog.js' %}"></script>
+{%endblock%}

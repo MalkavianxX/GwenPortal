@@ -2,18 +2,21 @@ from django.shortcuts import render, redirect
 from .models import Categoria, Material, Curso, Video, Taller
 from django.db.models import Count
 import requests
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 # Create your views here.
 def dashboard_cursos(request):
 
     categorias = Categoria.objects.annotate(num_cursos=Count('curso')).order_by('-nombre')
     cursos = Curso.objects.annotate(num_videos=Count('video')).order_by('-fecha')
+    cursos = cursos.annotate(cantidad_usuarios_cursando=Count('usuarios_cursando'))
     materiales = Material.objects.all().order_by('-tipo_archivo')
     return render(request,"curso/cursos.html",{
         'categorias':categorias,
         'cursos':cursos,
         'materiales':materiales
-    })
+    }) 
 def format_seconds(seconds):
     hours = seconds // 3600  # Obtener las horas
     minutes = (seconds % 3600) // 60  # Obtener los minutos
@@ -71,7 +74,14 @@ def ver_taller(request,id_taller):
             'contenido_relacionado':Taller.objects.filter(categoria = taller.categoria)
         })   
 
-
+def render_crear_curso(request):
+    return render(request,"curso/crear_curso.html",{
+        'categorias': Categoria.objects.all().order_by('-nombre')
+    })
+def render_crear_taller(request):
+    return render(request,"curso/crear_taller.html",{
+        'categorias': Categoria.objects.all().order_by('-nombre')
+    })
 def ver_curso(request,id_curso):
     usuario = request.user
     print(usuario.username)
@@ -123,74 +133,89 @@ def ver_curso(request,id_curso):
 def dashboard_talleres(request):
     categorias = Categoria.objects.annotate(num_cursos=Count('taller')).order_by('-nombre')
     talleres = Taller.objects.annotate(num_videos=Count('video')).order_by('-fecha')
+    talleres = talleres.annotate(cantidad_usuarios_cursando=Count('usuarios_cursando'))
+
     materiales = Material.objects.all().order_by('-tipo_archivo')
     return render(request,"curso/talleres.html",{
         'categorias':categorias,
         'talleres':talleres,
         'materiales':materiales
     })
+
+@csrf_exempt
 def guardar_curso(request):
-    categoria = request.POST.get('Categoria')
-    nombre_curso = request.POST.get('curso_nombre')
-    descripcion = request.POST.get('curso_descripcion')
-    precio = request.POST.get('precio_curso')
-    imagen = request.FILES.get('curso_imagen')  # Asegúrate de tener enctype="multipart/form-data" en tu formulario HTML
+    if request.method == 'POST':
+
+        categoria = request.POST.get('categoria')
+        nombre_curso = request.POST.get('nombre')
+        descripcion = request.POST.get('descrip')
+        precio = request.POST.get('precio')
+        imagen = request.FILES.get('imagen')  # Asegúrate de tener enctype="multipart/form-data" en tu formulario HTML
 
 
-    url = "https://video.bunnycdn.com/library/132990/collections"
+        url = "https://video.bunnycdn.com/library/132990/collections"
 
-    payload = "{\"name\":\""+str(nombre_curso)+"\"}"
-    headers = {
-        "accept": "application/json",
-        "content-type": "application/*+json",
-        "AccessKey": "6b2d3de5-8f09-4541-a57fe5df8534-047a-4afd"
-    }
+        payload = "{\"name\":\""+str(nombre_curso)+"\"}"
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/*+json",
+            "AccessKey": "6b2d3de5-8f09-4541-a57fe5df8534-047a-4afd"
+        }
 
-    response = requests.post(url, data=payload, headers=headers)
-    guid = response.json()["guid"]
-    curso = Curso(
-        categoria = Categoria.objects.get(pk = categoria),
-        nombre = nombre_curso,
-        descripcion = descripcion,
-        precio = float(precio),
-        imagen = imagen,
-        id_collection = guid
-    )
-    # Guardar el objeto Curso en la base de datos
-    curso.save()
-    return redirect('dashboard_cursos')
-
+        response = requests.post(url, data=payload, headers=headers)
+        guid = response.json()["guid"]
+        curso = Curso(
+            categoria = Categoria.objects.get(pk = categoria),
+            nombre = nombre_curso,
+            descripcion = descripcion,
+            precio = float(precio),
+            imagen = imagen,
+            id_collection = guid
+        )
+        # Guardar el objeto Curso en la base de datos
+        curso.save()
+        # Enviar una respuesta al cliente
+        return JsonResponse({'status': 'ok'})
+    else:
+        # Si la solicitud no es de tipo POST, enviar un error al cliente
+        return JsonResponse({'status': 'error', 'message': 'El método de solicitud no es válido'})   
+@csrf_exempt
 def guardar_taller(request):
-    categoria = request.POST.get('Categoria')
-    nombre_curso = request.POST.get('curso_nombre')
-    descripcion = request.POST.get('curso_descripcion')
-    precio = request.POST.get('precio_curso')
-    imagen = request.FILES.get('curso_imagen')  # Asegúrate de tener enctype="multipart/form-data" en tu formulario HTML
+    if request.method == 'POST':
 
-    url = "https://video.bunnycdn.com/library/132992/collections"
+        categoria = request.POST.get('categoria')
+        nombre_curso = request.POST.get('nombre')
+        descripcion = request.POST.get('descrip')
+        precio = request.POST.get('precio')
+        imagen = request.FILES.get('imagen')  # Asegúrate de tener enctype="multipart/form-data" en tu formulario HTML
 
-    payload = "{\"name\":\""+str(nombre_curso)+"\"}"    
-    headers = {
-        "accept": "application/json",
-        "content-type": "application/*+json",
-        "AccessKey": "1e8f3a9c-0092-464b-96c0336bad00-0a1d-4912"
-    }
+        url = "https://video.bunnycdn.com/library/132992/collections"
 
-    response = requests.post(url, data=payload, headers=headers)
+        payload = "{\"name\":\""+str(nombre_curso)+"\"}"    
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/*+json",
+            "AccessKey": "1e8f3a9c-0092-464b-96c0336bad00-0a1d-4912"
+        }
 
-    guid = response.json()["guid"]
-    curso = Taller(
-        categoria = Categoria.objects.get(pk = categoria),
-        nombre = nombre_curso,
-        descripcion = descripcion,
-        precio = float(precio),
-        imagen = imagen,
-        id_collection = guid
-    )
-    # Guardar el objeto Curso en la base de datos
-    curso.save()
-    return redirect('dashboard_talleres')
+        response = requests.post(url, data=payload, headers=headers)
 
+        guid = response.json()["guid"]
+        curso = Taller(
+            categoria = Categoria.objects.get(pk = categoria),
+            nombre = nombre_curso,
+            descripcion = descripcion,
+            precio = float(precio),
+            imagen = imagen,
+            id_collection = guid
+        )
+        # Guardar el objeto Curso en la base de datos
+        curso.save()
+        # Enviar una respuesta al cliente
+        return JsonResponse({'status': 'ok'})
+    else:
+        # Si la solicitud no es de tipo POST, enviar un error al cliente
+        return JsonResponse({'status': 'error', 'message': 'El método de solicitud no es válido'})   
 
 def public_todos_cursos(request):
     cursos = Curso.objects.all().order_by('-categoria')

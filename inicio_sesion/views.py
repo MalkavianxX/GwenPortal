@@ -79,6 +79,14 @@ def crear_usuario(request):
             login(request, user)
             return JsonResponse(data={'mensaje': 'Creacion exitosa'}, status=200)
 
+def render_seccion_usuarios_dashboard(request):
+    users = User.objects.all().order_by()
+    for i in users:
+        print(i.username)
+    return render(request, "inicio_sesion/dashboard/usuarios.html",{
+        'usuarios': users
+    })
+
 def render_dashboard(request):
     return render(request,"inicio_sesion/dashboard.html")
 
@@ -98,8 +106,7 @@ def render_seccion_talleres_dashboard(request):
 def render_seccion_biblioteca_dashboard(request):
     return render(request, "inicio_sesion/dashboard/biblioteca.html")
 
-def render_seccion_usuarios_dashboard(request):
-    return render(request, "inicio_sesion/dashboard/usuarios.html")
+
 
 def render_seccion_mensajes_dashboard(request):
     return render(request, "inicio_sesion/dashboard/mensajes.html")
