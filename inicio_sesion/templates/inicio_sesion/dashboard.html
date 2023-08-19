@@ -103,8 +103,11 @@
                         <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <span class="account-user-avatar">
-                                <img src="{% static 'inicio_sesion/assets/images/users/avatar-1.jpg' %}"
-                                    alt="user-image" width="32" class="rounded-circle" />
+                                <div class="avatar-sm">
+                                    <span class="avatar-title bg-primary rounded-circle">
+                                        GW
+                                    </span>
+                                </div>
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
                                 <h5 class="my-0">{{ user.username }}</h5>
@@ -195,10 +198,12 @@
             <div class="h-100" id="leftside-menu-container" data-simplebar>
                 <!-- Leftbar User -->
                 <div class="leftbar-user">
-                    <a href="pages-profile.html">
-
-                        <img src="{% static 'inicio_sesion/assets/images/users/avatar-1.jpg' %}" alt="user-image"
-                            height="42" class="rounded-circle shadow-sm">
+                    <a href="#">       
+                            <div class="avatar-sm " style="margin-inline: auto">
+                                <span class="avatar-title shadow-sm bg-primary rounded-circle">
+                                    GW
+                                </span>
+                            </div>
                         <span class="leftbar-user-name mt-2">{{ user.username }}</span>
                     </a>
                 </div>
@@ -206,7 +211,7 @@
                 <!--- Sidemenu -->
                 <ul class="side-nav">
 
-                    <li class="side-nav-title">Navigation</li>
+                    <li class="side-nav-title">Navegacion</li>
 
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false"
