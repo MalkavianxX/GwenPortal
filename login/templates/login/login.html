@@ -519,13 +519,16 @@
             </li>
             <!-- Sections menu-->
             <li class="nav-item active">
-              <a class="nav-link" href="https://www.instagram.com/gwen.luyalva/"><i class="bi bi-instagram" title="Instagram"></i></a>
+              <a class="nav-link" href="https://www.instagram.com/gwen.luyalva/"><i class="bi bi-instagram"
+                  title="Instagram"></i></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="https://www.facebook.com/profile.php?id=100011373135407&mibextid=ZbWKwL"><i class="bi bi-facebook " title="Facebook"></i></a>
+              <a class="nav-link" href="https://www.facebook.com/profile.php?id=100011373135407&mibextid=ZbWKwL"><i
+                  class="bi bi-facebook " title="Facebook"></i></a>
             </li>
-            <li class="nav-item active"> 
-              <a class="nav-link" href="https://youtube.com/@angeloterapialuyalva2775"><i class="bi bi-youtube " title="YouTube"></i></a>
+            <li class="nav-item active">
+              <a class="nav-link" href="https://youtube.com/@angeloterapialuyalva2775"><i class="bi bi-youtube "
+                  title="YouTube"></i></a>
             </li>
           </ul>
           <ul class="navbar-nav align-items-lg-center mx-3 ml-lg-auto">
@@ -2123,7 +2126,8 @@
             - Política de privacidad de PayPal:<br>
             https://www.paypal.com/es/cshelp/article/%C2%BFcu%C3%A1l-es-la-pol%C3%ADtica-de-paypal-sobre-la-privacidad-y-c%C3%B3mo-se-aplica-la-declaraci%C3%B3n-de-privacidad-help330
 
-            <br>Recuerda que, al utilizar las pasarelas de pago, estarás sujeto a los términos y condiciones de servicio de
+            <br>Recuerda que, al utilizar las pasarelas de pago, estarás sujeto a los términos y condiciones de servicio
+            de
             dichas plataformas.<br>
 
             4. Responsabilidad limitada:<br>
@@ -2172,7 +2176,8 @@
             1. Edad mínima:<br>
 
             El uso de nuestra plataforma está limitado a personas mayores de 18 años. Si eres menor de edad, debes
-            obtener el consentimiento y supervisión de tus padres o tutores legales para utilizar nuestros servicios.<br>
+            obtener el consentimiento y supervisión de tus padres o tutores legales para utilizar nuestros
+            servicios.<br>
 
             2. Uso personal:<br>
 
@@ -2294,6 +2299,7 @@
       </div>
     </div>
   </footer>
+
   <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -2303,7 +2309,7 @@
     crossorigin="anonymous"></script>
 
   <script src="{% static 'login/assets/js/purpose.js' %}"></script>
-  <script src="{% static 'micontenido/js/carrito.js' %}"></script>
+  <!--<script src="{% static 'micontenido/js/carrito.js' %}"></script>-->
 
   <!-- Page JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
@@ -2312,7 +2318,141 @@
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
   <!--mercadopago-->
+  <script>
+    window.addEventListener('load', obtener_carrito);
 
+    function formatCurrency(value) {
+        const number = parseFloat(value);
+        if (isNaN(number)) {
+            return value; // Devolver el valor original si no es un número válido
+        }
+
+        const formattedNumber = number.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+
+        return formattedNumber;
+    }
+    function remover_del_carrito(productoId) {
+      const url = `/micontenido/eliminar_del_carrito/${productoId}/`;
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      };
+
+      fetch(url, fetchOptions)
+        .then((response) => {
+          if (response.ok) {
+            // Eliminar el div con el ID correspondiente
+            const div = document.getElementById(productoId);
+            div.remove();
+            obtener_carrito();
+          } else {
+            console.erro("Ocurrió un error al  eliminar el producto del carrito.");
+          }
+        })
+        .catch((error) => {
+          console.error("Ocurrió un error en la solicitud:", error);
+        });
+      }
+    function obtener_carrito() {
+
+      const url = `{% url 'ver_carrito' %}`;
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      };
+
+      fetch(url, fetchOptions)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Error al recuperar el carrito");
+          }
+        })
+        .then((data) => {
+          const carrito = data.productos;
+          const total = data.total;
+
+          // Eliminar el contenido actual del contenedor
+          const carritoContenedor = document.getElementById('carrito-contenedor');
+          carritoContenedor.innerHTML = '';
+
+          // Recorrer la lista de productos en el carrito
+          carrito.forEach((producto) => {
+            const id = producto.id;
+            const nombre = producto.nombre;
+            const imagen = producto.imagen;
+            const precio = producto.precio;
+            const categoria = producto.categoria;
+            const idCollection = producto.id_collection;
+            document.getElementById('total-carrito').value = formatCurrency(total) + "USD";
+            // Crear el elemento HTML para mostrar el producto
+            const productoElement = document.createElement('div');
+            productoElement.classList.add('col-12');
+            productoElement.id = idCollection;
+            
+            productoElement.innerHTML = `
+          <div class="card " style="max-width: 540px;background-color: transparent !important;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${imagen}"  class="img-fluid rounded-start align-self-center" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <div class="w-100 d-flex justify-content-between">
+                    <h6 class="card-title fw-bold">${nombre}</h6>
+                    <h6 class="text-success fw-bold">${formatCurrency(precio)}</h6>
+                  </div>
+                  <div class="w-100 lh-1">
+                    <p class="card-text"><small>Categoria: ${categoria}</small></p>
+                    <p class="card-text"><small>Curso/Taller ${nombre}</small></p>
+                  </div>
+                  <div class="w-100">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-sm  btn-danger"
+                          id="${idCollection}" 
+                          onclick="remover_del_carrito(this.id)" 
+                          type="button">
+                          Eliminar
+                        </button>                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+            // Agregar el elemento al contenedor
+            carritoContenedor.appendChild(productoElement);
+            const cantidadProductos = carrito.length;
+            const cantidadProductosElement = document.getElementById("cantidad-productos");
+
+            cantidadProductosElement.innerHTML = "&nbsp;&nbsp;" + cantidadProductos.toString();
+            //MERCADO PAGO SDK       
+
+            //PAYPAL LINK
+
+
+          });
+        })
+        .catch((error) => {
+          console.error("Ocurrió un error  obtener el carrito Por favor,:", error);
+        });
+    }
+  </script>
 </body>
 
 </html>

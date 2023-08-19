@@ -12,8 +12,8 @@ function formatCurrency(value) {
   return formattedNumber;
 }
 function agregarAlCarrito(productoId) {
-  const url = `https://gwenluy.com/micontenido/agregar_al_carrito/${productoId}/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+  const url = `{% url 'agregar_al_carrito/' ${productoId}/ %}`;
 
   const fetchOptions = {
     method: "POST",
@@ -34,7 +34,7 @@ function agregarAlCarrito(productoId) {
 }
 
 function remover_del_carrito(productoId) {
-  const url = `https://gwenluy.com/micontenido/eliminar_del_carrito/${productoId}/`;
+  const url = `/micontenido/eliminar_del_carrito/${productoId}/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -62,7 +62,8 @@ function remover_del_carrito(productoId) {
 }
 
 function obtener_carrito() {
-  const url = `https://gwenluy.com/micontenido/ver_carrito/`;
+
+  const url = `{% url 'ver_carrito/' %}`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -137,7 +138,7 @@ function obtener_carrito() {
         //MERCADO PAGO SDK       
        
         //PAYPAL LINK
-        agregarEnlacePP();
+     
 
       });
     })
@@ -161,7 +162,7 @@ function verificarCupon() {
   const cupon = cuponInput.value;
 
   // Realizar una solicitud al servidor para verificar el cupón
-  const url = `https://gwenluy.com/micontenido/verificar_descuento/${cupon}/`;
+  const url = `/micontenido/verificar_descuento/${cupon}/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -213,7 +214,7 @@ window.addEventListener('load', obtener_carrito);
 
 //meradopago
 function agregarEnlacePago() { 
-  const url = `https://gwenluy.com/micontenido/crear_preferencia_MP/`;
+  const url = `/micontenido/crear_preferencia_MP/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
@@ -244,7 +245,7 @@ function agregarEnlacePago() {
 }
 
 function agregarEnlacePP() {
-  const url = `https://gwenluy.com/micontenido/crear_preferencia_PP/`;
+  const url = `/micontenido/crear_preferencia_PP/`;
   const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
   const fetchOptions = {
