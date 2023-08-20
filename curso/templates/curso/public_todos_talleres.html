@@ -25,16 +25,16 @@
 
         <div class="row row-cols-1 row-cols-md-2 contenedor-sombras mb-3 row-cols-lg-4 g-4">
             {% for curso in talleres %}
-            <div class="col me-3">
+            <div class="col mb-3">
                 <a href="{% url 'ver_taller' curso.id %}">
 
                     <div class="card h-100 hover-grow " id="{{curso.nombre}}">
-                        <a href="{% url 'ver_curso' curso.id %}">
+                        <a href="{% url 'ver_taller' curso.id %}">
 
                             <img src="{{ curso.imagen.url}}" class="card-img-top" style="height: 250px;" alt="...">
                         </a>
                         <div class="card-body">
-                            <a href="{% url 'ver_curso' curso.id %}" style="text-decoration: none; color: black;">
+                            <a href="{% url 'ver_taller' curso.id %}" style="text-decoration: none; color: black;">
 
                                 <div class="fnt-roboto fw-bold w-100 card-title d-flex justify-content-between ">
                                     <p>{{curso.nombre}}</p>
@@ -60,7 +60,19 @@
     </div>
 </section>
 
-
+<div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-filled ">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <i class="ri-check-line h1 text-success"></i>
+                    <h4 class="mt-2 text-secondary">Se agregó correctamente</h4>
+      
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 
 <datalist id="todos_nombres_cursos">
 
@@ -68,7 +80,19 @@
     <option value="{{curso.nombre}}"></option>
     {%endfor%}
 </datalist>
-
+<div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-filled ">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <i class="ri-check-line h1 text-success"></i>
+                    <h4 class="mt-2 text-secondary">Se agregó al carrito</h4>
+          
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 <script>
 
     function convertirAFloat(stringValor) {
@@ -110,7 +134,10 @@
             .then((response) => response.json())
             .then(() => {
                 obtener_carrito();
-
+                modal = new bootstrap.Modal(
+                    document.getElementById("success-alert-modal"),
+                );
+                modal.show();
             })
             .catch((error) => {
                 console.error("Ocurrió un error en la solicitud:", error);

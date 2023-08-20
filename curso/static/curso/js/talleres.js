@@ -20,9 +20,9 @@ document.getElementById("submitButton").addEventListener("click", function() {
     formData.append('imagen', imagen);
 
     fetch("/cursos/guardar_taller", {
-        method: "POST",
+        method: "POST", 
       
-        body: formData
+        body: formData 
     })
     .then(response => response.json())
     .then(response => {

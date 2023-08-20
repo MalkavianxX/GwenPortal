@@ -98,7 +98,19 @@
     <option value="{{curso.nombre}}"></option>
     {%endfor%}
 </datalist>
-
+<div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-filled ">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <i class="ri-check-line h1 text-success"></i>
+                    <h4 class="mt-2 text-secondary">Se agregó al carrito</h4>
+          
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 <script>
 
     function convertirAFloat(stringValor) {
@@ -140,7 +152,10 @@
             .then((response) => response.json())
             .then(() => {
                 obtener_carrito();
-
+                modal = new bootstrap.Modal(
+                    document.getElementById("success-alert-modal"),
+                );
+                modal.show();
             })
             .catch((error) => {
                 console.error("Ocurrió un error en la solicitud:", error);
