@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row justify-content-lg-center mt-lg-0 mt-5 bg-light ">
             <div class="col-lg-6 titulo-shadow col-12 fnt-roboto align-self-center fw-bold">
-                <h3>Todos los cursos</h3>
+                <h3>Todos los talleres</h3>
             </div>
             <div class="col-lg-6 col-12">
                 <div class="form-floating mb-3">
@@ -24,37 +24,36 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 contenedor-sombras mb-3 row-cols-lg-4 g-4">
-            {% for curso in cursos %}
-            <div class="col mb-3 ">
-                <div class="card h-100 hover-grow " id="{{curso.nombre}}">
-                    <a href="{% url 'ver_curso' curso.id %}">
+            {% for curso in talleres %}
+            <div class="col me-3">
+                <a href="{% url 'ver_taller' curso.id %}">
 
-                        <img src="{{ curso.imagen.url}}" class="card-img-top" style="height: 250px;" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <a href="{% url 'ver_curso' curso.id %}" style="text-decoration: none; color: black;">
+                    <div class="card h-100 hover-grow " id="{{curso.nombre}}">
+                        <a href="{% url 'ver_curso' curso.id %}">
 
-                            <div class="fnt-roboto fw-bold w-100 card-title d-flex justify-content-between ">
-                                <p>{{curso.nombre}}</p>
-                                <p class="text-success">${{curso.precio|intcomma}}</p>
-                            </div>
-                            <p class="card-text limit-caracter">{{curso.descripcion}}</p>
+                            <img src="{{ curso.imagen.url}}" class="card-img-top" style="height: 250px;" alt="...">
                         </a>
+                        <div class="card-body">
+                            <a href="{% url 'ver_curso' curso.id %}" style="text-decoration: none; color: black;">
 
-                    </div>
-                    <div class="row mb-2">
-                        <div class="d-grid gap-2 col-12 col-lg-8 mx-auto">
-                            <button class="btn  btn-lg letra-blanca fw-bold btn-success"
+                                <div class="fnt-roboto fw-bold w-100 card-title d-flex justify-content-between ">
+                                    <p>{{curso.nombre}}</p>
+                                    <p class="text-success">${{curso.precio|intcomma}}</p>
+                                </div>
+                                <p class="card-text limit-caracter">{{curso.descripcion}}</p>
+                            </a>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="d-grid gap-2 col-12 col-lg-8 mx-auto">
+                                <button class="btn  btn-lg letra-blanca fw-bold btn-success"
                                     data-url="{% url 'agregar_al_carrito' curso.id_collection %}"
-                                    id="{{curso.id_collection }}" 
-                                    onclick="agregarAlCarrito(this.id)" 
-                                    type="button">
+                                    id="{{curso.id_collection }}" onclick="agregarAlCarrito(this.id)" type="button">
                                     Al carrito
-                            </button>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                </a>
             </div>
             {%endfor%}
         </div>
@@ -63,12 +62,11 @@
 
 
 
-
 <datalist id="todos_nombres_cursos">
-    {% for curso in cursos %}
+
+    {% for curso in talleres %}
     <option value="{{curso.nombre}}"></option>
     {%endfor%}
-  
 </datalist>
 
 <script>

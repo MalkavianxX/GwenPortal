@@ -219,8 +219,21 @@ def guardar_taller(request):
 
 def public_todos_cursos(request):
     cursos = Curso.objects.all().order_by('-categoria')
-    talleres = Taller.objects.all().order_by('-categoria')
     return render(request,"curso/public_todos_cursos.html",{
         'cursos':cursos,
+    })
+
+def public_todos_talleres(request):
+    talleres = Taller.objects.all().order_by('-categoria')
+    return render(request,"curso/public_todos_talleres.html",{
+       
         'talleres':talleres
     })
+
+def public_todos_gratis(request):
+    cursos = Curso.objects.filter(precio  = 0.0).order_by('-categoria')
+    talleres = Taller.objects.filter(precio  = 0.0).order_by('-categoria')    
+    return render(request,"curso/public_todos_gratis.html",{
+        'cursos':cursos,
+        'talleres':talleres
+    })    

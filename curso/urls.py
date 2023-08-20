@@ -15,6 +15,8 @@ urlpatterns = [
     path('public_todos_cursos',views.public_todos_cursos, name="public_todos_cursos"),
     path('render_crear_curso', views.render_crear_curso, name="render_crear_curso"),
     path('render_crear_taller', views.render_crear_taller, name="render_crear_taller"),
+    path('public_todos_talleres', views.public_todos_talleres, name="public_todos_talleres"),
+    path('public_todos_gratis',views.public_todos_gratis, name="public_todos_gratis"),
  
     
 ]
