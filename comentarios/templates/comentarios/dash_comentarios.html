@@ -1,0 +1,70 @@
+{% extends 'inicio_sesion/dashboard.html' %} {% load static %}{% load humanize %}
+
+
+{% block content%}
+
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+<script src="{% static 'blog/js/pages/code.jquery.com_jquery-3.7.0.js' %}"></script>
+
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Plataforma</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript: void(0);">Administrador</a>
+                        </li>
+                        <li class="breadcrumb-item active">Comentarios</li>
+                    </ol>
+                </div>
+                <h4 class="page-title text-uppercase">Comentarios</h4>
+            </div>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-12">
+            <div class="card">
+                <div class="card-body ">
+                    <table id="example" class="table table-striped"  style="width:100%; font-family: nunito;">
+                        <thead class="bg-primary" >
+                            <tr>
+                                <th style="color: white;">Nombre</th>
+                                <th style="color: white;">Categoria</th>
+                                <th style="color: white;">Precio</th>
+                                <th style="color: white;">Videos</th>
+                                <th style="color: white;">Usuarios</th>
+                                <th style="color: white;">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                       
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                                <th>Precio</th>
+                                <th>Videos</th>
+                                <th>Usuarios</th>
+                                <th>Fecha</th>
+                          </tr>
+                          </tfoot>
+                    </table>
+                </div>
+            </div>
+       
+        </div>
+        <div class="col-lg-4 col-md-4 col-12"></div>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/b-2.4.1/date-1.5.1/fh-3.4.0/kt-2.10.0/r-2.5.0/rr-1.4.1/sb-1.5.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+<script src="{% static 'blog/js/pages/demo.datatable-init.js' %}"></script>
+<script src="{% static 'blog/js/hyper-syntax.js' %}"></script>
+{%endblock%}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blog',
     'videos',
     'micontenido',
+    'comentarios',
 ]
 
 MIDDLEWARE = [

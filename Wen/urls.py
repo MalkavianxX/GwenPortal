@@ -26,6 +26,6 @@ urlpatterns = [
     path('blog/',include('blog.urls')),
     path('videos/',include('videos.urls')),
     path('micontenido/',include('micontenido.urls')),
-
+    path('comentarios/',include('comentarios.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
