@@ -12,14 +12,17 @@
   <meta name="author" content="Webpixels">
   <!-- Favicon -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
   <!-- Font Awesome 5 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <link rel="stylesheet" href="{% static 'login/assets/libs/swiper/dist/css/swiper.min.css'%}">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
@@ -27,12 +30,7 @@
   <link rel="stylesheet" href="{% static 'login/assets/css/purpose.css'%}" id="stylesheet">
   <link rel="stylesheet" href="{% static 'login/css/carrito.css'%}" id="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/svg-injector/1.1.3/svg-injector.min.js"
-    integrity="sha512-LpKoEmPyokcDYSjRJ/7WgybgdAYFsKtCrGC9m+VBwcefe1vHXyUnD9fTQb3nXVJda6ny1J84UR+iBtEYm3OQmQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
   <!--MP-->
-  <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 </head>
 
@@ -41,7 +39,7 @@
     <!-- Topbar -->
 
     <!-- Main navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark" id="navbar-main">
+    <nav class="navbar navbar-main navbar-expand-lg sticky-top navbar-dark bg-dark" style="background-color: transparent !important;" id="navbar-main">
       <div class="container px-lg-0">
         <!-- Logo -->
         <a class="navbar-brand mr-lg-5" href="{% url 'login' %}">
@@ -445,8 +443,8 @@
 
                   </li>
                   <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
-                    <a href="#" class="list-group-item list-group-item-action dropdown-toggle" role="button"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#comentarios-section" class="list-group-item list-group-item-action " 
+                      >
                       <div class="media d-flex align-items-center">
                         <!-- SVG icon -->
                         <figure style="width: 50px;">
@@ -598,6 +596,10 @@
 
   {% block content%}
 
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
   <!-- Omnisearch -->
   <!--AVISO DE PRIVACIDAD-->
   <!-- Button trigger modal -->
@@ -1467,7 +1469,7 @@
     <!-- Features (v5) -->
 
     <!-- Testimonials (v1) -->
-    <section class="slice slice-lg bg-section-secondary">
+    <section class="slice slice-lg bg-section-primary" id="comentarios-section">
       <div class="container">
         <div class="mb-5 text-center">
           <h3 class=" mt-1">¿Qué dicen de nosotros?</h3>
@@ -1478,150 +1480,103 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-5">
-            <div class="swiper-js-container overflow-hidden">
-              <div class="swiper-container" data-swiper-items="1" data-swiper-space-between="0" data-swiper-sm-items="2"
-                data-swiper-xl-items="3">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide p-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <img alt="Image placeholder"
-                              src="{% static 'login/assets/img/theme/light/team-1-800x800.jpg'%}"
-                              class="avatar  rounded-circle">
-                          </div>
-                          <div class="pl-3">
-                            <h5 class="h6 mb-0">Heather Wright</h5>
-                            <small class="d-block text-muted">Google</small>
-                          </div>
+        <!-- Slider main container -->
+            <div class="swiper">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper">
+                <!-- Slides -->
+  
+   
+                {% for comm in comms %}
+                <div class="swiper-slide"> 
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center">
+                        <div>
+                          <img alt="Image placeholder"
+                            src="{% static 'login/img/user-avatar-1.png'%}"
+                            class="avatar  rounded-circle">
                         </div>
-                        <p class="mt-4 lh-180">Amazing template! All-in-one, clean code, beautiful design, and really
-                          not hard to work with.Highly recommended for any kind on website.</p>
-                        <span class="static-rating static-rating-sm">
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide p-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <img alt="Image placeholder"
-                              src="{% static 'login/assets/img/theme/light/team-2-800x800.jpg'%}"
-                              class="avatar  rounded-circle">
-                          </div>
-                          <div class="pl-3">
-                            <h5 class="h6 mb-0">Monroe Parker</h5>
-                            <small class="d-block text-muted">Apple</small>
-                          </div>
+                        <div class="pl-3">
+                          <h5 class="h6 mb-0">{{comm.usuario}}</h5>
+                          <small class="d-block text-muted">Usuario</small>
                         </div>
-                        <p class="mt-4 lh-180">Amazing template! All-in-one, clean code, beautiful design, and really
-                          not hard to work with.Highly recommended for any kind on website.</p>
-                        <span class="static-rating static-rating-sm">
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                        </span>
                       </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide p-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <img alt="Image placeholder"
-                              src="{% static 'login/assets/img/theme/light/team-3-800x800.jpg'%}"
-                              class="avatar  rounded-circle">
-                          </div>
-                          <div class="pl-3">
-                            <h5 class="h6 mb-0">John Sullivan</h5>
-                            <small class="d-block text-muted">Amazon</small>
-                          </div>
-                        </div>
-                        <p class="mt-4 lh-180">Amazing template! All-in-one, clean code, beautiful design, and really
-                          not hard to work with.Highly recommended for any kind on website.</p>
-                        <span class="static-rating static-rating-sm">
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide p-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <img alt="Image placeholder"
-                              src="{% static 'login/assets/img/theme/light/team-4-800x800.jpg'%}"
-                              class="avatar  rounded-circle">
-                          </div>
-                          <div class="pl-3">
-                            <h5 class="h6 mb-0">James Lewis</h5>
-                            <small class="d-block text-muted">Google</small>
-                          </div>
-                        </div>
-                        <p class="mt-4 lh-180">Amazing template! All-in-one, clean code, beautiful design, and really
-                          not hard to work with.Highly recommended for any kind on website.</p>
-                        <span class="static-rating static-rating-sm">
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide p-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <img alt="Image placeholder"
-                              src="{% static 'login/assets/img/theme/light/team-5-800x800.jpg' %}"
-                              class="avatar  rounded-circle">
-                          </div>
-                          <div class="pl-3">
-                            <h5 class="h6 mb-0">Julia Howe</h5>
-                            <small class="d-block text-muted">Google</small>
-                          </div>
-                        </div>
-                        <p class="mt-4 lh-180">Amazing template! All-in-one, clean code, beautiful design, and really
-                          not hard to work with.Highly recommended for any kind on website.</p>
-                        <span class="static-rating static-rating-sm">
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                          <i class="star fas fa-star voted"></i>
-                        </span>
-                      </div>
+                      <p class="mt-4 lh-180">{{comm.comentario}}</p>
+                      <span class="static-rating static-rating-sm">
+
+                      </span>
                     </div>
                   </div>
                 </div>
+                {% endfor %}
+
               </div>
-              <!-- Add Pagination -->
-              <div class="swiper-pagination w-100 mt-4 d-flex align-items-center justify-content-center"></div>
+              <!-- If we need pagination -->
+              <div class="swiper-pagination"></div>
+
+              <!-- If we need navigation buttons -->
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+
+              <!-- If we need scrollbar -->
+              <div class="swiper-scrollbar"></div>
             </div>
           </div>
         </div>
+       
       </div>
+     
     </section>
     <!-- Features (v7) -->
+{% if user.is_authenticated %}
+<section class="bg-section-secondary">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="mb-5 text-center">
+        <h3 class=" mt-3">Danos tu opinion</h3>
+        <div class="fluid-paragraph mt-3">
+          <p class="lead lh-180">Para nosotros tu opinion es muy importante, así trabajamos y nos esforzamos mucho más para brindar el mejor ambiente
+            para los cursos que tenemos para tí.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-8 col-12">
+        <div class="card">
+          <div class="card-body p-0">
+              <ul class="nav nav-tabs nav-bordered" role="tablist">
+                  <li class="nav-item" role="presentation">
+                      <a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2" aria-selected="true" role="tab">
+                          <i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
+                          <span class="d-none d-md-block">Mi comentario</span>
+                      </a>
+                  </li>
+          
+              </ul> <!-- end nav-->
+              <div class="tab-content">
+                  <div class="tab-pane show active p-3" id="newpost" role="tabpanel">
+                      <!-- comment box -->
+                      <div class="border rounded">
+                          <form action="#" id="form-comment" class="comment-area-box">{% csrf_token %}
+                              <textarea rows="4" class="form-control border-0 resize-none" id="mycoment" placeholder="Yo opino que ..."></textarea>
+                              <div class="p-2 bg-light d-flex justify-content-between align-items-center">
+                                  <div></div>
+                                  <button type="submit" id="send-my-coment" class="btn btn-sm btn-success"><i class="uil uil-message me-1"></i>Enviar</button>
+                              </div>
+                          </form>
+                      </div> <!-- end .border-->
+                      <!-- end comment box -->
+                  </div> <!-- end preview-->
+              </div> <!-- end tab-content-->
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </section>
+{% endif %}
+
+
 
     <!-- Call to action (v10) -->
     <section class="slice slice-lg">
@@ -1665,6 +1620,9 @@
       </div>
     </section>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+  <script src="{% static 'login/js/login.js' %}"></script>
 
   {%endblock%}
   <!-- Modal privacidad-->
@@ -2092,160 +2050,41 @@
       </div>
     </div>
   </footer>
+<!-- Modal OK COMENTS-->
+<div class="modal fade modal-sm" id="modalComentsOk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: blueviolet;">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Gracias por tu comentario</h1>
+        <button type="button" class="btn-close" style="color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Hemos recibido tu comentario :D
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn " style="background-color: blueviolet; color: white;">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
 
   <script src="{% static 'login/assets/js/purpose.js' %}"></script>
-  <!--<script src="{% static 'micontenido/js/carrito.js' %}"></script>-->
 
-  <!-- Page JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <!-- Purpose JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
   <!--mercadopago-->
-  <script>
-    window.addEventListener('load', obtener_carrito);
 
-    function formatCurrency(value) {
-        const number = parseFloat(value);
-        if (isNaN(number)) {
-            return value; // Devolver el valor original si no es un número válido
-        }
-
-        const formattedNumber = number.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
-
-        return formattedNumber;
-    }
-    function remover_del_carrito(productoId) {
-      const url = `/micontenido/eliminar_del_carrito/${productoId}/`;
-      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-
-      const fetchOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,
-        },
-      };
-
-      fetch(url, fetchOptions)
-        .then((response) => {
-          if (response.ok) {
-            // Eliminar el div con el ID correspondiente
-            const div = document.getElementById(productoId);
-            div.remove();
-            obtener_carrito();
-          } else {
-            console.erro("Ocurrió un error al  eliminar el producto del carrito.");
-          }
-        })
-        .catch((error) => {
-          console.error("Ocurrió un error en la solicitud:", error);
-        });
-      }
-    function obtener_carrito() {
-
-      const url = `{% url 'ver_carrito' %}`;
-      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-
-      const fetchOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,
-        },
-      };
-
-      fetch(url, fetchOptions)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Error al recuperar el carrito");
-          }
-        })
-        .then((data) => {
-          const carrito = data.productos;
-          const total = data.total;
-
-          // Eliminar el contenido actual del contenedor
-          const carritoContenedor = document.getElementById('carrito-contenedor');
-          carritoContenedor.innerHTML = '';
-
-          // Recorrer la lista de productos en el carrito
-          carrito.forEach((producto) => {
-            const id = producto.id;
-            const nombre = producto.nombre;
-            const imagen = producto.imagen;
-            const precio = producto.precio;
-            const categoria = producto.categoria;
-            const idCollection = producto.id_collection;
-            document.getElementById('total-carrito').value = formatCurrency(total) + "USD";
-            // Crear el elemento HTML para mostrar el producto
-            const productoElement = document.createElement('div');
-            productoElement.classList.add('col-12');
-            productoElement.id = idCollection;
-            
-            productoElement.innerHTML = `
-          <div class="card " style="max-width: 540px;background-color: transparent !important;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${imagen}"  class="img-fluid rounded-start align-self-center" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <div class="w-100 d-flex justify-content-between">
-                    <h6 class="card-title fw-bold">${nombre}</h6>
-                    <h6 class="text-success fw-bold">${formatCurrency(precio)}</h6>
-                  </div>
-                  <div class="w-100 lh-1">
-                    <p class="card-text"><small>Categoria: ${categoria}</small></p>
-                    <p class="card-text"><small>Curso/Taller ${nombre}</small></p>
-                  </div>
-                  <div class="w-100">
-                    <div class="d-grid gap-2">
-                      <button class="btn btn-sm  btn-danger"
-                          id="${idCollection}" 
-                          onclick="remover_del_carrito(this.id)" 
-                          type="button">
-                          Eliminar
-                        </button>                    
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-            // Agregar el elemento al contenedor
-            carritoContenedor.appendChild(productoElement);
-            const cantidadProductos = carrito.length;
-            const cantidadProductosElement = document.getElementById("cantidad-productos");
-
-            cantidadProductosElement.innerHTML = "&nbsp;&nbsp;" + cantidadProductos.toString();
-            //MERCADO PAGO SDK       
-
-            //PAYPAL LINK
-
-
-          });
-        })
-        .catch((error) => {
-          console.error("Ocurrió un error  obtener el carrito Por favor,:", error);
-        });
-    }
-  </script>
 </body>
 
 </html>

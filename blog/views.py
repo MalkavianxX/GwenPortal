@@ -92,3 +92,11 @@ def mostrar_blog(request):
         'header_3' : header_3,
         'header_4': header_4,
     })
+
+def public_ver_post(request,id_post):
+    post = Post.objects.get(pk = id_post)
+    relative_post = Post.objects.filter(categoria = post.categoria).order_by('-fecha_publicacion')
+    return render(request,"blog/public_ver_post.html",{
+        'post':post,
+        'otros_post':relative_post
+    })

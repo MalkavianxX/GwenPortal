@@ -14,6 +14,7 @@ urlpatterns = [
     path('mostrar_blog',views.mostrar_blog, name="mostrar_blog"),
     path('render_escribir',views.render_escribir, name="render_escribir"),
     path('render_categorias', views.render_categorias, name="render_categorias"),
+    path('public_ver_post/<int:id_post>/',views.public_ver_post, name="public_ver_post"),
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,176 @@
+{% extends 'login/login.html' %} {% load static %}
+
+{% block content%}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'blog/css/public.css' %}">
+<style>
+    
+
+    body {
+        background: #00000012 !important;
+    }
+</style>
+<div class="container-fluid" style="margin-bottom: 80vh;">
+    <div class="row justify-content-evenly">
+        <div class="col-lg-7 col-md-10 col-12 contenedor-sombra" style="background-color: white; ">
+            <img src="{{post.imagen.url}}" class="img-fluid img-zoom" style="border-radius: 15px;" alt="">
+            <div class="d-flex justify-content-between ">
+                <p class="display-1 " style="font-size: 4rem; font-weight: 300 !important;">{{post.titulo}}
+                <p>
+                <p class="align-self-center" style="font-size: 2rem; "> <span
+                        class="badge bg-danger">{{post.categoria.nombre}}</span> </p>
+            </div>
+
+            <textarea class="lead" id="auto-resize-textarea" style="width: 100%;  border: 0; font-size: 1.5rem;"
+                readonly>{{post.contenido}}</textarea>
+                <p class="fnt-monse text-end"> <em>por <strong>Gwen </strong>{{post.fecha_publicacion}}</em></p>
+                {% if user.is_authenticated %}
+                <section class="bg-section-secondary mt-5">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                    
+                      <div class="col-lg-12 col-md-8 col-12">
+                        <div class="card">
+                          <div class="card-body p-0">
+                              <ul class="nav nav-tabs nav-bordered" role="tablist">
+                                  <li class="nav-item" role="presentation">
+                                      <a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2" aria-selected="true" role="tab">
+                                          <i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
+                                          <span class="d-none d-md-block">Mi comentario</span>
+                                      </a>
+                                  </li>
+                          
+                              </ul> <!-- end nav-->
+                              <div class="tab-content">
+                                  <div class="tab-pane show active p-3" id="newpost" role="tabpanel">
+                                      <!-- comment box -->
+                                      <div class="border rounded">
+                                          <form action="#" id="form-comment" class="comment-area-box">{% csrf_token %}
+                                              <textarea rows="4" class="form-control border-0 resize-none" id="mycoment" placeholder="Tu opinion es muy importante para nosotros ..."></textarea>
+                                              <div class="p-2 bg-light d-flex justify-content-between align-items-center">
+                                                  <div></div>
+                                                  <button type="submit" id="send-my-coment" class="btn btn-sm btn-success"><i class="uil uil-message me-1"></i>Enviar</button>
+                                              </div>
+                                          </form>
+                                      </div> <!-- end .border-->
+                                      <!-- end comment box -->
+                                  </div> <!-- end preview-->
+                              </div> <!-- end tab-content-->
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  </section>
+                {% endif %}        
+        </div>
+        <div class="col-lg-2 col-md-2 col-12 ">
+            <div class="row  " style="background-color: white;border-radius: 15px;">
+                <h3 class="fnt-monse mb-2">Más contenido</h3>
+                {% for post in otros_post %}
+
+           
+                <div class="col">
+                    <a href="{% url 'public_ver_post' post.id %}">
+                    <div class="card contenedor-sombra" style="width: 18rem;">
+                        <img src="{{post.imagen.url}} " class="card-img-top img-zoom" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">{{post.titulo}}</p>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                {%endfor%}
+            </div>
+   
+        </div>
+    </div>
+</div>
+<!-- Modal OK COMENTS-->
+<div class="modal fade modal-sm" id="modalComentsOk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: blueviolet;">
+          <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Gracias por tu comentario</h1>
+          <button type="button" class="btn-close" style="color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Hemos recibido tu comentario :D
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-bs-dismiss="modal" class="btn " style="background-color: blueviolet; color: white;">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('header-main').classList.remove('header');
+
+});
+document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("form-comment");
+      const commentInput = document.getElementById("mycoment");
+  
+      form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+  
+          const datos = {
+            comentario: commentInput.value,
+            
+          };
+          const url = "/comentarios/guardar_comentario";
+          const fetchOptions = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrfToken,
+            }
+          };
+  
+          fetch(url, fetchOptions)
+          .then(response => {
+              if (response.ok) {
+                  // La petición se realizó con éxito
+                  console.log('Datos enviados correctamente');
+                  commentInput.value = "";
+                  const modalComentsOk = new bootstrap.Modal(document.getElementById('modalComentsOk'));
+                  modalComentsOk.show();
+  
+              } else {
+                  // Hubo un error en la petición
+                  console.error('Error al enviar los datos');
+              }
+          })
+          .catch(error => {
+              console.error('Error en la conexión o en el procesamiento de la respuesta', error);
+          });
+  
+      });
+  });
+
+    const textarea = document.getElementById("auto-resize-textarea");
+
+    textarea.addEventListener("input", function () {
+        this.style.height = "auto"; // Reajustar a la altura por defecto
+        this.style.height = (this.scrollHeight) + "px"; // Ajustar a la altura del contenido
+    });
+
+    // Disparar el evento "input" para ajustar la altura inicial
+    textarea.dispatchEvent(new Event("input"));
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+<script src="https://kit.fontawesome.com/63bc1a63be.js" crossorigin="anonymous"></script>
+
+{% endblock %}

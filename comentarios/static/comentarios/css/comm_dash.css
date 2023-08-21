@@ -1,0 +1,8 @@
+.limited-text {
+    cursor: pointer;
+  }
+  
+  .limited-text:hover {
+    font-weight: bold;
+   
+  }

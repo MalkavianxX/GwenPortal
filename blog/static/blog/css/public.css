@@ -73,10 +73,6 @@ a {
   color: var(--bs-white);
 }
 
-header {
-   background: linear-gradient(50deg, #6e00ff 0, #bb00ff 100%) !important;
-}
-
 .fnt-roboto{
   font-family: 'Roboto', sans-serif !important;
 }

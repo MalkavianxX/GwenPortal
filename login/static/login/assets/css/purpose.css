@@ -5010,7 +5010,8 @@ button.bg-light:focus {
   background-color: #cdd6e6 !important; }
 
 .bg-dark {
-  background-color: #273444 !important; }
+  /* background-color: #273444 !important; */
+  }
 
 a.bg-dark:hover, a.bg-dark:focus,
 button.bg-dark:hover,
@@ -13296,7 +13297,8 @@ textarea[resize="horizontal"] {
 .header,
 .navbar,
 .navbar-top {
-  transition: all 0.2s ease; }
+  transition: all 0.2s ease;
+  }
   @media (prefers-reduced-motion: reduce) {
     .header,
     .navbar,
@@ -13323,7 +13325,8 @@ textarea[resize="horizontal"] {
   .header-transparent .navbar:not(.sticky):not(.navbar-collapsed) {
     background-color: transparent !important;
     border: 0;
-    box-shadow: none; }
+    box-shadow: none;
+    }
   .header-transparent + main section:first-child:not([data-spotlight]) .container {
     padding-top: 5rem; }
 

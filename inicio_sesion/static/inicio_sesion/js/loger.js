@@ -90,7 +90,7 @@ function enviarDatos() {
         }
     };
 
-    // Enviar la petición fetch
+    // Enviar la petición fetch 
     fetch(url, fetchOptions)
         .then(response => {
             if (response.ok) {

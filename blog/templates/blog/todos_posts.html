@@ -21,7 +21,10 @@
                 </div>
                 <div class="card text-bg-dark position-relative overflow-hidden">
                     {% if header_1.imagen %}
-                    <img src="{{header_1.imagen.url}}" class="img-zoom object-fit-cover" alt="...">
+                    <a href="{% url 'public_ver_post' header_1.id %}" style="text-decoration: none; color: white;">
+                        <img src="{{header_1.imagen.url}}" class="img-zoom object-fit-cover" alt="...">
+
+                    </a>
                     {% else %}
                     <img src="{% static 'blog/img/porsi.png' %}" class="img-zoom object-fit-cover" alt="...">
                     {% endif %}
@@ -106,7 +109,7 @@
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{post.titulo}}</h5>
                                 <p class="card-text limit-caracter">{{post.contenido}}</p>
-                                <p class="card-text"><small>por <strong>Gwendolyn</strong>
+                                <p class="card-text"><small>por <strong>Gwen</strong>
                                         &nbsp;&nbsp;&nbsp;{{post.fecha_publicacion}}</small></p>
 
                             </div>
