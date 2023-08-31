@@ -19,6 +19,8 @@
                         <label for="floatingInput">Buscar Post</label>
                     </div>
                 </div>
+                <a href="{% url 'public_ver_post' header_1.id %}" style="text-decoration: none; color: white;">
+
                 <div class="card text-bg-dark position-relative overflow-hidden">
                     {% if header_1.imagen %}
                     <a href="{% url 'public_ver_post' header_1.id %}" style="text-decoration: none; color: white;">
@@ -41,16 +43,16 @@
                         </div>
                     </a>
                 </div>
+                </a>
             </div>
             <div class="col-lg-5 col-12 mt-lg-5 mt-4">
                 <div class="row">
                     <div class="col-12">
+                        <a href="{% url 'public_ver_post' header_3.id %}" style="text-decoration: none; color: white;">
+
                         <div class="card text-bg-dark overflow-hidden">
-                            <a href="{% url 'public_ver_post' header_3.id %}" style="text-decoration: none; color: white;">
 
                             <img src="{{header_3.imagen.url}}" class="card-img" alt="...">
-                            </a>
-                            <a href="{% url 'public_ver_post' header_3.id %}" style="text-decoration: none; color: white;">
 
                                 <div class="card-img-overlay mt-lg-5 bg-dark bg-opacity-25 img-zoom ">
                                     <a href="" class=" badge text-bg-success mb-2 "><i class="bi bi-circle-fill"></i>
@@ -60,12 +62,15 @@
 
                                     <p class="card-text"><small>{{header_3.fecha_publicacion}}</small></p>
                                 </div>
-                            </a>
                         </div>
+                    </a>
+
                     </div>
                     <div class="col-12 mt-4 mt-lg-3 mt-4">
                         <div class="row">
                             <div class="col-lg-6 col-12">
+                                <a href="{% url 'public_ver_post' header_4.id %}" style="text-decoration: none; color: white;">
+
                                 <div class="card text-bg-dark overflow-hidden">
                                     <a href="{% url 'public_ver_post' header_4.id %}" style="text-decoration: none; color: white;">
 
@@ -83,8 +88,11 @@
                                     </div>
                                     </a>
                                 </div>
+                                </a>
                             </div>
                             <div class="col-lg-6 col-12 mt-lg-0 mt-4 overflow-hidden">
+                                <a href="{% url 'public_ver_post' header_2.id %}" style="text-decoration: none; color: white;">
+
                                 <div class="card text-bg-dark">
                                     <a href="{% url 'public_ver_post' header_2.id %}" style="text-decoration: none; color: white;">
 
@@ -103,6 +111,7 @@
                                         </div>
                                     </a>
                                 </div>
+                                </a>
                             </div>
                         </div>
                     </div>
