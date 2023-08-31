@@ -19,48 +19,6 @@ const swiper = new Swiper('.swiper', {
       el: '.swiper-scrollbar',
     },
   });
-  document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("form-comment");
-      const commentInput = document.getElementById("mycoment");
-  
-      form.addEventListener("submit", function (event) {
-          event.preventDefault();
-          const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-  
-          const datos = {
-            comentario: commentInput.value,
-            
-          };
-          const url = "/comentarios/guardar_comentario";
-          const fetchOptions = {
-            method: 'POST',
-            body: JSON.stringify(datos),
-            headers: {
-                'Content-Type': 'application/json',
-                "X-CSRFToken": csrfToken,
-            }
-          };
-  
-          fetch(url, fetchOptions)
-          .then(response => {
-              if (response.ok) {
-                  // La petición se realizó con éxito
-                  console.log('Datos enviados correctamente');
-                  commentInput.value = "";
-                  const modalComentsOk = new bootstrap.Modal(document.getElementById('modalComentsOk'));
-                  modalComentsOk.show();
-  
-              } else {
-                  // Hubo un error en la petición
-                  console.error('Error al enviar los datos');
-              }
-          })
-          .catch(error => {
-              console.error('Error en la conexión o en el procesamiento de la respuesta', error);
-          });
-  
-      });
-  });
 
   
     window.addEventListener('load', obtener_carrito);
