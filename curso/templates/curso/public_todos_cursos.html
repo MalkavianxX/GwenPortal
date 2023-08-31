@@ -87,7 +87,7 @@
     {%endfor%}
 
 </datalist>
-
+ 
 <script>
 
     function convertirAFloat(stringValor) {
@@ -238,6 +238,33 @@
                 console.error("Ocurrió un error  obtener el carrito Por favor,:", error);
             });
     }
+    function remover_del_carrito(productoId) {
+      const url = `/micontenido/eliminar_del_carrito/${productoId}/`;
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      };
+
+      fetch(url, fetchOptions)
+        .then((response) => {
+          if (response.ok) {
+            // Eliminar el div con el ID correspondiente
+            const div = document.getElementById(productoId);
+            div.remove();
+            obtener_carrito();
+          } else {
+            console.erro("Ocurrió un error al  eliminar el producto del carrito.");
+          }
+        })
+        .catch((error) => {
+          console.error("Ocurrió un error en la solicitud:", error);
+        });
+      }
 </script>
 
 

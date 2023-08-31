@@ -128,6 +128,184 @@
         </div>
     </div>
 </div>
+<script>
+
+    function convertirAFloat(stringValor) {
+        // Eliminar el símbolo "$" y las comas ","
+        const valorSinSimbolo = stringValor.replace("$", "").replace(",", "");
+
+        // Convertir a float
+        const floatValor = parseFloat(valorSinSimbolo);
+
+        return floatValor;
+    }
+
+    function formatCurrency(value) {
+        const number = parseFloat(value);
+        if (isNaN(number)) {
+            return value; // Devolver el valor original si no es un número válido
+        }
+
+        const formattedNumber = number.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+
+        return formattedNumber;
+    }
+    function agregarAlCarrito(id) {
+        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        console.log(id);
+        let url = document.getElementById(id).dataset.url;
+        console.log("url: " + url);
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+        };
+        fetch(url, fetchOptions)
+            .then((response) => response.json())
+            .then(() => {
+                obtener_carrito();
+              
+                modal = new bootstrap.Modal(
+                    document.getElementById("success-alert-modal"),
+                );
+                modal.show();
+                
+
+
+            })
+            .catch((error) => {
+                console.error("Ocurrió un error en la solicitud:", error);
+            });
+    }
+
+    function buscarElemento(valor) {
+        var elemento = document.getElementById(valor);
+
+        if (elemento) {
+            elemento.scrollIntoView();
+            elemento.classList.add("animated");
+            setTimeout(function () {
+                elemento.classList.remove("animated");
+            }, 1200);
+        }
+    }
+    function obtener_carrito() {
+
+        const url = `{% url 'ver_carrito' %}`;
+        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+        };
+
+        fetch(url, fetchOptions)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al recuperar el carrito");
+                }
+            })
+            .then((data) => {
+                const carrito = data.productos;
+                const total = data.total;
+
+                // Eliminar el contenido actual del contenedor
+                const carritoContenedor = document.getElementById('carrito-contenedor');
+                carritoContenedor.innerHTML = '';
+
+                // Recorrer la lista de productos en el carrito
+                carrito.forEach((producto) => {
+                    const id = producto.id;
+                    const nombre = producto.nombre;
+                    const imagen = producto.imagen;
+                    const precio = producto.precio;
+                    const categoria = producto.categoria;
+                    const idCollection = producto.id_collection;
+                    document.getElementById('total-carrito').value = formatCurrency(total) + "USD";
+                    // Crear el elemento HTML para mostrar el producto
+                    const productoElement = document.createElement('div');
+                    productoElement.classList.add('col-12');
+                    productoElement.id = idCollection;
+                    productoElement.innerHTML = `
+          <div class="card " style="max-width: 540px;background-color: transparent !important;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${imagen}"  class="img-fluid rounded-start align-self-center" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <div class="w-100 d-flex justify-content-between">
+                    <h6 class="card-title fw-bold">${nombre}</h6>
+                    <h6 class="text-success fw-bold">${formatCurrency(precio)}</h6>
+                  </div>
+                  <div class="w-100 lh-1">
+                    <p class="card-text"><small>Categoria: ${categoria}</small></p>
+                    <p class="card-text"><small>Curso/Taller ${nombre}</small></p>
+                  </div>
+                  <div class="w-100">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-outline-danger"  onclick="remover_del_carrito('${idCollection}')" type="button">Eliminar del carrito</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+                    // Agregar el elemento al contenedor
+                    carritoContenedor.appendChild(productoElement);
+                    const cantidadProductos = carrito.length;
+                    const cantidadProductosElement = document.getElementById("cantidad-productos");
+
+                    cantidadProductosElement.innerHTML = "&nbsp;&nbsp;" + cantidadProductos.toString();
+                    //MERCADO PAGO SDK       
+
+
+
+                });
+            })
+            .catch((error) => {
+                console.error("Ocurrió un error  obtener el carrito Por favor,:", error);
+            });
+    }
+    function remover_del_carrito(productoId) {
+      const url = `/micontenido/eliminar_del_carrito/${productoId}/`;
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      };
+
+      fetch(url, fetchOptions)
+        .then((response) => {
+          if (response.ok) {
+            // Eliminar el div con el ID correspondiente
+            const div = document.getElementById(productoId);
+            div.remove();
+            obtener_carrito();
+          } else {
+            console.erro("Ocurrió un error al  eliminar el producto del carrito.");
+          }
+        })
+        .catch((error) => {
+          console.error("Ocurrió un error en la solicitud:", error);
+        });
+      }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 {%endblock%}
