@@ -7,7 +7,7 @@ from django.conf import settings
 #PAYPAL
 from paypalcheckoutsdk.orders import OrdersCreateRequest
 from paypalhttp import HttpError
-from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
+from paypalcheckoutsdk.core import PayPalHttpClient, LiveEnvironment, SandboxEnvironment
 import requests
 from  curso.models import Material,Curso,Taller
 import json
@@ -451,6 +451,55 @@ def checkout(request):
         productos.append(producto_aux)
 
         total = total + float(producto.precio)
+
+    carrito = request.session.get('carrito', [])
+    total = 0
+    for clave in carrito:
+        try:
+            producto = Curso.objects.get(id_collection=clave)
+        except Curso.DoesNotExist:
+            producto = Taller.objects.get(id_collection=clave)
+        total = total + float(producto.precio)
+
+    environment = SandboxEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
+    client = PayPalHttpClient(environment)
+    requestPaypal = OrdersCreateRequest()
+    requestPaypal.prefer('return=representation')
+
+    requestPaypal.request_body (
+        {
+            "intent": "CAPTURE",
+            "purchase_units": [
+                { 
+                    "amount": {
+                        "currency_code": 'USD',
+                        "value": str(total)
+                    }
+                }
+            ],
+            "application_context":{
+                "return_url":"https://gwenluy.com/micontenido/pago_success/",
+                "cancel_url":"https://gwenluy.com/micontenido/pago_danger/",
+                "brand_name":"Gwen Cursos"
+            }
+        }
+    )
+    try:
+        response = client.execute(requestPaypal)
+        if response.result.status == 'CREATED':
+            approval_url = str(response.result.links[1].href)
+         
+            return render(request,"micontenido/checkout.html",{
+                'cursos':productos,
+                'total':total,
+                'link': approval_url
+            })
+
+
+    except IOError as ioe:
+        if isinstance(ioe, HttpError):
+            # Something went wrong server-side
+            return render(request,'micontenido/danger.html')           
     return render(request,"micontenido/checkout.html",{
         'cursos':productos,
         'total':total

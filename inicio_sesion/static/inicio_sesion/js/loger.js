@@ -78,7 +78,7 @@ function enviarDatos() {
         pass: pass
     };
     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-    const url = "https://gwenluy.com/inicio_sesion/crear_usuario/"
+    const url = "crear_usuario/"
     // Configurar la petición fetch
     const fetchOptions = {
         method: 'POST',

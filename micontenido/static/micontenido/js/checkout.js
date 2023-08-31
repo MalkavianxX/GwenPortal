@@ -12,7 +12,7 @@ function formatCurrency(value) {
     return formattedNumber;
   }
 function agregarEnlacePP() {
-    const url = `https://gwenluy.com/micontenido/crear_preferencia_PP/`;
+    const url = `crear_preferencia_PP`;
     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
   
     const fetchOptions = {
@@ -68,6 +68,6 @@ function agregarEnlacePP() {
 
   function initMetodos() {
     agregarEnlacePP();
-    agregarEnlacePago();
+    
   }
   window.addEventListener('load', initMetodos);

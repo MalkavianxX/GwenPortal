@@ -35,7 +35,7 @@ def ver_taller(request,id_taller):
         def __init__(self,nombre,tiempo) -> None:
             self.nombre = nombre
             self.tiempo = tiempo
-    url = "https://video.bunnycdn.com/library/132992/videos?page=1&itemsPerPage=100&collection="+str(taller.id_collection)+"&orderBy=date"
+    url = "https://video.bunnycdn.com/library/132992/videos?page=1&itemsPerPage=100&collection="+str(taller.id_collection)+"&orderBy=title"
 
     headers = {
         "accept": "application/json",
@@ -55,6 +55,7 @@ def ver_taller(request,id_taller):
         )
     total_time = format_seconds(total_time)     
     cant_videos = response["totalItems"]
+    
     if usuario.is_staff:
         return render(request,"curso/ver_taller.html",{
             'taller':taller,
@@ -90,7 +91,7 @@ def ver_curso(request,id_curso):
             self.nombre = nombre
             self.tiempo = tiempo
     curso = Curso.objects.get(pk = id_curso)
-    url = "https://video.bunnycdn.com/library/132990/videos?page=1&itemsPerPage=100&collection="+str(curso.id_collection)+"&orderBy=date"
+    url = "https://video.bunnycdn.com/library/132990/videos?page=1&itemsPerPage=100&collection="+str(curso.id_collection)+"&orderBy=title"
 
     headers = {
         "accept": "application/json",
@@ -108,6 +109,7 @@ def ver_curso(request,id_curso):
         lista_videos.append(
             VideosAux(video["title"],format_seconds(int(video["length"])))
         )
+
     total_time = format_seconds(total_time)     
     cant_videos = response["totalItems"]
     if usuario.is_staff:

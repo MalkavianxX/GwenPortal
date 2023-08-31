@@ -12,7 +12,7 @@
                 <div class="w-100">
                     <img src="{% static 'micontenido/img/astgif.gif' %}" class="img-fluid" alt="">
                 </div>
-                <h1 class="fnt-monse" style="color: rgb(188, 130, 243);"><strong>Aún no tienes ningun curso&nbsp; </strong> <a style="color: rgb(157, 87, 223); text-decoration: underline;" href="#">Adquiere uno aquí</a></h1>
+                <h1 class="fnt-monse" style="color: rgb(188, 130, 243);"><strong>Aún no tienes ningun curso&nbsp; </strong> <a style="color: rgb(157, 87, 223); text-decoration: underline;" href="{% url 'login' %}">Adquiere uno aquí</a></h1>
 
             </div>
             {% else %}
@@ -67,13 +67,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-3 shadow">
-                <div class="row">
-                    <div class="col-12">
-                        <h4>Ultimas clases</h4>
-                    </div>
-                </div>
-            </div>
+        
 
             {%endif %}
 
