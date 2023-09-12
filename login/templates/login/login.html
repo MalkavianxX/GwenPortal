@@ -39,7 +39,8 @@
     <!-- Topbar -->
 
     <!-- Main navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg sticky-top navbar-dark bg-dark" style="background-color: transparent !important;" id="navbar-main">
+    <nav class="navbar navbar-main navbar-expand-lg sticky-top navbar-dark bg-dark"
+      style="background-color: transparent !important;" id="navbar-main">
       <div class="container px-lg-0">
         <!-- Logo -->
         <a class="navbar-brand mr-lg-5" href="{% url 'login' %}">
@@ -64,8 +65,7 @@
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-arrow p-0">
                 <ul class="list-group list-group-flush">
                   <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
-                    <a href="{% url 'public_todos_cursos' %}"
-                      class="list-group-item list-group-item-action ">
+                    <a href="{% url 'public_todos_cursos' %}" class="list-group-item list-group-item-action ">
                       <div class="media d-flex align-items-center">
                         <!-- SVG icon -->
                         <figure style="width: 50px;">
@@ -145,8 +145,7 @@
                     </a>
                   </li>
                   <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
-                    <a href="{% url 'public_todos_talleres' %}"
-                      class="list-group-item list-group-item-action ">
+                    <a href="{% url 'public_todos_talleres' %}" class="list-group-item list-group-item-action ">
                       <div class="media d-flex align-items-center">
                         <!-- SVG icon -->
                         <figure style="width: 50px;">
@@ -350,8 +349,7 @@
 
                   </li>
                   <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
-                    <a href="{% url 'public_todos_gratis' %}" class="list-group-item list-group-item-action " 
-                      >
+                    <a href="{% url 'public_todos_gratis' %}" class="list-group-item list-group-item-action ">
                       <div class="media d-flex align-items-center">
                         <!-- SVG icon -->
                         <figure style="width: 50px;">
@@ -443,8 +441,7 @@
 
                   </li>
                   <li class="dropdown dropdown-animate dropdown-submenu" data-toggle="hover">
-                    <a href="#comentarios-section" class="list-group-item list-group-item-action " 
-                      >
+                    <a href="#comentarios-section" class="list-group-item list-group-item-action ">
                       <div class="media d-flex align-items-center">
                         <!-- SVG icon -->
                         <figure style="width: 50px;">
@@ -596,10 +593,7 @@
 
   {% block content%}
 
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <!-- Omnisearch -->
   <!--AVISO DE PRIVACIDAD-->
   <!-- Button trigger modal -->
@@ -671,21 +665,21 @@
         <!--SECION DEMLOS CURSOS-->
         <div class="row mt-1  row-cols-1 row-cols-md-2  g-4">
 
-       
+
           {% for curso in cursos %}
 
-            <div class="col">
-              <a href="{% url 'ver_curso' curso.id %}">
-                <div class="card text-center hover-shadow-lg hover-translate-y-n10 ">
-                  <div class="px-4 py-5">
-                    <img src="{{ curso.imagen.url}}" class="card-img-top" alt="{{curso.nombre}}">
-                  </div>
-                  <div class="px-4 pb-5 ">
-                    <h6>{{curso.nombre}}</h6>
-                  </div>
+          <div class="col">
+            <a href="{% url 'ver_curso' curso.id %}">
+              <div class="card text-center hover-shadow-lg hover-translate-y-n10 ">
+                <div class="px-4 py-5">
+                  <img src="{{ curso.imagen.url}}" class="card-img-top" alt="{{curso.nombre}}">
                 </div>
-              </a>
-            </div>
+                <div class="px-4 pb-5 ">
+                  <h6>{{curso.nombre}}</h6>
+                </div>
+              </div>
+            </a>
+          </div>
 
           {%endfor%}
           <div class="col">
@@ -790,7 +784,7 @@
             </a>
           </div>
 
-        {%endfor%}
+          {%endfor%}
           <div class="col-lg-4 col-sm-6">
             <a href="{% url 'public_todos_cursos' %} ">
               <div class="card text-center hover-shadow-lg hover-translate-y-n10">
@@ -891,7 +885,8 @@
                     </span>
                     <span class="btn-inner--text">Todos los cursos</span>
                   </a>
-                  <a href="{% url 'public_todos_talleres' %}" class="btn btn-white rounded-pill btn-icon hover-translate-y-n3">
+                  <a href="{% url 'public_todos_talleres' %}"
+                    class="btn btn-white rounded-pill btn-icon hover-translate-y-n3">
                     <span class="btn-inner--icon">
                       <i class="fas fa-book"></i>
                     </span>
@@ -1480,21 +1475,20 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-5">
-        <!-- Slider main container -->
+            <!-- Slider main container -->
             <div class="swiper">
               <!-- Additional required wrapper -->
               <div class="swiper-wrapper">
                 <!-- Slides -->
-  
-   
+
+
                 {% for comm in comms %}
-                <div class="swiper-slide"> 
+                <div class="swiper-slide">
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex align-items-center">
                         <div>
-                          <img alt="Image placeholder"
-                            src="{% static 'login/img/user-avatar-1.png'%}"
+                          <img alt="Image placeholder" src="{% static 'login/img/user-avatar-1.png'%}"
                             class="avatar  rounded-circle">
                         </div>
                         <div class="pl-3">
@@ -1524,57 +1518,61 @@
             </div>
           </div>
         </div>
-       
+
       </div>
-     
+
     </section>
     <!-- Features (v7) -->
-{% if user.is_authenticated %}
-<section class="bg-section-secondary">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="mb-5 text-center">
-        <h3 class=" mt-3">Danos tu opinion</h3>
-        <div class="fluid-paragraph mt-3">
-          <p class="lead lh-180">Para nosotros tu opinion es muy importante, así trabajamos y nos esforzamos mucho más para brindar el mejor ambiente
-            para los cursos que tenemos para tí.
-          </p>
+    {% if user.is_authenticated %}
+    <section class="bg-section-secondary">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="mb-5 text-center">
+            <h3 class=" mt-3">Danos tu opinion</h3>
+            <div class="fluid-paragraph mt-3">
+              <p class="lead lh-180">Para nosotros tu opinion es muy importante, así trabajamos y nos esforzamos mucho
+                más para brindar el mejor ambiente
+                para los cursos que tenemos para tí.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-8 col-12">
+            <div class="card">
+              <div class="card-body p-0">
+                <ul class="nav nav-tabs nav-bordered" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2"
+                      aria-selected="true" role="tab">
+                      <i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
+                      <span class="d-none d-md-block">Mi comentario</span>
+                    </a>
+                  </li>
+
+                </ul> <!-- end nav-->
+                <div class="tab-content">
+                  <div class="tab-pane show active p-3" id="newpost" role="tabpanel">
+                    <!-- comment box -->
+                    <div class="border rounded">
+                      <form action="#" id="form-comment" class="comment-area-box">{% csrf_token %}
+                        <textarea rows="4" class="form-control border-0 resize-none" id="mycoment"
+                          placeholder="Yo opino que ..."></textarea>
+                        <div class="p-2 bg-light d-flex justify-content-between align-items-center">
+                          <div></div>
+                          <button type="submit" id="send-my-coment" class="btn btn-sm btn-success"><i
+                              class="uil uil-message me-1"></i>Enviar</button>
+                        </div>
+                      </form>
+                    </div> <!-- end .border-->
+                    <!-- end comment box -->
+                  </div> <!-- end preview-->
+                </div> <!-- end tab-content-->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-lg-12 col-md-8 col-12">
-        <div class="card">
-          <div class="card-body p-0">
-              <ul class="nav nav-tabs nav-bordered" role="tablist">
-                  <li class="nav-item" role="presentation">
-                      <a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2" aria-selected="true" role="tab">
-                          <i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
-                          <span class="d-none d-md-block">Mi comentario</span>
-                      </a>
-                  </li>
-          
-              </ul> <!-- end nav-->
-              <div class="tab-content">
-                  <div class="tab-pane show active p-3" id="newpost" role="tabpanel">
-                      <!-- comment box -->
-                      <div class="border rounded">
-                          <form action="#" id="form-comment" class="comment-area-box">{% csrf_token %}
-                              <textarea rows="4" class="form-control border-0 resize-none" id="mycoment" placeholder="Yo opino que ..."></textarea>
-                              <div class="p-2 bg-light d-flex justify-content-between align-items-center">
-                                  <div></div>
-                                  <button type="submit" id="send-my-coment" class="btn btn-sm btn-success"><i class="uil uil-message me-1"></i>Enviar</button>
-                              </div>
-                          </form>
-                      </div> <!-- end .border-->
-                      <!-- end comment box -->
-                  </div> <!-- end preview-->
-              </div> <!-- end tab-content-->
-          </div>
-      </div>
-      </div>
-    </div>
-  </div>
-  </section>
-{% endif %}
+    </section>
+    {% endif %}
 
 
 
@@ -1622,7 +1620,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <!--<script src="{% static 'login/js/login.js' %}"></script>--> 
+  <!--<script src="{% static 'login/js/login.js' %}"></script>-->
 
   {%endblock%}
   <!-- Modal privacidad-->
@@ -2050,23 +2048,26 @@
       </div>
     </div>
   </footer>
-<!-- Modal OK COMENTS-->
-<div class="modal fade modal-sm" id="modalComentsOk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: blueviolet;">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Gracias por tu comentario</h1>
-        <button type="button" class="btn-close" style="color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Hemos recibido tu comentario :D
-      </div>
-      <div class="modal-footer">
-        <button type="button" data-bs-dismiss="modal" class="btn " style="background-color: blueviolet; color: white;">Ok</button>
+  <!-- Modal OK COMENTS-->
+  <div class="modal fade modal-sm" id="modalComentsOk" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: blueviolet;">
+          <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Gracias por tu comentario</h1>
+          <button type="button" class="btn-close" style="color: white;" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Hemos recibido tu comentario :D
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-bs-dismiss="modal" class="btn "
+            style="background-color: blueviolet; color: white;">Ok</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -2084,44 +2085,44 @@
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
   <!--mercadopago-->
-<script>
-  const swiper = new Swiper('.swiper', {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-  
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-    },
-  
-    // Navigation arrows
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  
-    // And if we need scrollbar
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-  });
+  <script>
+    const swiper = new Swiper('.swiper', {
+      // Optional parameters
+      direction: 'horizontal',
+      loop: true,
 
-  
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+    });
+
+
     window.addEventListener('load', obtener_carrito);
 
     function formatCurrency(value) {
-        const number = parseFloat(value);
-        if (isNaN(number)) {
-            return value; // Devolver el valor original si no es un número válido
-        }
+      const number = parseFloat(value);
+      if (isNaN(number)) {
+        return value; // Devolver el valor original si no es un número válido
+      }
 
-        const formattedNumber = number.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
+      const formattedNumber = number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
 
-        return formattedNumber;
+      return formattedNumber;
     }
     function remover_del_carrito(productoId) {
       const url = `/micontenido/eliminar_del_carrito/${productoId}/`;
@@ -2149,7 +2150,7 @@
         .catch((error) => {
           console.error("Ocurrió un error en la solicitud:", error);
         });
-      }
+    }
     function obtener_carrito() {
 
       const url = `{% url 'ver_carrito' %}`;
@@ -2192,7 +2193,7 @@
             const productoElement = document.createElement('div');
             productoElement.classList.add('col-12');
             productoElement.id = idCollection;
-            
+
             productoElement.innerHTML = `
           <div class="card " style="max-width: 540px;background-color: transparent !important;">
             <div class="row g-0">
@@ -2241,7 +2242,67 @@
           console.error("Ocurrió un error  obtener el carrito Por favor,:", error);
         });
     }
-</script>
+    function convertirAFloat(stringValor) {
+      // Eliminar el símbolo "$" y las comas ","
+      const valorSinSimbolo = stringValor.replace("$", "").replace(",", "");
+
+      // Convertir a float
+      const floatValor = parseFloat(valorSinSimbolo);
+
+      return floatValor;
+    }
+    function verificarCupon() {
+      // Obtener el valor del cupón del input
+      const cuponInput = document.getElementById('cupon-input');
+      const cupon = cuponInput.value;
+
+      // Realizar una solicitud al servidor para verificar el cupón
+      const url = `/micontenido/verificar_descuento/${cupon}/`;
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      };
+
+      fetch(url, fetchOptions)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            const valorDescuento = data.valor;
+            precio_original = document.getElementById('total-carrito');
+            set_precio_original = convertirAFloat(precio_original.value);
+            const nuevo_precio = set_precio_original - parseFloat(valorDescuento);
+            precio_original.value = formatCurrency(nuevo_precio);
+            console.log(`Cupón válido. Valor de descuento: ${valorDescuento}`);
+            text_mensaje = document.getElementById('alter-descuento');
+            text_mensaje.classList.add('text-success');
+            text_mensaje.textContent = "Ahorraste " + formatCurrency(valorDescuento) + "USD";
+            text_mensaje.style.display = "block";
+            const btn_verificar = document.getElementById('btn-verificar-cupon');
+            btn_verificar.disabled = true;
+
+            // Realizar las acciones adicionales según sea necesario con el valor de descuento obtenido
+          } else {
+            const mensajeError = data.message;
+            console.log(`Error: ${mensajeError}`);
+            text_mensaje = document.getElementById('alter-descuento');
+            text_mensaje.classList.add('text-danger');
+            text_mensaje.textContent = "El cupon no es valido";
+            text_mensaje.style.display = "block";
+            cuponInput.value = "";
+            // Mostrar el mensaje de error al usuario o realizar las acciones adicionales según sea necesario
+          }
+        })
+        .catch(error => {
+          console.error('Ocurrió un error en la solicitud:', error);
+          // Mostrar un mensaje de error genérico al usuario o realizar las acciones adicionales según sea necesario
+        });
+    }
+  </script>
 </body>
 
 </html>

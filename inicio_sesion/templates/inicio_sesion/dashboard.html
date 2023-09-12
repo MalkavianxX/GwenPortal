@@ -1248,26 +1248,20 @@
                         </div>
 
                         <div class="input-group mt-3">
-                            <input type="text" class="form-control" placeholder="Codigo " aria-label="Recipient's username">
-                            <button class="input-group-text btn-light" type="button">Aplicar</button>
+                            <input type="text" class="form-control" placeholder="Codigo " id="cupon-input">
+                            <button class="input-group-text btn-light"  onclick="verificarCupon()" id="btn-verificar-cupon" type="button">Aplicar</button>
                         </div>
+                        <p><small id="alter-descuento" class="fw-bold"></small></p>
 
                     </div>
-                            
-
-     
-
-
                 </div>
             </div>
-
         </div>
         <div class="offcanvas-footer border-top p-3 text-center">
             <div class="row">
                 <div class="col-12">
                     <button type="button" class="btn btn-dark w-100" >Comprar</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -1356,6 +1350,67 @@
                 console.error("Error en la solicitud fetch:", error);
             });
         });
+    
+        function convertirAFloat(stringValor) {
+      // Eliminar el símbolo "$" y las comas ","
+      const valorSinSimbolo = stringValor.replace("$", "").replace(",", "");
+
+      // Convertir a float
+      const floatValor = parseFloat(valorSinSimbolo);
+
+      return floatValor;
+    }
+    function verificarCupon() {
+      // Obtener el valor del cupón del input
+      const cuponInput = document.getElementById('cupon-input');
+      const cupon = cuponInput.value;
+
+      // Realizar una solicitud al servidor para verificar el cupón
+      const url = `/micontenido/verificar_descuento/${cupon}/`;
+      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      };
+
+      fetch(url, fetchOptions)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            const valorDescuento = data.valor;
+            precio_original = document.getElementById('total-carrito');
+            set_precio_original = convertirAFloat(precio_original.value);
+            const nuevo_precio = set_precio_original - parseFloat(valorDescuento);
+            precio_original.value = formatCurrency(nuevo_precio);
+            console.log(`Cupón válido. Valor de descuento: ${valorDescuento}`);
+            text_mensaje = document.getElementById('alter-descuento');
+            text_mensaje.classList.add('text-success');
+            text_mensaje.textContent = "Ahorraste " + formatCurrency(valorDescuento) + "USD";
+            text_mensaje.style.display = "block";
+            const btn_verificar = document.getElementById('btn-verificar-cupon');
+            btn_verificar.disabled = true;
+
+            // Realizar las acciones adicionales según sea necesario con el valor de descuento obtenido
+          } else {
+            const mensajeError = data.message;
+            console.log(`Error: ${mensajeError}`);
+            text_mensaje = document.getElementById('alter-descuento');
+            text_mensaje.classList.add('text-danger');
+            text_mensaje.textContent = "El cupon no es valido";
+            text_mensaje.style.display = "block";
+            cuponInput.value = "";
+            // Mostrar el mensaje de error al usuario o realizar las acciones adicionales según sea necesario
+          }
+        })
+        .catch(error => {
+          console.error('Ocurrió un error en la solicitud:', error);
+          // Mostrar un mensaje de error genérico al usuario o realizar las acciones adicionales según sea necesario
+        });
+    }
     </script>
 </body>
 

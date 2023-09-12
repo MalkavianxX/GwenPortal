@@ -280,6 +280,13 @@ def verificar_descuento(request, cupon):
             'message': f'Cupón de descuento de {descuento.valor}USD',
             'valor': descuento.valor
         }
+
+        if 'descuento' not in request.session:
+            request.session['descuento'] = 0
+        desc = request.session['descuento']
+        desc= descuento.valor
+        request.session['descuento'] = desc
+
         return JsonResponse(response)
     except Cupones.DoesNotExist:
         response = {
@@ -350,7 +357,9 @@ def crear_preferencia_PP(request):
     client = PayPalHttpClient(environment)
     requestPaypal = OrdersCreateRequest()
     requestPaypal.prefer('return=representation')
-
+    descuento = request.session.get('descuento')
+    total = total - descuento
+    
     requestPaypal.request_body (
         {
             "intent": "CAPTURE",
