@@ -141,8 +141,8 @@ MERCADO_PAGO_CLIENT_ID = 'TEST-45f25815-70b7-4017-9052-2bb2a4acdcfa'
 MERCADO_PAGO_CLIENT_SECRET = 'TEST-13674068714057-062721-6a711bd620175aa9edb5aec2d47ec6d3-1091690075'
 
 #paypal
-CLIENT_ID = "AeB5FOIGIoRzw4PQkpM4wg0CWW9NOSJrV2oJCUtdhOusKa0F2jqz_rT5QlC2m7XxrKmHSIUiYik7ksb8"
-CLIENT_SECRET = "EDPOiRQwhbfzk3qO0o4PxriQpqiCWHy6RpYnM1cOumK_J_mTy8kHmCPAEeBfL47_-JC0Hqmb2NoLiRP6"
+CLIENT_ID = "AaHUiQxg516WKgd_t9H-sBiNDtI5UNZmcouH9HH_jSNwIdFLJ8-t4K2GXHzP4nAixu3gyu8joUmeFVnb"
+CLIENT_SECRET = "EPgQkwBuUNwvzHM006XJ5JVAXrosGVjH3sWJcyQECOyuIfTbifGBksniRZUNs4M27ZmlDvBdQKU_xkib"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

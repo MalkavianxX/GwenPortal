@@ -12,14 +12,17 @@
 
             <div class="col-4">
                 <div class="row shadow rounded">
-                    <div class="col-12  " style="background-color: blueviolet;"> 
+                    <div class="col-12  bg-primary" > 
                         <h4 class="fnt-robot fw-bold text-center letra-blanca ">Resumen</h4>
                     </div>
                     <div class="col-12 border">
                         <hr>
                         <p class="text-muted"><small>Detalles</small></p>
-                        <h5 class="fnt-robot mt-3 text-muted">Subtotal: <strong>{{total|intcomma}}0USD</strong> </h5>
-                        <h5 class="fnt-robot mt-1 text-muted">Cupon: </h5>
+                        <h5 class="fnt-robot mt-3 text-muted">Subtotal: <strong>{{subtotal|intcomma}}0USD</strong> </h5>
+                        <h5 class="fnt-robot mt-1 text-muted">Cupon: {{descuento|intcomma}}0USD</h5>
+                        <h5 class="fnt-robot mt-3 text-muted">Total : <strong>{{total|intcomma}}0USD</strong> </h5>
+
+
                         <hr>
                         <div class="row">
                             <p class="text-muted"><small>Metodos de pago</small></p>
@@ -39,8 +42,8 @@
 
             <div class="col-5 mb-3">
                 <div class="row shadow rounded mb-3">
-                    <div class="col-12 letra-blanca" style="background-color: blueviolet;">
-                        <h4 class="fnt-robot fw-bold text-center">Mi carrito</h4>
+                    <div class="col-12 bg-primary " >
+                        <h4 class="fnt-robot fw-bold text-center letra-blanca">Mi carrito</h4>
                     </div>
                     {% for curso in cursos %}
                     <div class="col-12 mb-3 mt-3">

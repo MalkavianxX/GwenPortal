@@ -7,7 +7,7 @@ from django.conf import settings
 #PAYPAL
 from paypalcheckoutsdk.orders import OrdersCreateRequest
 from paypalhttp import HttpError
-from paypalcheckoutsdk.core import PayPalHttpClient, LiveEnvironment, SandboxEnvironment
+from paypalcheckoutsdk.core import PayPalHttpClient, LiveEnvironment
 import requests
 from  curso.models import Material,Curso,Taller
 import json
@@ -244,6 +244,10 @@ class ProductoAux():
 @csrf_exempt
 def ver_carrito(request):
     carrito = request.session.get('carrito', [])
+    if 'descuento' not in request.session:
+        request.session['descuento'] = 0
+    desc = request.session['descuento']
+   
     productos = []
     total = 0
     for clave in carrito:
@@ -266,7 +270,8 @@ def ver_carrito(request):
     response = {
         'carrito': carrito,
         'productos': productos,
-        'total': str(total)
+        'total': str(total),
+        'descuento': str(desc)
     }
 
     return JsonResponse(response)
@@ -353,7 +358,7 @@ def crear_preferencia_PP(request):
             producto = Taller.objects.get(id_collection=clave)
         total = total + float(producto.precio)
 
-    environment = SandboxEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
+    environment = LiveEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
     client = PayPalHttpClient(environment)
     requestPaypal = OrdersCreateRequest()
     requestPaypal.prefer('return=representation')
@@ -470,19 +475,22 @@ def checkout(request):
             producto = Taller.objects.get(id_collection=clave)
         total = total + float(producto.precio)
 
-    environment = SandboxEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
+    environment = LiveEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
     client = PayPalHttpClient(environment)
     requestPaypal = OrdersCreateRequest()
     requestPaypal.prefer('return=representation')
-
+    if 'descuento' not in request.session:
+        request.session['descuento'] = 0
+    desc = request.session['descuento']
+    f_total = total - float(desc)
     requestPaypal.request_body (
         {
             "intent": "CAPTURE",
             "purchase_units": [
-                { 
+                {  
                     "amount": {
                         "currency_code": 'USD',
-                        "value": str(total)
+                        "value": str(f_total)
                     }
                 }
             ],
@@ -497,11 +505,13 @@ def checkout(request):
         response = client.execute(requestPaypal)
         if response.result.status == 'CREATED':
             approval_url = str(response.result.links[1].href)
-         
+
             return render(request,"micontenido/checkout.html",{
                 'cursos':productos,
-                'total':total,
-                'link': approval_url
+                'total':f_total,
+                'link': approval_url,
+                'descuento': float(desc),
+                'subtotal': float(total),
             })
 
 

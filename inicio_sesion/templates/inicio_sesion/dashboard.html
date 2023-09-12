@@ -36,7 +36,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="index.html" class="logo-light">
+                        <a href="{% url 'dash_micontenido' %}" class="logo-light">
                             <span class="logo-lg">
                                 <img src="{% static '/inicio_sesion/img/logo-white.png' %}" alt="logo" />
                                 Dashboard
@@ -353,6 +353,9 @@
                             <ul class="side-nav-second-level">
                                 <li>
                                     <a href="{% url 'dash_micontenido' %}">Cursos y talleres</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'login' %}">Pagina de inicio</a>
                                 </li>
                                
     
@@ -1226,16 +1229,16 @@
                                 <table class="table mb-0">
                                     <tbody>
                                         <tr>
-                                            <td>Total :</td>
-                                            <td>$1571.19</td>
+                                            <td>Subtotal :</td>
+                                            <td id="total_carrito"></td>
                                         </tr>
                                         <tr>
                                             <td>Descuento : </td>
-                                            <td>-$157.11</td>
+                                            <td id="descuento_carrito"></td>
                                         </tr>
                                         <tr>
                                             <th>Total :</th>
-                                            <th>$1458.3</th>
+                                            <th id="full_total"></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1260,7 +1263,7 @@
         <div class="offcanvas-footer border-top p-3 text-center">
             <div class="row">
                 <div class="col-12">
-                    <button type="button" class="btn btn-dark w-100" >Comprar</button>
+                    <a type="button"  href="{% url 'checkout' %}" class="btn btn-dark w-100" >Comprar</a>
                 </div>
             </div>
         </div>
@@ -1311,7 +1314,12 @@
             .then(data => {
                 // Procesar respuesta exitosa si es necesario
                 console.log(data);
-                
+                let total = data.total;
+                let descuento = data.descuento;
+                let full_total = parseFloat(total) - parseFloat(descuento);
+                document.getElementById("total_carrito").innerHTML ="$"+ parseFloat(total);
+                document.getElementById("descuento_carrito").innerHTML = "$"+parseFloat(descuento);
+                document.getElementById("full_total").innerHTML = "$"+full_total;
                 let tbody = document.getElementById('tbody-cart')
                 let productosArray = data.productos;
                 productosArray.forEach(element => {
@@ -1391,9 +1399,15 @@
             text_mensaje.classList.add('text-success');
             text_mensaje.textContent = "Ahorraste " + formatCurrency(valorDescuento) + "USD";
             text_mensaje.style.display = "block";
+
             const btn_verificar = document.getElementById('btn-verificar-cupon');
             btn_verificar.disabled = true;
 
+            let f_total = convertirAFloat(precio_original.value) - parseFloat(valorDescuento);
+            document.getElementById("total_carrito").innerHTML ="$"+ parseFloat(total);
+            document.getElementById("descuento_carrito").innerHTML = "$"+parseFloat(valorDescuento);
+            document.getElementById("full_total").innerHTML = "$"+f_total;
+               
             // Realizar las acciones adicionales según sea necesario con el valor de descuento obtenido
           } else {
             const mensajeError = data.message;
