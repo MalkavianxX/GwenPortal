@@ -114,3 +114,5 @@ def render_seccion_mensajes_dashboard(request):
 def render_seccion_estadisticas_dashboard(request):
     return render(request, "inicio_sesion/dashboard/estadisticas.html")
 
+def render_tyc(request):
+    return render(request,"inicio_sesion/terminos.html")
