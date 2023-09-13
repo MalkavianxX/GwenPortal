@@ -140,8 +140,8 @@ MEDIA_ROOT =  os.path.join(BASE_DIR,'media')
 
 
 #paypal
-CLIENT_ID = "AS4H4aApQJa4N8rwM39w8Dwl_U87JXlsHfsQNKMsbT4IHDUusL-tvqsaJwEgqS7S75T32Fw44yA-sSHz"
-CLIENT_SECRET = "EKvZTKXHrkey2bkVoF6FcA3q7chB9kzS9wwj35XE7scdk2hTZbMm6hPC_Ogxb_LhYchD7zBnLe5-hxZD"
+CLIENT_ID = "AaHUiQxg516WKgd_t9H-sBiNDtI5UNZmcouH9HH_jSNwIdFLJ8-t4K2GXHzP4nAixu3gyu8joUmeFVnb"
+CLIENT_SECRET = "EPgQkwBuUNwvzHM006XJ5JVAXrosGVjH3sWJcyQECOyuIfTbifGBksniRZUNs4M27ZmlDvBdQKU_xkib"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
