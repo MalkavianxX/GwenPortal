@@ -528,4 +528,33 @@ def checkout(request):
             'total':total
         })
     else:
-        pago_success(request)
+        for clave in carrito:
+                try:
+                    producto = Curso.objects.get(id_collection=clave)
+                    nuevo_curso = MiContenido(
+                        usuario = request.user,
+                        curso = producto,
+
+                    )
+                    nuevo_curso.save()
+                    progeso = ProgresoCurso(
+                        inscripcion = nuevo_curso,
+                        porcentaje_completado = 0
+                    )
+                    progeso.save()
+                except Curso.DoesNotExist:
+                    producto = Taller.objects.get(id_collection=clave)
+                    nuevo_taller = MiContenido(
+                        usuario = request.user,
+                        taller = producto,
+
+                    )
+                    nuevo_taller.save()
+                    progeso = ProgresoCurso(
+                        inscripcion = nuevo_taller,
+                        porcentaje_completado = 0
+                    )
+                    progeso.save()
+        request.session['carrito'] = []
+
+        return render(request,"micontenido/pago_success.html")
