@@ -9,6 +9,7 @@ from paypalcheckoutsdk.orders import OrdersCreateRequest
 from paypalhttp import HttpError
 from paypalcheckoutsdk.core import PayPalHttpClient
 from paypalcheckoutsdk.core.environment import LiveEnvironment
+from paypalcheckoutsdk.orders.orders_capture_request import OrdersCaptureRequest
 
 import requests
 from  curso.models import Material,Curso,Taller
@@ -435,8 +436,28 @@ def pago_success(request):
             )
             progeso.save()
     request.session['carrito'] = []
+    client_id = settings.CLIENT_ID
+    client_secret = settings.CLIENT_SECRET
+    environment = LiveEnvironment(client_id=client_id, client_secret=client_secret)
+    client = PayPalHttpClient(environment)
+    ordenId=request.GET.get('token')
+    payerId=request.GET.get('PayerID')
+    requestPaypal =OrdersCaptureRequest(ordenId)
+    requestPaypal.prefer('return=representation')    
+    try:
+        response = client.execute(requestPaypal)
+    except IOError as ioe:
+        if isinstance(ioe, HttpError):
+            # Something went wrong server-side
+            print("Algo salio mal :c")
 
+            return render(request,'checkout/pago_danger.html')    
+        else:
+            # Something went wrong client side
+            print (ioe)
+        return render(request,'checkout/pago_danger.html')         
     return render(request,"micontenido/pago_success.html")
+
 
 def pago_danger(request):
     return render(request,"micontenido/pago_danger.html")
@@ -447,6 +468,8 @@ def pago_pendiente(request):
 def obtener_contenido(request):
 
     return JsonResponse()
+
+
 @login_required(login_url='login_view')
 def checkout(request):
     carrito = request.session.get('carrito', [])
@@ -480,15 +503,16 @@ def checkout(request):
             producto = Taller.objects.get(id_collection=clave)
         total = total + float(producto.precio)
 
-    environment = LiveEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
-    client = PayPalHttpClient(environment)
-    requestPaypal = OrdersCreateRequest()
-    requestPaypal.prefer('return=representation')
     if 'descuento' not in request.session:
         request.session['descuento'] = 0
     desc = request.session['descuento']
     f_total = total - float(desc)
     if f_total > 0:
+
+        environment = LiveEnvironment(client_id=settings.CLIENT_ID, client_secret=settings.CLIENT_SECRET)
+        client = PayPalHttpClient(environment)
+        requestPaypal = OrdersCreateRequest()
+        requestPaypal.prefer('return=representation')
         requestPaypal.request_body (
             {
                 "intent": "CAPTURE",
@@ -519,44 +543,38 @@ def checkout(request):
                     'descuento': float(desc),
                     'subtotal': float(total),
                 })
-
-
         except IOError as ioe:
             if isinstance(ioe, HttpError):
                 # Something went wrong server-side
-                return render(request,'micontenido/pago_danger.html')           
-        return render(request,"micontenido/checkout.html",{
-            'cursos':productos,
-            'total':total
-        })
+                return render(request,'micontenido/pago_danger.html') 
     else:
         for clave in carrito:
-                try:
-                    producto = Curso.objects.get(id_collection=clave)
-                    nuevo_curso = MiContenido(
-                        usuario = request.user,
-                        curso = producto,
+            try:
+                producto = Curso.objects.get(id_collection=clave)
+                nuevo_curso = MiContenido(
+                    usuario = request.user,
+                    curso = producto,
 
-                    )
-                    nuevo_curso.save()
-                    progeso = ProgresoCurso(
-                        inscripcion = nuevo_curso,
-                        porcentaje_completado = 0
-                    )
-                    progeso.save()
-                except Curso.DoesNotExist:
-                    producto = Taller.objects.get(id_collection=clave)
-                    nuevo_taller = MiContenido(
-                        usuario = request.user,
-                        taller = producto,
+                )
+                nuevo_curso.save()
+                progeso = ProgresoCurso(
+                    inscripcion = nuevo_curso,
+                    porcentaje_completado = 0
+                )
+                progeso.save()
+            except Curso.DoesNotExist:
+                producto = Taller.objects.get(id_collection=clave)
+                nuevo_taller = MiContenido(
+                    usuario = request.user,
+                    taller = producto,
 
-                    )
-                    nuevo_taller.save()
-                    progeso = ProgresoCurso(
-                        inscripcion = nuevo_taller,
-                        porcentaje_completado = 0
-                    )
-                    progeso.save()
+                )
+                nuevo_taller.save()
+                progeso = ProgresoCurso(
+                    inscripcion = nuevo_taller,
+                    porcentaje_completado = 0
+                )
+                progeso.save()
         request.session['carrito'] = []
 
         return render(request,"micontenido/pago_success.html")
