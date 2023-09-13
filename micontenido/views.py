@@ -458,7 +458,7 @@ def pago_success(request):
         return render(request,'checkout/pago_danger.html')         
     return render(request,"micontenido/pago_success.html")
 
-
+ 
 def pago_danger(request):
     return render(request,"micontenido/pago_danger.html")
 
