@@ -7,7 +7,9 @@ from django.conf import settings
 #PAYPAL
 from paypalcheckoutsdk.orders import OrdersCreateRequest
 from paypalhttp import HttpError
-from paypalcheckoutsdk.core import PayPalHttpClient, LiveEnvironment
+from paypalcheckoutsdk.core import PayPalHttpClient
+from paypalcheckoutsdk.core.environment import LiveEnvironment
+
 import requests
 from  curso.models import Material,Curso,Taller
 import json
