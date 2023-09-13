@@ -13,6 +13,7 @@ from  curso.models import Material,Curso,Taller
 import json
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 class MicontenidoAux():
     def __init__(self, nombre, tipo, imagen, progreso,collection_id):
@@ -403,7 +404,7 @@ def crear_preferencia_PP(request):
 
 def pago_success(request):
     carrito = request.session.get('carrito', [])
-
+    
     for clave in carrito:
         try:
             producto = Curso.objects.get(id_collection=clave)
@@ -444,7 +445,7 @@ def pago_pendiente(request):
 def obtener_contenido(request):
 
     return JsonResponse()
-
+@login_required(login_url='login_view')
 def checkout(request):
     carrito = request.session.get('carrito', [])
     total = 0
