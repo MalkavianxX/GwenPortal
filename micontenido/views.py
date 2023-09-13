@@ -364,40 +364,42 @@ def crear_preferencia_PP(request):
     requestPaypal.prefer('return=representation')
     descuento = request.session.get('descuento')
     total = total - descuento
-    
-    requestPaypal.request_body (
-        {
-            "intent": "CAPTURE",
-            "purchase_units": [
-                { 
-                    "amount": {
-                        "currency_code": 'USD',
-                        "value": str(total)
+    if total > 0:
+        requestPaypal.request_body (
+            {
+                "intent": "CAPTURE",
+                "purchase_units": [
+                    { 
+                        "amount": {
+                            "currency_code": 'USD',
+                            "value": str(total)
+                        }
                     }
+                ],
+                "application_context":{
+                    "return_url":"https://gwenluy.com/micontenido/pago_success/",
+                    "cancel_url":"https://gwenluy.com/micontenido/pago_danger/",
+                    "brand_name":"Gwen Cursos"
                 }
-            ],
-            "application_context":{
-                "return_url":"https://gwenluy.com/micontenido/pago_success/",
-                "cancel_url":"https://gwenluy.com/micontenido/pago_danger/",
-                "brand_name":"Gwen Cursos"
             }
-        }
-    )
-    try:
-        response = client.execute(requestPaypal)
-        if response.result.status == 'CREATED':
-            approval_url = str(response.result.links[1].href)
-            print(approval_url)
-            response_data = {
-                'link':approval_url
-            
-            }
-            return JsonResponse(response_data)
+        )
+        try:
+            response = client.execute(requestPaypal)
+            if response.result.status == 'CREATED':
+                approval_url = str(response.result.links[1].href)
+                print(approval_url)
+                response_data = {
+                    'link':approval_url
+                
+                }
+                return JsonResponse(response_data)
 
-    except IOError as ioe:
-        if isinstance(ioe, HttpError):
-            # Something went wrong server-side
-            return render(request,'checkout/pago_cancelado.html')   
+        except IOError as ioe:
+            if isinstance(ioe, HttpError):
+                # Something went wrong server-side
+                return render(request,'checkout/pago_cancelado.html')   
+    else:
+        pago_success(request)        
 
 def pago_success(request):
     carrito = request.session.get('carrito', [])
@@ -483,44 +485,46 @@ def checkout(request):
         request.session['descuento'] = 0
     desc = request.session['descuento']
     f_total = total - float(desc)
-    requestPaypal.request_body (
-        {
-            "intent": "CAPTURE",
-            "purchase_units": [
-                {  
-                    "amount": {
-                        "currency_code": 'USD',
-                        "value": str(f_total)
+    if f_total > 0:
+        requestPaypal.request_body (
+            {
+                "intent": "CAPTURE",
+                "purchase_units": [
+                    {  
+                        "amount": {
+                            "currency_code": 'USD',
+                            "value": str(f_total)
+                        }
                     }
+                ],
+                "application_context":{
+                    "return_url":"https://gwenluy.com/micontenido/pago_success/",
+                    "cancel_url":"https://gwenluy.com/micontenido/pago_danger/",
+                    "brand_name":"Gwen Cursos"
                 }
-            ],
-            "application_context":{
-                "return_url":"https://gwenluy.com/micontenido/pago_success/",
-                "cancel_url":"https://gwenluy.com/micontenido/pago_danger/",
-                "brand_name":"Gwen Cursos"
             }
-        }
-    )
-    try:
-        response = client.execute(requestPaypal)
-        if response.result.status == 'CREATED':
-            approval_url = str(response.result.links[1].href)
+        )
+        try:
+            response = client.execute(requestPaypal)
+            if response.result.status == 'CREATED':
+                approval_url = str(response.result.links[1].href)
 
-            return render(request,"micontenido/checkout.html",{
-                'cursos':productos,
-                'total':f_total,
-                'link': approval_url,
-                'descuento': float(desc),
-                'subtotal': float(total),
-            })
+                return render(request,"micontenido/checkout.html",{
+                    'cursos':productos,
+                    'total':f_total,
+                    'link': approval_url,
+                    'descuento': float(desc),
+                    'subtotal': float(total),
+                })
 
 
-    except IOError as ioe:
-        if isinstance(ioe, HttpError):
-            # Something went wrong server-side
-            return render(request,'micontenido/danger.html')           
-    return render(request,"micontenido/checkout.html",{
-        'cursos':productos,
-        'total':total
-    })
-
+        except IOError as ioe:
+            if isinstance(ioe, HttpError):
+                # Something went wrong server-side
+                return render(request,'micontenido/pago_danger.html')           
+        return render(request,"micontenido/checkout.html",{
+            'cursos':productos,
+            'total':total
+        })
+    else:
+        pago_success(request)
