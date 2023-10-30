@@ -12,10 +12,11 @@ urlpatterns = [
     path('mostrar_vcursos', views.mostrar_vcursos, name="mostrar_vcursos"),
     path('render_subir_video', views.render_subir_video, name="render_subir_video"),
     path('render_archivos_dash', views.render_archivos_dash, name="render_archivos_dash"),
+    path('download', views.download, name="download"),
 
     #URL DE JS
     path('guardar_archivo_curso', views.guardar_archivo_curso, name="guardar_archivo_curso"),
-    path('guardar_archivo_taller',views.guardar_archivo_taller, name="guardar_archivo_taller"),
+    path('download/<int:pk>/', views.download, name='download'),
  
     
 ]

@@ -4,7 +4,8 @@ import requests
 from django.db.models import Count
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-
+from django.shortcuts import get_object_or_404
+from django.http import FileResponse
 class Manager_video():
     def __init__(self,curso,nombre_video,peso,link,tipo):
         self.curso = curso
@@ -199,3 +200,8 @@ def guardar_archivo_taller(request):
     else:
         response_data = {'error': 'Método no permitido'}
         return JsonResponse(response_data, status=405)
+    
+
+def download(request, pk):
+    document = get_object_or_404(Material, pk=pk)
+    return FileResponse(document.archivo, as_attachment=True)

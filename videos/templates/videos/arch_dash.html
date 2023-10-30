@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                             <div class="col ps-0">
-                                                <a href="{{material.archivo.url}}" target="_blank" class="text-muted fw-bold">{{material.nombre_archivo}} {{material.tipo_archivo}}</a>
+                                                <a href="{% url 'download' pk=material.pk %}" target="_blank" class="text-muted fw-bold">{{material.nombre_archivo}} {{material.tipo_archivo}}</a>
                                                 <p class="mb-0 font-13">{{material.curso.nombre}}</p>
                                             </div>
                                         </div> <!-- end row -->
@@ -85,7 +85,7 @@
                                                 </div>
                                             </div>
                                             <div class="col ps-0">
-                                                <a href="{{material.archivo.url}}" target="_blank" class="text-muted fw-bold">{{material.nombre_archivo}} {{material.tipo_archivo}}</a>
+                                                <a href="{% url 'download' pk=material.pk %}" target="_blank" class="text-muted fw-bold">{{material.nombre_archivo}} {{material.tipo_archivo}}</a>
                                                 <p class="mb-0 font-13">{{material.taller.nombre}}</p>
                                             </div>
                                         </div> <!-- end row -->

@@ -76,7 +76,7 @@ class Video(models.Model):
         return self.nombre    
 
 class Material(models.Model): 
-    opciones = (
+    opciones = ( 
         ('word','Word'),
         ('pdf','PDF'),
         ('pp',"PowerPoint"),
