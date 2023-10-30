@@ -4,7 +4,7 @@
 {% block content%}
 <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
 
-<section style="margin-top: 10vh;">
+<section style="margin-top: 1vh;">
     <div class="container-fluid">
         <div class="row d-flex justify-content-evenly">
             {% if flag == False %}
@@ -17,15 +17,15 @@
             </div>
             {% else %}
              
-            <div class="col-lg-6 shadow">
+            <div class="col-12 shadow">
                 <div class="row">
-     
+      
                     
                     <div class="col-12 mb-3">
                         <h4>Mis Cursos y Talleres</h4>
                     </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="row row-cols-1 row-cols-lg-2 row-cols-md-3 g-4">
+                    <div class="col-12">
+                        <div class="row row-cols-1 row-cols-lg-3 row-cols-md-3 g-4 mb-3">
                             {% for curso in cursos %}
                             <div class="col" id="{{curso.nombre}}">
                                 <div class="card border border-0 h-100 overflow-hidden">

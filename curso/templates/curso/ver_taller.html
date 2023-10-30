@@ -77,7 +77,7 @@
                                             <button 
                                             class="btn  btn-lg letra-blanca fw-bold" 
                                             id="{{taller.id_collection}}" 
-                                            data-url="{% url 'agregar_al_carrito' curso.id_collection %}"
+                                            data-url="{% url 'agregar_al_carrito' taller.id_collection %}"
                                             onclick="agregarAlCarrito(this.id)" style="background-color: rgb(149, 47, 245);" 
                                             type="button">Añadir a la cesta</button>
                                           </div>
@@ -116,8 +116,15 @@
             <div class="col-4 align-self-center text-center"><h1 class="fw-bold text-success fnt-roboto">${{taller.precio|intcomma}}0USD</h1></div>
             <div class="col-8">
                 <div class="d-grid gap-2">
-                    <button class="btn btn-lg letra-blanca fnt-roboto" id="{{taller.id_collection}}" data-url="{% url 'agregar_al_carrito' curso.id_collection %}" onclick="agregarAlCarrito(this.id)"  style="background-color: rgb(149, 47, 245);" type="button">Añadir a la cesta</button>
-                  </div>
+                    <button 
+                    class="btn  btn-lg letra-blanca fw-bold" 
+                    id="{{taller.id_collection}}" 
+                    data-url="{% url 'agregar_al_carrito' taller.id_collection %}"
+                    onclick="agregarAlCarrito(this.id)"  
+                    style="color: white; background-color: rgb(149, 47, 245);" 
+                    type="button">Añadir a la cesta
+                </button>                  
+            </div>
             </div>
         </div>
     </div>

@@ -72,19 +72,22 @@
                             </div>
                             <div class="col-12">
                                 <div class="row justify-content-center">
-                                    <div class="col-8">
+                                    <div class="col-12">
                                         <div class="d-grid gap-2">
-                                            <button class="btn  btn-lg letra-blanca fw-bold" id="{{curso.id_collection}}" onclick="agregarAlCarrito(this.id)" style="color: white; background-color: rgb(149, 47, 245);" type="button">Añadir a la cesta</button>
+                                            <button 
+                                            class="btn  btn-lg letra-blanca fw-bold" 
+                                            id="{{curso.id_collection}}" 
+                                            data-url="{% url 'agregar_al_carrito' curso.id_collection %}"
+                                            onclick="agregarAlCarrito(this.id)"  
+                                            style="color: white; background-color: rgb(149, 47, 245);" 
+                                            type="button">Añadir a la cesta
+                                        </button>
                                           </div>
                                     </div>
                                    
                                 </div>
                             </div>
-                            <div class="col-12 mt-3">
-                                <div class="d-grid gap-2 ">
-                                    <button class=" btn-lg  btn btn-outline-dark fs-5"  type="button">Comprar ahora</button>
-                                </div>
-                            </div>
+                         
                             <p class="text-center mt-3"><small>Garantia de satisfacción*</small></p>
                             <h3 class="text-start mt-2 fw-bold">Este curso incluye</h3>
                             <p><strong class="fw-bold"><i class="bi bi-camera-video"></i></strong> <small>{{total_tiempo}} de video</small></p>
@@ -111,12 +114,33 @@
             <div class="col-4 align-self-center text-center"><h1 class="fw-bold text-success fnt-roboto">${{curso.precio|intcomma}}0USD</h1></div>
             <div class="col-8">
                 <div class="d-grid gap-2">
-                    <button class="btn btn-lg letra-blanca fnt-roboto" id="{{curso.id_collection}}" onclick="agregarAlCarrito(this.id)" style="background-color: rgb(149, 47, 245);" type="button">Añadir a la cesta</button>
-                  </div>
+                    <button 
+                    class="btn  btn-lg letra-blanca fw-bold" 
+                    id="{{curso.id_collection}}" 
+                    data-url="{% url 'agregar_al_carrito' curso.id_collection %}"
+                    onclick="agregarAlCarrito(this.id)"  
+                    style="color: white; background-color: rgb(149, 47, 245);" 
+                    type="button">Añadir a la cesta
+                </button>                  
+            </div>
             </div>
         </div>
     </div>
 </div>
+<div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content modal-filled ">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <i class="ri-check-line h1 text-success"></i>
+                    <h4 class="mt-2 text-secondary">Se agregó correctamente</h4>
+      
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
 <script>
 
     function convertirAFloat(stringValor) {
