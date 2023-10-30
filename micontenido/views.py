@@ -17,7 +17,7 @@ import json
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth import update_session_auth_hash
 class MicontenidoAux():
     def __init__(self, nombre, tipo, imagen, progreso,collection_id):
         self.nombre = nombre
@@ -578,3 +578,19 @@ def checkout(request):
         request.session['carrito'] = []
 
         return render(request,"micontenido/pago_success.html")
+
+@login_required
+def view_change_password(request):
+    return render(request,"micontenido/password.html")
+
+@login_required
+def fun_change_password(request):
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        request.user.set_password(password)
+        request.user.save()
+        update_session_auth_hash(request, request.user)  
+        
+        return redirect('view_change_password')
+
+    return redirect('login_view')

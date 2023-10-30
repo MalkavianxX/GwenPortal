@@ -19,6 +19,7 @@ urlpatterns = [
     path('checkout/',views.checkout, name="checkout"),
     path('iniciar_curso/<str:id_library>/<str:id_collection>/', views.iniciar_curso,name="iniciar_curso"),
     path('marcar_completado/<str:guid>/', views.marcar_completado,name="marcar_completado"),
-    
+    path('view_change_password',views.view_change_password, name="view_change_password"),
+    path('fun_change_password',views.fun_change_password, name="fun_change_password"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
