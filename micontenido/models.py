@@ -10,8 +10,7 @@ class MiContenido(models.Model):
     fecha_inicio = models.DateField(auto_now_add=True)
     fecha_fin = models.DateField(null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.usuario.username} - {self.curso.nombre}"
+
      
 class ProgresoCurso(models.Model):
     inscripcion = models.ForeignKey(MiContenido, on_delete=models.CASCADE)
