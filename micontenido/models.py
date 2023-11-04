@@ -17,8 +17,7 @@ class ProgresoCurso(models.Model):
     inscripcion = models.ForeignKey(MiContenido, on_delete=models.CASCADE)
     porcentaje_completado = models.IntegerField(default=0)
     # Otros campos de progreso del curso, si los necesitas
-    def __str__(self):
-        return f"{self.inscripcion.usuario.username} - {self.inscripcion.curso.nombre}({self.porcentaje_completado}%)"   
+
     
 class VideosVistos(models.Model):
     video_guid = models.CharField(max_length=100000)
